@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <iframe style="width:100%;min-height:100%;background-color:#fff;" src="/weishi/feed/BpaXgQUDVtikTvPSCmGMHD/wsfeed?_proxy=1&amp;_wv=1&amp;id=BpaXgQUDVtikTvPSCmGMHD&amp;from=pc&amp;orifrom="></iframe>
+    123
     <router-view/>
   </div>
 </template>
