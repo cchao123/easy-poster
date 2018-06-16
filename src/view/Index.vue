@@ -1,12 +1,20 @@
 <template>
-  <div>
-    123123
-  </div>
+  <ul>
+    <videoItem></videoItem>
+  </ul>
 </template>
 
 <script>
+import videoItem from "../components/videoItem.vue"
 export default {
+  data() {
+    return {
 
+    }
+  },
+  components: {
+    videoItem
+  }
 }
 </script>
 
