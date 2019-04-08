@@ -1,0 +1,8 @@
+.list-flex-start {
+  .el-select-dropdown__list {
+    display: flex;
+    width: 250px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}

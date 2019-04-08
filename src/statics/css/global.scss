@@ -1,0 +1,75 @@
+.ang-fl {
+  float: left;
+}
+.ang-fr {
+  float: right;
+}
+.ang-mr5 {
+  margin-right: 5px;
+}
+.ang-mr15 {
+  margin-right: 15px;
+}
+.ang-mb15 {
+  margin-bottom: 15px;
+}
+.ang-mb5,
+.el-button.ang-mb5 {
+  margin-bottom: 5px;
+}
+.el-input.ang-width170 {
+  width: 170px;
+}
+.ang-ml10 {
+ margin-left: 10px;
+}
+.ang-danger-tip {
+  color: #f00;
+}
+
+a,
+a:visited {
+  color: #409eff;
+  text-decoration: none;
+}
+a:hover,
+a:focus ,
+a:active {
+  color: #66b1ff;
+}
+
+.ang-txt {
+  color: #666;
+  font-size: 14px;
+}
+
+.ang-hide {
+  visibility: hidden;
+  height: 0;
+}
+
+.ang-flex {
+  display: flex;
+}
+
+.ang-word-break {
+  word-break: break-all;
+  white-space: normal !important;
+}
+
+.el-loading-spinner {
+  top: 100px;
+}
+
+.ang-w100 {
+  width: 100%;
+}
+
+.ang-img80 {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+.ang-clr-red {
+  color: #f00;
+}
