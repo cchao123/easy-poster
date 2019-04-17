@@ -1,21 +1,19 @@
 <template>
-  <el-header class="ang-header" :height="'50px'">
+  <el-header class="ang-header" :height="'64px'">
     <a href="/" class="logo-box" v-if="collapse === collapseStatus.hide">
       <img class="logo" :src="logo" alt="logo" v-if="logo">
     </a>
     <div class="collapse" :class="isShow.show" @click="handleCollapse()">
       <i class="iconfont" :class="isShow.fa"></i>
     </div>
-    <!-- 面包屑导航 -->
-    <page-header v-show="$route.name !== 'index'"></page-header>
     <div class="ang-header-right">
       <el-dropdown v-if="showCtrl" @command="handleCommand">
         <div class="el-dropdown-link">
           <img class="ang-header-photo" :src="user.headimg" /> {{ user.name }}
         </div>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="userlogout">退出登录</el-dropdown-item>
-          <!-- <el-dropdown-item divided command="userupdate">修改</el-dropdown-item> -->
+          <el-dropdown-item command="userlogout">退出</el-dropdown-item>
+          <el-dropdown-item divided command="userupdate">修改</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <div class="el-dropdown-link" v-else>
@@ -28,14 +26,9 @@
 <script>
 import { mapState } from 'vuex'
 import * as $types from '../store/mutation-types.js'
-import { COLLAPSE_STATUS, DEFAULT_HEADER_IMG } from '../common/const'
-import PageHeader from './PageHeader'
-
+import { COLLAPSE_STATUS } from '../common/const'
 export default {
   name: 'layout-header',
-  components: {
-    PageHeader
-  },
   props: {
     logo: String,
     user: {
@@ -43,7 +36,7 @@ export default {
       default: () => {
         return {
           name: '未知',
-          headimg: DEFAULT_HEADER_IMG
+          headimg: 'http://dayu.oa.com/avatars/profile.gif?0'
         }
       }
     },
@@ -54,8 +47,7 @@ export default {
   },
   data () {
     return {
-      collapseStatus: COLLAPSE_STATUS,
-      defaultHeadimg: DEFAULT_HEADER_IMG
+      collapseStatus: COLLAPSE_STATUS
     }
   },
   methods: {
@@ -103,9 +95,8 @@ export default {
 .el-header.ang-header {
   position: relative;
   padding: 0;
-  display: flex;
-  height: 50px;
-  line-height: 50px;
+  height: 64px;
+  line-height: 64px;
   background-color: #fff;
   overflow: hidden;
   .logo-box {

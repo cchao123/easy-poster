@@ -11,7 +11,7 @@
   --sidebar-open-width: 256px;
   --sidebar-close-width: 80px;
 
-  --header-height: 50px;
+  --header-height: 64px;
 
   --size-base: 10px;
   --font-size: calc(var(--size-base) * 1.6);
