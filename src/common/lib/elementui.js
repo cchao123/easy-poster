@@ -1,5 +1,6 @@
 // http://element-cn.eleme.io/#/zh-CN/component/quickstart
 import Vue from 'vue'
+import 'element-ui/lib/theme-chalk/index.css'
 import {
   Pagination,
   Dropdown,
