@@ -130,6 +130,8 @@ export default {
   flex: 0 1;
   overflow: auto;
   height: 100%;
+  overflow-x: hidden; overflow-y: auto;
+  
   .el-menu {
     border: 0;
   }
