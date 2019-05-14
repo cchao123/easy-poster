@@ -1,5 +1,6 @@
 {
-  "name": "123",
+  "name": "{{name}}",
+  "description": "{{description}}",
   "version": "0.1.0",
   "private": true,
   "scripts": {
