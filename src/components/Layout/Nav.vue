@@ -60,9 +60,9 @@
 // import { inArray } from '@tencent/anghost-util/array'
 // import { isArray } from '@tencent/anghost-util/type'
 import { mapState } from 'vuex'
-import { COLLAPSE_STATUS } from '@common/const'
-import { debounce } from '@common/util'
-import * as $types from '@store/mutation-types'
+import { COLLAPSE_STATUS } from '../../common/const'
+import { debounce } from '../../common/util'
+import * as $types from '../../store/mutation-types'
 
 export default {
   name: 'layout-nav',

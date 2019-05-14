@@ -27,8 +27,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import * as $types from '@store/mutation-types.js'
-import { COLLAPSE_STATUS, DEFAULT_HEADER_IMG } from '@common/const'
+import * as $types from '../../store/mutation-types.js'
+import { COLLAPSE_STATUS, DEFAULT_HEADER_IMG } from '../../common/const'
 import LayoutBreadCrumb from './BreadCrumb'
 
 export default {

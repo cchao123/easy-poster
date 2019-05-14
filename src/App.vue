@@ -7,7 +7,7 @@
         <layout-nav v-if="!isNavFixed"
           :logo="navLogo"
           :title="navTitle"></layout-nav>
-        <el-container direction="vertical">
+        <el-container :style="rightContentStyl" direction="vertical">
           <!-- header -->
           <layout-header
             :logo="navLogo"
@@ -35,13 +35,14 @@
   </div>
 </template>
 
+
 <script>
 import { mapState } from 'vuex'
 import { COLLAPSE_STATUS } from './common/const'
 import * as $types from './store/mutation-types'
-import LayoutNav from './components/LayoutNav'
-import LayoutHeader from './components/LayoutHeader'
-import LayoutFooter from './components/LayoutFooter'
+import LayoutNav from './components/Layout/Nav'
+import LayoutHeader from './components/Layout/Header'
+import LayoutFooter from './components/Layout/Footer'
 export default {
   components: {
     LayoutNav,
@@ -52,7 +53,7 @@ export default {
     return {
       navLogo: '//mat1.gtimg.com/bbs/kameng-h5/img/logo.9af0e412.png', // 管理系统logo
       navTitle: '咖萌管理后台', // 管理系统名称
-      isShowCtrl: false, // 是否显示头部用户的登出和修改操作
+      isShowCtrl: true, // 是否显示头部用户的登出和修改操作
       collapseStatus: COLLAPSE_STATUS,
       containerStyl: 'opacity: 0;'
     }
@@ -77,6 +78,16 @@ export default {
     }),
     isNavFixed () {
       return this.collapse === COLLAPSE_STATUS.show
+    },
+    rightContentStyl () {
+      var styl = ''
+      if (this.collapse === COLLAPSE_STATUS.unfold) {
+        styl = 'margin-left: 240px;'
+      }
+      if (this.collapse === COLLAPSE_STATUS.fold) {
+        styl = 'margin-left: 64px;'
+      }
+      return styl
     }
   }
 }
