@@ -1,16 +1,25 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>123</title>
+    <!-- 优先使用 IE 最新版本和 Chrome -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <!-- 页面描述 -->
+    <meta name="description" content="<%= htmlWebpackPlugin.options.desc %>"/>
+    <!-- 页面关键词 -->
+    <meta name="keywords" content=""/>
+    <!-- 为移动设备添加 viewport -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <!-- <meta name="renderer" content="webkit"> -->
+    <!-- 毛球视频访问问题 -->
+    <meta name="referrer" content="no-referrer" />
+    <!-- 添加 favicon icon -->
+    <link rel="icon" href="<%= BASE_URL %>logo.png">
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but 123 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
