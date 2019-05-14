@@ -52,7 +52,7 @@ export default {
   data () {
     return {
       navLogo: '//mat1.gtimg.com/bbs/kameng-h5/img/logo.9af0e412.png', // 管理系统logo
-      navTitle: '咖萌管理后台', // 管理系统名称
+      navTitle: '管理后台系统', // 管理系统名称
       isShowCtrl: true, // 是否显示头部用户的登出和修改操作
       collapseStatus: COLLAPSE_STATUS,
       containerStyl: 'opacity: 0;'

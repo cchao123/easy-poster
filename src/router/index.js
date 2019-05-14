@@ -22,6 +22,7 @@ const EmptyContent = () => import('../components/Layout/EmptyContent.vue')
 export default new Router({
   mode: 'history',
   base: '/',
+  redirect: { name: 'index' },
   routes: [
     {
       path: '/login',
@@ -36,20 +37,20 @@ export default new Router({
       path: '/index',
       name: 'index',
       component: () => import(/* webpackChunkName: "index" */ '../views/Index/index.vue'),
-      alias: '首页',
+      alias: '系统首页',
       icon: 'iconfont icon-shouye',
       meta: {
-        title: '首页'
+        title: '系统首页'
       }
     },
     {
       path: '/content-admin',
       name: 'content-admin',
       component: EmptyContent,
-      alias: '内容管理',
+      alias: '用户管理',
       icon: 'iconfont icon-fuwuneirong',
       meta: {
-        title: '内容管理'
+        title: '用户管理'
       },
       redirect: { name: 'ca-list' },
       children: [
@@ -57,18 +58,18 @@ export default new Router({
           name: 'ca-list',
           path: 'list',
           component: () => import(/* webpackChunkName: "content-admin-list" */ '../views/ContentAdmin/list.vue'),
-          alias: '帖子列表',
+          alias: '超级会员',
           meta: {
-            title: '帖子列表'
+            title: '超级会员'
           }
         },
         {
           name: 'ca-edit',
           path: 'edit',
           component: () => import(/* webpackChunkName: "content-admin-edit" */ '../views/ContentAdmin/edit.vue'),
-          alias: '帖子编辑',
+          alias: '普通用户',
           meta: {
-            title: '帖子编辑'
+            title: '普通用户'
           }
         }
       ]
@@ -76,7 +77,7 @@ export default new Router({
     {
       path: '*',
       noshow: true,
-      redirect: { name: 'ca-list' }
+      redirect: { name: 'index' }
     }
   ]
 })
