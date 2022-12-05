@@ -1,10 +1,5 @@
-```
-___  ____ __   ____           _____     __| _/_____ |__| ____  
-\  \/ /  |  \_/ __ \   ______ \__  \   / __ |/     \|  |/    \ 
- \   /|  |  /\  ___/  /_____/  / __ \_/ /_/ |  Y Y  \  |   |  \
-  \_/ |____/  \___  >         (____  /\____ |__|_|  /__|___|  /
-                  \/               \/      \/     \/        \/ 
-```
+# my-project
+
 ## Project setup
 ```
 npm install
@@ -18,11 +13,6 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
 ```
 
 ### Lints and fixes files
