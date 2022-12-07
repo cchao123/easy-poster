@@ -1,30 +1,23 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <el-config-provider namespace="ep">
+    <BaseHeader />
+    <div style="display: flex">
+      <BaseSide />
+      <div>
+        <img alt="Vue logo" class="element-plus-logo" src="./assets/logo.png" />
+        <HelloWorld msg="Hello Vue 3.0 + Element Plus + Vite" />
+      </div>
+    </div>
+  </el-config-provider>
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--ep-text-color-primary);
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.element-plus-logo {
+  width: 50%;
 }
 </style>
