@@ -1,40 +1,29 @@
 <template>
   <el-menu
-    default-active="2"
+    default-active="home"
     class="el-menu-vertical-demo"
+    :router="true"
     :collapse="isCollapse"
+    :collapse-transition="false"
     @open="handleOpen"
     @close="handleClose"
   >
-    <el-sub-menu index="1">
-      <template #title>
-        <el-icon><location /></el-icon>
-        <span>Navigator One</span>
-      </template>
-      <el-menu-item-group>
-        <template #title><span>Group One</span></template>
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item two</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">item three</el-menu-item>
-      </el-menu-item-group>
-      <el-sub-menu index="1-4">
-        <template #title><span>item four</span></template>
-        <el-menu-item index="1-4-1">item one</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
-    <el-menu-item index="2">
+    <div class="el-logo" @click="toggleMenuStatus">
+      <div class="logo-shadow"></div>
+    </div>
+    <el-menu-item index="home">
       <el-icon><icon-menu /></el-icon>
-      <template #title>Navigator Two</template>
+      <template #title>操作中心</template>
     </el-menu-item>
-    <el-menu-item index="3" disabled>
+
+    <el-menu-item index="readme">
       <el-icon><document /></el-icon>
-      <template #title>Navigator Three</template>
+      <template #title>使用文档</template>
     </el-menu-item>
-    <el-menu-item index="4">
+    
+    <el-menu-item index="3">
       <el-icon><setting /></el-icon>
-      <template #title>Navigator Four</template>
+      <template #title>系统设置</template>
     </el-menu-item>
   </el-menu>
 </template>
@@ -48,12 +37,34 @@ import {
   Setting,
 } from '@element-plus/icons-vue'
 
-const isCollapse = ref(true)
+const isCollapse = ref(false)
 const handleOpen = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
 const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
+const toggleMenuStatus = () => {
+  isCollapse.value = !isCollapse.value;
+};
 </script>
 
+<style>
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  /* width: 60px; */
+}
+.el-logo {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-shadow {
+  width: 80%;
+  height: 40px;
+  background-color: #999;
+  opacity: .2;
+  border-radius: 5px;
+}
+</style>

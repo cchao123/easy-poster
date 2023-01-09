@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "element-plus": "^2.2.13",
+    "sortable.js": "^0.3.0",
     "vue": "^3.2.36"
   },
   "devDependencies": {
@@ -23,6 +24,7 @@
     "unplugin-vue-components": "^0.19.5",
     "vite": "^2.9.9",
     "vite-ssg": "^0.20.0",
+    "vue-router": "^4.1.6",
     "vue-tsc": "^0.34.16"
   },
   "license": "MIT"
