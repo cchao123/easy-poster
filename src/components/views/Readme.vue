@@ -1,5 +1,7 @@
 <template>
-  文档
+  <div>
+    123
+  </div>
 </template>
 
 <script>

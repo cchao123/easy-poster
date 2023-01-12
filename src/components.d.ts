@@ -7,6 +7,9 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BaseHeader: typeof import('./components/layouts/BaseHeader.vue')['default']
     BaseSide: typeof import('./components/layouts/BaseSide.vue')['default']
+    BtmComp: typeof import('./components/views/btmComp.vue')['default']
+    'BtmComp copy': typeof import('./components/views/btmComp copy.vue')['default']
+    DragContainer: typeof import('./components/views/dragContainer.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElForm: typeof import('element-plus/es')['ElForm']
@@ -15,13 +18,17 @@ declare module '@vue/runtime-core' {
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     HomeView: typeof import('./components/views/HomeView.vue')['default']
+    ImgComp: typeof import('./components/views/imgComp.vue')['default']
     Readme: typeof import('./components/views/Readme.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Setting: typeof import('./components/views/Setting.vue')['default']
     SortTable: typeof import('./components/layouts/SortTable.vue')['default']
+    TextComp: typeof import('./components/views/textComp.vue')['default']
   }
 }
 
