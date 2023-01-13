@@ -4,7 +4,7 @@
     <div class="worktop-options">
       <div>
         <div>组件库：</div>
-        <div><button @click="addCom('img')">添加一个图片组件</button></div>
+        <!-- <div><button @click="addCom('img')">添加一个图片组件</button></div> -->
         <br>
         <div><button @click="addCom('text')">添加一个文本组件</button></div>
         <br>
@@ -24,7 +24,7 @@
           <div>No.{{ind + 1}}:</div>
           <b>类型：</b>{{ cmp.type }}组件 <button @click="del">删除</button>
           <br>
-          <b>内容：</b>{{ cmp.url  }}<button @click="modify">修改</button>
+          <b>内容：</b><input type="text" v-model="cmp.url">
         </div>
       </div>
       <hr>
@@ -66,9 +66,9 @@
     <!-- 预览模块 -->
     <div class="worktop-preview">
       <template v-for="(cmp, ind) in cmptList" :key="ind">
-        <BtnComp v-if="cmp.type === 'btn'"></BtnComp>
-        <TextComp v-if="cmp.type === 'text'"></TextComp>
-        <ImgComp v-if="cmp.type === 'img'"></ImgComp>
+        <BtnComp @updatePoint="updatePoint" :config="cmp" :ind="ind" v-if="cmp.type === 'btn'"></BtnComp>
+        <TextComp @updatePoint="updatePoint" :config="cmp" :ind="ind" v-if="cmp.type === 'text'"></TextComp>
+        <ImgComp @updatePoint="updatePoint" :config="cmp" :ind="ind" v-if="cmp.type === 'img'"></ImgComp>
       </template>
 
       <div></div>
@@ -81,7 +81,7 @@ import { defineComponent, computed, ref } from 'vue';
 import BtnComp from './btmComp.vue'
 import TextComp from './textComp.vue'
 import ImgComp from './imgComp.vue'
-
+import { setStorage } from './../../libs/storage'
 export default defineComponent({
   components: {
     BtnComp,
@@ -110,39 +110,54 @@ export default defineComponent({
       },
       {
         type: 'img',
-        url: 'http://m.cchao.cc/life/imgs/tips.png',
+        url: 'https://mat1.gtimg.com/qqcdn/tnewsh5/core/news_logo_200.png',
         point: {
-          x: 0,
+          x: 100,
           y: 0,
         }
       },
       {
         type: 'text',
-        url: 'http://m.cchao.cc/life/imgs/tips.png',
+        url: '我是文案',
         point: {
-          x: 200,
+          x: 50,
           y: 300,
         }
       },
     ]);
     const onSubmit = () => {
-      console.log('submit!')
+      console.log(cmptList.value)
+      setStorage('QWEQWEQWEQWEQWE_QWEQWEQWE', JSON.stringify(cmptList.value));
     }
 
     const addCom = (type: string) =>{
-      // cmptList.push({
-        
-      // });
+      cmptList.value.push({
+        type: type,
+        url: type,
+        point: {
+          x: 0,
+          y: 0,
+        }
+      });
     };
     
     const del = (index: number)=> {
       cmptList.value.splice(index, 1)
     }
+
+    const updatePoint = (a: any,b: any)=>{
+      if (b!=undefined) {
+        cmptList.value[b].point.x = a.moveX;
+        cmptList.value[b].point.y = a.moveY;
+      }
+    }
     return {
+      addCom,
       del,
       form,
       onSubmit,
       cmptList,
+      updatePoint,
     }
   }
 })

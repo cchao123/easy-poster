@@ -1,26 +1,31 @@
 <template>
-  <div class="drag btn">按钮</div>
+  <DragContainer :config="config" @updatePoint="updatePoint">
+    {{ config.url }}
+  </DragContainer>
 </template>
 
 <script>
-
+import { defineComponent } from 'vue';
+import DragContainer from './dragContainer.vue'
+export default defineComponent({
+  props: {
+    config: {
+      type: Object,
+    },
+    ind: {
+      type: Number,
+    }
+  },
+  components: {
+    DragContainer,
+  },
+  setup(props, {emit }) {
+    const updatePoint =(point)=> {
+      emit('updatePoint', point, props.ind);
+    }
+    return {
+      updatePoint
+    }
+  }
+})
 </script>
-
-<style>
-.drag {
-  position: absolute;
-}
-.btn {
-  width: 100px;
-  height: 32px;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 32px;
-  text-align: center;
-  color: #fff;
-  border-radius: 32px;
-  background-image: linear-gradient(to right, #ff85ce, #8f4bff);
-  border: 1px solid #ff69e5;
-  border-image: linear-gradient(#c87cff, #ff69e5) rounded;
-}
-</style>

@@ -8,7 +8,6 @@ declare module '@vue/runtime-core' {
     BaseHeader: typeof import('./components/layouts/BaseHeader.vue')['default']
     BaseSide: typeof import('./components/layouts/BaseSide.vue')['default']
     BtmComp: typeof import('./components/views/btmComp.vue')['default']
-    'BtmComp copy': typeof import('./components/views/btmComp copy.vue')['default']
     DragContainer: typeof import('./components/views/dragContainer.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
