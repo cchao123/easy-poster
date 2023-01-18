@@ -1,29 +1,49 @@
 <template>
   <el-config-provider namespace="ep">
-    <div class="main-container">
-      <BaseSide />
-      <div class="content">
-        <BaseHeader />
-        <router-view />
-      </div>
+    <BaseHeader />
+    <div class="el-container">
+      <LeftAside></LeftAside>
+      <ContentMain></ContentMain>
+      <RightAside></RightAside>
     </div>
   </el-config-provider>
 </template>
 
-<style>
+<script lang="ts">
+import { defineComponent, computed, ref } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const dragstart = () => {
+      console.log('submit!')
+    }
+    return {
+      dragstart,
+    }
+  }
+})
+
+</script>
+
+<style lang="postcss">
 body, html,#app {
   height: 100%;
+  user-select: none;
 }
+
 #app {
-  text-align: center;
-  color: var(--ep-text-color-primary);
-}
-.main-container {
   display: flex;
-  min-height: 100%;
+  flex-direction: column;
+  text-align: center;
+  /* color: var(--ep-text-color-primary);
+  color: var(--color); */
 }
-.content {
+
+.el-container {
+  display: flex;
   width: 100%;
-  /* background-color: skyblue; */
+  height: 100%;
 }
+
+
 </style>

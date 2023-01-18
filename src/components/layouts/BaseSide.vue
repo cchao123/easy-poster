@@ -50,9 +50,9 @@ const toggleMenuStatus = () => {
 </script>
 
 <style>
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  /* width: 60px; */
-}
+/* .el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 60px;
+} */
 .el-logo {
   height: 60px;
   display: flex;
