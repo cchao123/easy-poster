@@ -1,56 +1,28 @@
 <template>
-  <div class="aside-material">
-    <div class="material-items">
+  <div class="aside-material" @dragstart="dragstart">
+    <!-- <div class="material-items" draggable="true">
       <div class="material-icon">
         <div class="iconfont icon-suffix-psd"></div>
       </div>
       <div class="material-name">解析PSD</div>
-    </div>
-    <div class="material-items"
-         @dragstart="dragstart">
+    </div> -->
+
+    <div class="material-items" :draggable="true" v-for="mItem in MATERIAL_LIST" :key="mItem.icon" :data-type="mItem.type">
       <div class="material-icon">
-        <div class="iconfont icon-rongqi"></div>
+        <div class="iconfont" :class="`icon-${mItem.icon}`"></div>
       </div>
-      <div class="material-name">元素容器</div>
-    </div>
-    <div class="material-items"
-         @dragstart="dragstart">
-      <div class="material-icon">
-        <div class="iconfont icon-background"></div>
-      </div>
-      <div class="material-name">海报背景</div>
-    </div>
-    <div class="material-items">
-      <div class="material-icon">
-        <div class="iconfont icon-tupian"></div>
-      </div>
-      <div class="material-name">图片素材</div>
-    </div>
-    <div class="material-items">
-      <div class="material-icon">
-        <div class="iconfont icon-wenzi"></div>
-      </div>
-      <div class="material-name">文本内容</div>
-    </div>
-    <div class="material-items">
-      <div class="material-icon">
-        <div class="iconfont icon-touxiang"></div>
-      </div>
-      <div class="material-name">用户头像</div>
-    </div>
-    <div class="material-items">
-      <div class="material-icon">
-        <div class="iconfont icon-erweima"></div>
-      </div>
-      <div class="material-name">二维码</div>
+      <div class="material-name">{{ mItem.text }}</div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts" setup>
+import { MATERIAL_LIST } from '~/constants';
 
-}
+const dragstart = (e: any) => {
+  e.dataTransfer.setData('type', e.target.dataset.type)
+};
+
 </script>
 
 <style>
