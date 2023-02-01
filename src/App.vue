@@ -4,7 +4,7 @@
     <div class="el-container">
       <LeftAside></LeftAside>
       <ContentMain></ContentMain>
-      <!-- <RightAside></RightAside> -->
+      <RightAside></RightAside>
     </div>
   </el-config-provider>
 </template>

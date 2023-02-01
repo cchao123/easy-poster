@@ -7,7 +7,7 @@
       <div class="material-name">解析PSD</div>
     </div> -->
 
-    <div class="material-items" :draggable="true" v-for="mItem in MATERIAL_LIST" :key="mItem.icon" :data-type="mItem.type">
+    <div class="material-items" :draggable="true" v-for="(mItem, mIndex) in MATERIAL_LIST" :key="mItem.icon" :data-index="mIndex">
       <div class="material-icon">
         <div class="iconfont" :class="`icon-${mItem.icon}`"></div>
       </div>
@@ -20,7 +20,7 @@
 import { MATERIAL_LIST } from '~/constants';
 
 const dragstart = (e: any) => {
-  e.dataTransfer.setData('type', e.target.dataset.type)
+  e.dataTransfer.setData('index', e.target.dataset.index)
 };
 
 </script>
