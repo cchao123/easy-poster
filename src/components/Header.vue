@@ -1,8 +1,25 @@
 <template>
   <div class="header">
-    <img src="https://bizaladdin-image.baidu.com/0/pic/1080140929_-251358729_-1837083577.jpg" alt="">
+    <img :src="currentCompConfig.style.url || errorImg" :onerror="error" alt="">
   </div>
 </template>
+
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { useStore } from '~/store';
+import errorImg from '~/assets/head.png'
+
+const props = defineProps({
+  index: {
+    type: Number,
+    default: 0,
+  },
+});
+
+const store = useStore();
+// const currentCompConfig = computed(() => store.compList[props.index]);
+const currentCompConfig = computed(() => store.currentCompConfig);
+</script>
 
 <style lang="postcss">
 .header {

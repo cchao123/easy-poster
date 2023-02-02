@@ -3,13 +3,21 @@
     <div class="rightborder"></div>
     <ConfigForm></ConfigForm>
     <div class="codeWrap">
-      <pre>console.log(123)</pre>
+      <!-- <pre>console.log(123)</pre> -->
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
+import { useStore } from '~/store';
 import ConfigForm from '~/components/layouts/ConfigForm.vue'
+
+const store = useStore();
+
+const compList = computed(() => store.compList);
+const currentCompConfig = computed(() => store.currentCompConfig);
+
 </script>
 
 <style lang="postcss" scoped>

@@ -1,13 +1,15 @@
 // 从这里扩展字段？ 然后插入
 // 通用参数
-const COMMON = {
+let COMMON = {
   style: {
+    isFixed: false,
     width: '',
     height: '',
     color: '',
-    url: 'https://mat1.gtimg.com/qqcdn/tnewsh5/2022surname/lottie/img_46.png',
+    url: '',
     textValue: '文本内容',
-    fontSize: '14',
+    fontColor: '#000',
+    fontSize: 12,
     fontStyle: 'normal',
     fontWeight: 'normal',
     letterSpacing: '',
@@ -21,9 +23,10 @@ const COMMON = {
 export const MATERIAL_LIST = [
   {
     icon: 'background',
-    type: 'bg',
+    type: 'background',
     text: '海报背景',
     ...COMMON,
+    url: 'https://mat1.gtimg.com/qqcdn/tnewsh5/2022surname/lottie/img_46.png',
   },
   {
     icon: 'rongqi',
@@ -33,7 +36,7 @@ export const MATERIAL_LIST = [
   },
   {
     icon: 'tupian',
-    type: 'img',
+    type: 'image',
     text: '图片素材',
     ...COMMON,
   },
@@ -48,12 +51,14 @@ export const MATERIAL_LIST = [
     type: 'head',
     text: '用户头像',
     ...COMMON,
+    url: 'https://bizaladdin-image.baidu.com/0/pic/1080140929_-251358729_-1837083577.jpg',
   },
   {
     icon: 'erweima',
     type: 'qrcode',
     text: '二维码',
     ...COMMON,
+    url: 'https://github.com/cchao123',
   },
 ];
 

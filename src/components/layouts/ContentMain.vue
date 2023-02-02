@@ -3,7 +3,7 @@
        @mousedown="handleMouseDown"
        ref="mainRef">
     <div class="iphone"
-         :style="`transform: scale(${canvasZoom}) translate3d(${canvasX}px, ${canvasY}px ,0);`"
+         :style="`width: ${canvasConfig.width}px; height: ${canvasConfig.height}px; background-color: ${canvasConfig.background};transform: scale(${canvasZoom}) translate3d(${canvasX}px, ${canvasY}px ,0);`"
          @drop="drop"
          @dragover.prevent="dragover">
       <Edit v-for="(item, idx) in compList"
@@ -12,12 +12,12 @@
             :key="idx"
             :index="idx"
             :item="item">
-        <Container v-if="item.type === 'container'" />
-        <Background v-if="item.type === 'bg'" />
-        <Image v-if="item.type === 'img'" />
-        <Text v-if="item.type === 'text'" />
-        <Header v-if="item.type === 'head'" />
-        <QrCode v-if="item.type === 'qrcode'" />
+        <Container :index="idx" v-if="item.type === 'container'" />
+        <Background :index="idx" v-if="item.type === 'background'" />
+        <Image :index="idx" v-if="item.type === 'image'" />
+        <Text :index="idx" v-if="item.type === 'text'" />
+        <Header :index="idx" v-if="item.type === 'head'" />
+        <QrCode :index="idx" v-if="item.type === 'qrcode'" />
       </Edit>
     </div>
   </div>
@@ -51,6 +51,7 @@ let point = {
 };
 const store = useStore();
 const compList = computed(() => store.compList);
+const canvasConfig = computed(() => store.canvasConfig);
 const currentCompIndex = computed(() => store.currentCompIndex);
 const { setCompList, setCurrentCompIndex } = store;
 

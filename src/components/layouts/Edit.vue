@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, ref, toRefs } from 'vue';
+import { ref, toRefs } from 'vue';
 import { useStore } from '~/store';
 const store = useStore();
 const { setCompPoint, setCurrentCompIndex } = store;
@@ -31,6 +31,7 @@ const props = defineProps({
 });
 
 const handleMouseDown = (e: any) => {
+    // @TODO 如果锁定 return
     setCurrentCompIndex(props.index);
     // ele位置 
     const pointX = props.item.point.x;
