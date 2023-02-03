@@ -1,5 +1,5 @@
 <template>
-  <img class="images" :src="currentCompConfig.style.url || errorImg" :onerror="error" alt="">
+  <img class="images" :src="currentCompConfig.url || errorImg" :onerror="error" alt="">
 </template>
 
 <script lang="ts" setup>

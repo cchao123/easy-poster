@@ -1,5 +1,5 @@
 <template>
-  <div :style="`font-size: ${currentCompConfig.style.fontSize}px; font-weight: ${currentCompConfig.style.fontWeight};font-style: ${currentCompConfig.style.fontStyle};color: ${currentCompConfig.style.fontColor}`">{{ currentCompConfig.style.textValue }}</div>
+  <div :style="`font-size: ${currentCompConfig.fontSize}px; font-weight: ${currentCompConfig.fontWeight};font-style: ${currentCompConfig.fontStyle};color: ${currentCompConfig.fontColor}`">{{ currentCompConfig.textValue }}</div>
 </template>
 
 <script lang="ts" setup>

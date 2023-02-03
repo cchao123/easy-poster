@@ -26,19 +26,46 @@
 
         </el-row>
       </div>
+
       <template v-if="currentCompConfig">
+        <template v-if="['container'].includes(currentCompConfig.type)">
+          <h4>容器设置</h4>
+          <el-row>
+            <el-col :span="5">
+              <span class="labelText">宽度:</span>
+              <el-input-number v-model="currentCompConfig.width"
+                               :max="375"
+                               controls-position="right"
+                               style="width: 90px" />
+            </el-col>
+            <el-col :span="5">
+              <span class="labelText">高度:</span>
+              <el-input-number v-model="currentCompConfig.height"
+                               :max="667"
+                               controls-position="right"
+                               style="width: 90px" />
+            </el-col>
+            <el-col :span="12">
+              <span class="labelText">画布颜色:</span>
+              <el-color-picker v-model="currentCompConfig.background"
+                               show-alpha />
+            </el-col>
+
+          </el-row>
+        </template>
+
         <template v-if="['text'].includes(currentCompConfig.type)">
           <el-divider />
           <h4>文字设置</h4>
           <el-row>
             <el-col :span="4">
               <span class="labelText">字体颜色:</span>
-              <el-color-picker v-model="currentCompConfig.style.fontColor"
+              <el-color-picker v-model="currentCompConfig.fontColor"
                                show-alpha />
             </el-col>
             <el-col :span="20">
               <span class="labelText">文字内容:</span>
-              <el-input v-model="currentCompConfig.style.textValue"
+              <el-input v-model="currentCompConfig.textValue"
                         style="width: 525px" />
             </el-col>
           </el-row>
@@ -46,14 +73,14 @@
           <el-row>
             <el-col :span="8">
               <span class="labelText">字体大小:</span>
-              <el-input-number v-model="currentCompConfig.style.fontSize"
+              <el-input-number v-model="currentCompConfig.fontSize"
                                @change="elInputNumberChange"
                                min="12"
                                :step="2" />
             </el-col>
             <el-col :span="8">
               <span class="labelText">字体样式:</span>
-              <el-select v-model="currentCompConfig.style.fontStyle"
+              <el-select v-model="currentCompConfig.fontStyle"
                          style="width: 150px"
                          placeholder="normal">
                 <el-option label="normal"
@@ -65,7 +92,7 @@
 
             <el-col :span="8">
               <span class="labelText">字体粗细:</span>
-              <el-select v-model="currentCompConfig.style.fontWeight"
+              <el-select v-model="currentCompConfig.fontWeight"
                          style="width: 150px"
                          placeholder="normal">
                 <el-option label="normal"
@@ -99,7 +126,7 @@
             </el-col>
             <el-col :span="12">
               <span class="labelText">素材地址:</span>
-              <el-input v-model="currentCompConfig.style.url"
+              <el-input v-model="currentCompConfig.url"
                         placeholder="生成二维码所需链接"
                         style="width: 300px" />
             </el-col>
@@ -120,7 +147,7 @@
               city
             }}</el-checkbox>
         </el-checkbox-group>
-  <br>
+        <br>
         <el-button-group>
           <el-button type="primary"
                      style="width: 10px!important">靠左</el-button>

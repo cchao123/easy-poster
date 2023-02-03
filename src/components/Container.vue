@@ -1,11 +1,22 @@
 <template>
-  <div class="mc"></div>
+  <div :style="`width: ${currentCompConfig.width}px; height: ${currentCompConfig.height}px;background: ${currentCompConfig.background}`"></div>
 </template>
 
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { useStore } from '~/store';
+import errorImg from '~/assets/image.png'
+
+const props = defineProps({
+  index: {
+    type: Number,
+    default: 0,
+  },
+});
+
+const store = useStore();
+const currentCompConfig = computed(() => store.compList[props.index]);
+</script>
+
 <style lang="postcss">
-.mc {
-  width: 150px;
-  height: 150px;
-  border: 1px solid #000;
-}
 </style>

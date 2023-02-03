@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <img :src="currentCompConfig.style.url || errorImg" :onerror="error" alt="">
+    <img :src="currentCompConfig.url || errorImg" :onerror="error" alt="">
   </div>
 </template>
 
