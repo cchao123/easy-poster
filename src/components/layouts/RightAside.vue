@@ -11,13 +11,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from '~/store';
-import ConfigForm from '~/components/layouts/ConfigForm.vue'
+import ConfigForm from '~/components/layouts/ConfigForm.vue';
 const store = useStore();
 const compList = computed(() => store.compList);
 const curCompConfig = computed(() => store.curCompConfig);
-import { ref } from 'vue'
 </script>
 
 <style lang="postcss" scoped>

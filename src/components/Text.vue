@@ -1,5 +1,10 @@
 <template>
-  <div :style="`font-size: ${curCompConfig.fontSize}px; font-weight: ${curCompConfig.fontWeight};font-style: ${curCompConfig.fontStyle};color: ${curCompConfig.fontColor}`">{{ curCompConfig.textValue }}</div>
+  <div :style="{
+    fontSize: `${curCompConfig.fontSize}px`,
+    fontWeight: `${curCompConfig.fontWeight}`,
+    fontStyle: `${curCompConfig.fontStyle}`,
+    color: `${curCompConfig.fontColor}`,
+  }">{{ curCompConfig.text }}</div>
 </template>
 
 <script lang="ts" setup>

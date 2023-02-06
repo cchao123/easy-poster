@@ -13,9 +13,6 @@ export const useStore = defineStore('easyPoster', {
     compList: [] as unknown as ElementStyle,
   }),
   actions: {
-    setCurCompValue(key: any, value: number | string) {
-      this.compList[0][key] = value;
-    },
     setCurCompIndex(curCompIndex: Number) {
       this.curCompIndex = curCompIndex;
     },
@@ -27,7 +24,13 @@ export const useStore = defineStore('easyPoster', {
       this.compList[index].point[key] = pixel;
     },
     setCheckAllStatus(status: boolean) {
-      status? this.curCompConfig.drag.directionFixed = CHECK_ALL_VALUE: this.curCompConfig.drag.directionFixed = []
+      status ? this.curCompConfig.dragDirFixed = CHECK_ALL_VALUE: this.curCompConfig.dragDirFixed = []
+    },
+    setDOMparams(index: number, obj: any) {
+      this.compList[index] = {
+        ...this.compList[index],
+        ...obj,
+      }
     },
   },
   getters: {
@@ -35,13 +38,13 @@ export const useStore = defineStore('easyPoster', {
       return state.compList[state.curCompIndex];
     },
     isIndeterminate (state) {
-      return this.curCompConfig.drag.directionFixed.length > 0 && this.curCompConfig.drag.directionFixed.length < CHECK_MAX_LENGTH;
+      return this.curCompConfig.dragDirFixed.length > 0 && this.curCompConfig.dragDirFixed.length < CHECK_MAX_LENGTH;
     },
     isCheckAll (state) {
-      return this.curCompConfig.drag.directionFixed.length === CHECK_MAX_LENGTH;
+      return this.curCompConfig.dragDirFixed.length === CHECK_MAX_LENGTH;
     },
     curFixedStatus(status) {
-      return this.curCompConfig.drag.directionFixed;
+      return this.curCompConfig.dragDirFixed;
     },
   }
 });

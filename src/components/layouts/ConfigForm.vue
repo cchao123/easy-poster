@@ -2,7 +2,7 @@
   <div class="formWrap">
     <div class="custom-form">
       <div>
-        <h4>画布设置</h4>
+        <h4>画布设置{{ curCompIndex }}</h4>
         <el-row>
           <el-col :span="5">
             <span class="labelText">宽度:</span>
@@ -29,6 +29,7 @@
 
       <template v-if="curCompConfig">
         <template v-if="['container'].includes(curCompConfig.type)">
+          <el-divider />
           <h4>容器设置</h4>
           <el-row>
             <el-col :span="5">
@@ -74,7 +75,6 @@
             <el-col :span="8">
               <span class="labelText">字体大小:</span>
               <el-input-number v-model="curCompConfig.fontSize"
-                               @change="elInputNumberChange"
                                min="12"
                                :step="2" />
             </el-col>
@@ -112,15 +112,17 @@
           <el-row>
             <el-col :span="5">
               <span class="labelText">宽度:</span>
-              <el-input-number :min="1"
-                               :max="10"
+              <el-input-number v-model="curCompConfig.width"
+                               :min="0"
+                               :max="375"
                                controls-position="right"
                                style="width: 90px" />
             </el-col>
             <el-col :span="5">
               <span class="labelText">高度:</span>
-              <el-input-number :min="1"
-                               :max="10"
+              <el-input-number v-model="curCompConfig.height"
+                               :min="0"
+                               :max="667"
                                controls-position="right"
                                style="width: 90px" />
             </el-col>
@@ -135,28 +137,27 @@
         </template>
 
         <el-divider />
-        <h4>拖拽设置 ~ [ {{curCompConfig.point.x  }}, {{curCompConfig.point.y  }} ]</h4>
-
+        <h4>拖拽设置 📌 [ {{curCompConfig.point.x  }}, {{curCompConfig.point.y  }} ]</h4>
         <el-row>
           <el-col :span="24">
             <el-checkbox v-model="isCheckAll"
                          :indeterminate="isIndeterminate"
                          @change="handleCheckAllChange">拖拽锁定</el-checkbox>
           </el-col>
-          <el-checkbox-group v-model="curCompConfig.drag.directionFixed"
+          <el-checkbox-group v-model="curCompConfig.dragDirFixed"
                              @change="handleCheckedCitiesChange">
             <el-checkbox key="x"
                          label="X">锁定X</el-checkbox>
             <el-checkbox key="y"
                          label="Y">锁定Y</el-checkbox>
           </el-checkbox-group>
-          
+
           <el-tooltip v-for="btn in POSITION_BUTTON"
                       :key="btn.class"
                       :content="btn.content"
                       placement="top">
             <div class="icon-wrap iconfont"
-            @click="changeABABABAB"
+                 @click="changeFixedDirection(btn.direction)"
                  :class="btn.class"></div>
           </el-tooltip>
         </el-row>
@@ -171,28 +172,32 @@ import { useStore } from '~/store';
 import { POSITION_BUTTON } from '~/constants';
 
 const store = useStore();
+const curCompIndex = computed(() => store.curCompIndex);
 const curCompConfig = computed(() => store.curCompConfig);
 const canvasConfig = computed(() => store.canvasConfig);
 const isIndeterminate = computed(() => store.isIndeterminate);
 const isCheckAll = computed(() => store.isCheckAll);
+const { setCheckAllStatus, setCompPoint } = store;
 
-const { setCurCompValue, setCheckAllStatus } = store;
-
-
-const changeABABABAB = () => {
-}
-
-const elInputNumberChange = (currentValue: number) => {
-  setCurCompValue('fontSize', currentValue);
+const changeFixedDirection = (direction: string) => {
+  const { setDOMparams } = store;
+  const dirFun = {
+    bottom: () => setCompPoint(curCompIndex.value, 'y', canvasConfig.value.height - curCompConfig.value.height),
+    top: () => setCompPoint(curCompIndex.value, 'y', 0),
+    left: () => setCompPoint(curCompIndex.value, 'x', 0),
+    right: () => setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width - curCompConfig.value.width),
+    center: () => setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width / 2 - curCompConfig.value.width / 2),
+    middle: () => setCompPoint(curCompIndex.value, 'y', canvasConfig.value.height / 2 - curCompConfig.value.height / 2),
+  };
+  dirFun[direction]();
 };
-
 
 const handleCheckAllChange = (status: boolean) => {
   setCheckAllStatus(status);
 };
+
 const handleCheckedCitiesChange = (value: string[]) => {
   const checkedCount = value.length;
-  // checkedCount && checkedCount === curCompConfig.value.drag.directionFixed.length ? setCheckAllStatus(true): setCheckAllStatus(false);
 };
 </script>
 

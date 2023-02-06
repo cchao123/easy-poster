@@ -1,5 +1,6 @@
 <template>
   <div class="editWrap"
+       :class="{ noDrop: curFixedStatus.length === CHECK_MAX_LENGTH, ewDrop: curFixedStatus.indexOf('Y') !== -1, nsDrop: curFixedStatus.indexOf('X') !== -1}"
        @mousedown.stop.prevent="handleMouseDown"
        :style="`left: ${item.point.x}px; top: ${item.point.y}px;`">
     <slot />
@@ -9,6 +10,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import { useStore } from '~/store';
+import { CHECK_MAX_LENGTH } from '~/constants';
 
 const store = useStore();
 const { setCompPoint, setCurCompIndex } = store;
@@ -34,8 +36,6 @@ const props = defineProps({
 });
 
 const handleMouseDown = (e: any) => {
-  console.log(1111);
-  // @TODO 如果锁定 return
   setCurCompIndex(props.index);
   // ele位置
   const pointX = props.item.point.x;
@@ -76,5 +76,17 @@ const handleMouseDown = (e: any) => {
   color: RED;
 }
 .editWrap:hover {
+}
+
+.ewDrop {
+  cursor: ew-resize;
+}
+
+.nsDrop {
+  cursor: ns-resize;
+}
+
+.noDrop {
+  cursor: no-drop;
 }
 </style>

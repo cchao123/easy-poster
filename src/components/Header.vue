@@ -1,13 +1,20 @@
 <template>
-  <div class="header">
-    <img :src="curCompConfig.url || errorImg" :onerror="error" alt="">
+  <div class="header"
+       :style="{
+         width:`${curCompConfig.width}px`,
+         height: `${curCompConfig.height}px`,
+       }">
+    <img :src="curCompConfig.url || errorImg"
+         :onerror="error">
+    {{ curCompConfig }}
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useStore } from '~/store';
-import errorImg from '~/assets/head.png'
+import errorImg from '~/assets/head.png';
+import { getClientRect } from '~/utils';
 
 const props = defineProps({
   index: {
@@ -17,20 +24,16 @@ const props = defineProps({
 });
 
 const store = useStore();
-// const curCompConfig = computed(() => store.compList[props.index]);
-const curCompConfig = computed(() => store.curCompConfig);
+const curCompConfig = computed(() => store.compList[props.index]);
 </script>
 
 <style lang="postcss">
 .header {
-  width: 50px;
-  height: 50px;
   overflow: hidden;
   border-radius: 50%;
-
 }
 .header img {
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  height: 100%;
 }
 </style>

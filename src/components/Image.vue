@@ -1,11 +1,19 @@
 <template>
-  <img class="images" :src="curCompConfig.url || errorImg" :onerror="error" alt="">
+  <img ref="imageRef"
+       class="images"
+       :src="curCompConfig.url || errorImg"
+       :onerror="error"
+       :style="{
+         width: curCompConfig.width ? ` ${curCompConfig.width}px`: 'auto',
+         height: curCompConfig.height? ` ${curCompConfig.height}px`: 'auto',
+       }">
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useStore } from '~/store';
-import errorImg from '~/assets/image.png'
+import errorImg from '~/assets/image.png';
+import { getClientRect } from '~/utils';
 
 const props = defineProps({
   index: {

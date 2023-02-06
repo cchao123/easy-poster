@@ -2,7 +2,6 @@
 const COMMON_STYLE = {
   width: 0,
   height: 0,
-  color: '',
   url: '',
   textValue: '文本内容',
   fontColor: '#000',
@@ -17,9 +16,7 @@ const COMMON_PARAMS = {
     x: 0,
     y: 0,
   },
-  drag: {
-    directionFixed: [],
-  },
+  dragDirFixed: [],
 }
 
 export const MATERIAL_LIST = [
@@ -47,6 +44,8 @@ export const MATERIAL_LIST = [
     text: '图片素材',
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
+    width: 60,
+    height: 60,
   },
   {
     icon: 'wenzi',
@@ -62,6 +61,8 @@ export const MATERIAL_LIST = [
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
     url: 'https://bizaladdin-image.baidu.com/0/pic/1080140929_-251358729_-1837083577.jpg',
+    width: 50,
+    height: 50,
   },
   {
     icon: 'erweima',
@@ -75,26 +76,32 @@ export const MATERIAL_LIST = [
 
 export const POSITION_BUTTON = [
   {
+    direction: 'center',
     content: '水平居中',
     class: 'icon-shangxiajuzhong icon-r-90',
   },
   {
+    direction: 'middle',
     content: '垂直居中',
     class: 'icon-shangxiajuzhong',
   },
   {
+    direction: 'left',
     content: '靠左',
     class: 'icon-kaozuo',
   },
   {
+    direction: 'right',
     content: '靠右',
     class: 'icon-kaozuo icon-r-180',
   },
   {
+    direction: 'top',
     content: '靠上',
     class: 'icon-kaoshang',
   },
   {
+    direction: 'bottom',
     content: '靠下',
     class: 'icon-kaoshang icon-r-180',
   },

@@ -1,5 +1,9 @@
 <template>
-  <div :style="`width: ${curCompConfig.width}px; height: ${curCompConfig.height}px;background: ${curCompConfig.background}`"></div>
+  <div :style="{
+    width: `${curCompConfig.width}px`,
+    height: `${curCompConfig.height}px`,
+    background: `${curCompConfig.background}`,
+  }"></div>
 </template>
 
 <script lang="ts" setup>

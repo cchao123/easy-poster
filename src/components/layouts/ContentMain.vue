@@ -3,21 +3,33 @@
        @mousedown="handleMouseDown"
        ref="mainRef">
     <div class="iphone"
-         :style="`width: ${canvasConfig.width}px; height: ${canvasConfig.height}px; background-color: ${canvasConfig.background};transform: scale(${canvasZoom}) translate3d(${canvasX}px, ${canvasY}px ,0);`"
+         :style="{
+        width: `${canvasConfig.width}px`,
+        height:`${canvasConfig.height}px`,
+        backgroundColor: `${canvasConfig.background}`,
+        transform: `scale(${canvasZoom}) translate3d(${canvasX}px, ${canvasY}px ,0)`,
+      }"
          @drop="drop"
          @dragover.prevent="dragover">
+
       <Edit v-for="(item, idx) in compList"
             :canvasX="canvasX"
             :canvasY="canvasY"
             :key="idx"
             :index="idx"
             :item="item">
-        <Container :index="idx" v-if="item.type === 'container'" />
-        <Background :index="idx" v-if="item.type === 'background'" />
-        <Image :index="idx" v-if="item.type === 'image'" />
-        <Text :index="idx" v-if="item.type === 'text'" />
-        <Header :index="idx" v-if="item.type === 'head'" />
-        <QrCode :index="idx" v-if="item.type === 'qrcode'" />
+        <Container :index="idx"
+                   v-if="item.type === 'container'" />
+        <Background :index="idx"
+                    v-if="item.type === 'background'" />
+        <Image :index="idx"
+               v-if="item.type === 'image'" />
+        <Text :index="idx"
+              v-if="item.type === 'text'" />
+        <Header :index="idx"
+                v-if="item.type === 'head'" />
+        <QrCode :index="idx"
+                v-if="item.type === 'qrcode'" />
       </Edit>
     </div>
   </div>
