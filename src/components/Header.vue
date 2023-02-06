@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <img :src="currentCompConfig.url || errorImg" :onerror="error" alt="">
+    <img :src="curCompConfig.url || errorImg" :onerror="error" alt="">
   </div>
 </template>
 
@@ -17,8 +17,8 @@ const props = defineProps({
 });
 
 const store = useStore();
-// const currentCompConfig = computed(() => store.compList[props.index]);
-const currentCompConfig = computed(() => store.currentCompConfig);
+// const curCompConfig = computed(() => store.compList[props.index]);
+const curCompConfig = computed(() => store.curCompConfig);
 </script>
 
 <style lang="postcss">

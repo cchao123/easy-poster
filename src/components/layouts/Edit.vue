@@ -1,15 +1,18 @@
 <template>
-  <div class="editWrap" @mousedown.stop.prevent="handleMouseDown"
+  <div class="editWrap"
+       @mousedown.stop.prevent="handleMouseDown"
        :style="`left: ${item.point.x}px; top: ${item.point.y}px;`">
     <slot />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs } from 'vue';
+import { ref, computed } from 'vue';
 import { useStore } from '~/store';
+
 const store = useStore();
-const { setCompPoint, setCurrentCompIndex } = store;
+const { setCompPoint, setCurCompIndex } = store;
+const curFixedStatus = computed(() => store.curFixedStatus);
 
 const props = defineProps({
   item: {
@@ -31,39 +34,38 @@ const props = defineProps({
 });
 
 const handleMouseDown = (e: any) => {
-    // @TODO 如果锁定 return
-    setCurrentCompIndex(props.index);
-    // ele位置 
-    const pointX = props.item.point.x;
-    const pointY = props.item.point.y;
+  console.log(1111);
+  // @TODO 如果锁定 return
+  setCurCompIndex(props.index);
+  // ele位置
+  const pointX = props.item.point.x;
+  const pointY = props.item.point.y;
 
-    // 鼠标位置 
-    const startX = e.clientX;
-    const startY = e.clientY;
-    
-    const move = (moveEvent: any) => {
-      // 当前位置
-      const currX = moveEvent.clientX;
-      const currY = moveEvent.clientY;
+  // 鼠标位置
+  const startX = e.clientX;
+  const startY = e.clientY;
 
-      const targetX = pointX + currX - startX;
-      const targetY = pointY + currY - startY;
+  const move = (moveEvent: any) => {
+    // 当前位置
+    const currX = moveEvent.clientX;
+    const currY = moveEvent.clientY;
 
-      // x + w >= 375
-      setCompPoint(props.index, {
-        x: targetX > 0 ? targetX : 0,
-        y: targetY > 0 ? targetY : 0,
-      });
-    };
+    const targetX = pointX + currX - startX;
+    const targetY = pointY + currY - startY;
 
-    const up = () => {
-      document.removeEventListener('mousemove', move)
-      document.removeEventListener('mouseup', up)
-    };
+    // x + w >= 375
+    curFixedStatus.value.indexOf('Y') === -1 && setCompPoint(props.index, 'y', targetY > 0 ? targetY : 0);
+    curFixedStatus.value.indexOf('X') === -1 && setCompPoint(props.index, 'x', targetX > 0 ? targetX : 0);
+  };
 
-    document.addEventListener('mousemove', move)
-    document.addEventListener('mouseup', up)
-}
+  const up = () => {
+    document.removeEventListener('mousemove', move);
+    document.removeEventListener('mouseup', up);
+  };
+
+  document.addEventListener('mousemove', move);
+  document.addEventListener('mouseup', up);
+};
 </script>
 
 <style lang="postcss">

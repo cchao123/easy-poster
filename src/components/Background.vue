@@ -14,7 +14,7 @@ const props = defineProps({
   },
 });
 
-const currentCompConfig = computed(() => store.compList[props.index]);
+const curCompConfig = computed(() => store.compList[props.index]);
 </script>
 <style lang="postcss">
 .bgg {

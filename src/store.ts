@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia';
+import { ElementStyle } from '~/types';
+import { CHECK_ALL_VALUE, CHECK_MAX_LENGTH } from '~/constants';
 
 export const useStore = defineStore('easyPoster', {
   state: () => ({
@@ -7,27 +9,39 @@ export const useStore = defineStore('easyPoster', {
       height: 667,
       background: '#fff',
     },
-    currentCompIndex: 0,
-    compList: [],
+    curCompIndex: 0,
+    compList: [] as unknown as ElementStyle,
   }),
   actions: {
-    setCurrentCompValue(key: any, value: number | string) {
+    setCurCompValue(key: any, value: number | string) {
       this.compList[0][key] = value;
     },
-    setCurrentCompIndex(currentCompIndex: Number) {
-      this.currentCompIndex = currentCompIndex;
+    setCurCompIndex(curCompIndex: Number) {
+      this.curCompIndex = curCompIndex;
     },
     setCompList(compConfig: any) {
       // @TODO push深拷贝
       this.compList.push(JSON.parse(JSON.stringify(compConfig)));
     },
-    setCompPoint(index: number, point: {x: number | any, y: number | any}) {
-      this.compList[index].point = point;
-    }
+    setCompPoint(index: number, key: string, pixel:  Number) {
+      this.compList[index].point[key] = pixel;
+    },
+    setCheckAllStatus(status: boolean) {
+      status? this.curCompConfig.drag.directionFixed = CHECK_ALL_VALUE: this.curCompConfig.drag.directionFixed = []
+    },
   },
   getters: {
-    currentCompConfig(state) {
-      return state.compList[state.currentCompIndex];
+    curCompConfig(state) {
+      return state.compList[state.curCompIndex];
+    },
+    isIndeterminate (state) {
+      return this.curCompConfig.drag.directionFixed.length > 0 && this.curCompConfig.drag.directionFixed.length < CHECK_MAX_LENGTH;
+    },
+    isCheckAll (state) {
+      return this.curCompConfig.drag.directionFixed.length === CHECK_MAX_LENGTH;
+    },
+    curFixedStatus(status) {
+      return this.curCompConfig.drag.directionFixed;
     },
   }
 });

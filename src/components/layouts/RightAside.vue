@@ -6,6 +6,7 @@
       <!-- <pre>console.log(123)</pre> -->
       {{ compList }}
     </div>
+
   </div>
 </template>
 
@@ -13,12 +14,10 @@
 import { computed } from 'vue';
 import { useStore } from '~/store';
 import ConfigForm from '~/components/layouts/ConfigForm.vue'
-
 const store = useStore();
-
 const compList = computed(() => store.compList);
-const currentCompConfig = computed(() => store.currentCompConfig);
-
+const curCompConfig = computed(() => store.curCompConfig);
+import { ref } from 'vue'
 </script>
 
 <style lang="postcss" scoped>

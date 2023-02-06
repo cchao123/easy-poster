@@ -19,7 +19,7 @@ const props = defineProps({
 });
 
 const store = useStore();
-const currentCompConfig = computed(() => store.compList[props.index]);
+const curCompConfig = computed(() => store.compList[props.index]);
 
 const qrUrl = ref();
 onMounted(() => {

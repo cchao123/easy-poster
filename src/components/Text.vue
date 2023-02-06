@@ -1,5 +1,5 @@
 <template>
-  <div :style="`font-size: ${currentCompConfig.fontSize}px; font-weight: ${currentCompConfig.fontWeight};font-style: ${currentCompConfig.fontStyle};color: ${currentCompConfig.fontColor}`">{{ currentCompConfig.textValue }}</div>
+  <div :style="`font-size: ${curCompConfig.fontSize}px; font-weight: ${curCompConfig.fontWeight};font-style: ${curCompConfig.fontStyle};color: ${curCompConfig.fontColor}`">{{ curCompConfig.textValue }}</div>
 </template>
 
 <script lang="ts" setup>
@@ -13,5 +13,5 @@ const props = defineProps({
     default: 0,
   },
 });
-const currentCompConfig = computed(() => store.compList[props.index]);
+const curCompConfig = computed(() => store.compList[props.index]);
 </script>

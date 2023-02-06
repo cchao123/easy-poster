@@ -1,5 +1,5 @@
 <template>
-  <div :style="`width: ${currentCompConfig.width}px; height: ${currentCompConfig.height}px;background: ${currentCompConfig.background}`"></div>
+  <div :style="`width: ${curCompConfig.width}px; height: ${curCompConfig.height}px;background: ${curCompConfig.background}`"></div>
 </template>
 
 <script lang="ts" setup>
@@ -15,7 +15,7 @@ const props = defineProps({
 });
 
 const store = useStore();
-const currentCompConfig = computed(() => store.compList[props.index]);
+const curCompConfig = computed(() => store.compList[props.index]);
 </script>
 
 <style lang="postcss">

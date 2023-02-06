@@ -1,5 +1,5 @@
 <template>
-  <img class="images" :src="currentCompConfig.url || errorImg" :onerror="error" alt="">
+  <img class="images" :src="curCompConfig.url || errorImg" :onerror="error" alt="">
 </template>
 
 <script lang="ts" setup>
@@ -15,7 +15,7 @@ const props = defineProps({
 });
 
 const store = useStore();
-const currentCompConfig = computed(() => store.compList[props.index]);
+const curCompConfig = computed(() => store.compList[props.index]);
 </script>
 
 <style lang="postcss">

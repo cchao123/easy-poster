@@ -14,7 +14,8 @@ export interface ElementStyle {
   point: {
     x: Number,
     y: Number,
-  }
+  },
+  isIndeterminate?: Boolean,
 }
 
 export interface SchemeType {

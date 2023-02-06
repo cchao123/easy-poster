@@ -52,8 +52,8 @@ let point = {
 const store = useStore();
 const compList = computed(() => store.compList);
 const canvasConfig = computed(() => store.canvasConfig);
-const currentCompIndex = computed(() => store.currentCompIndex);
-const { setCompList, setCurrentCompIndex } = store;
+const curCompIndex = computed(() => store.curCompIndex);
+const { setCompList, setCurCompIndex } = store;
 
 const dragover = (e: any) => {
   point = {
@@ -63,7 +63,7 @@ const dragover = (e: any) => {
 };
 
 const drop = (e: any) => {
-  setCurrentCompIndex(compList.value.length);
+  setCurCompIndex(compList.value.length);
   const materialIndex = e.dataTransfer.getData('index');
   setCompList({
     ...MATERIAL_LIST[materialIndex],
