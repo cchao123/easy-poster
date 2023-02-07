@@ -35,7 +35,7 @@ const props = defineProps({
   },
 });
 
-const handleMouseDown = (e: any) => {
+const handleMouseDown = (e: MouseEvent) => {
   setCurCompIndex(props.index);
   // ele位置
   const pointX = props.item.point.x;
@@ -45,7 +45,7 @@ const handleMouseDown = (e: any) => {
   const startX = e.clientX;
   const startY = e.clientY;
 
-  const move = (moveEvent: any) => {
+  const move = (moveEvent: MouseEvent) => {
     // 当前位置
     const currX = moveEvent.clientX;
     const currY = moveEvent.clientY;

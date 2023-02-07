@@ -67,14 +67,14 @@ const canvasConfig = computed(() => store.canvasConfig);
 const curCompIndex = computed(() => store.curCompIndex);
 const { setCompList, setCurCompIndex } = store;
 
-const dragover = (e: any) => {
+const dragover = (e: DragEvent) => {
   point = {
     x: e.layerX - canvasX.value,
     y: e.layerY - canvasY.value,
   };
 };
 
-const drop = (e: any) => {
+const drop = (e: DragEvent) => {
   setCurCompIndex(compList.value.length);
   const materialIndex = e.dataTransfer.getData('index');
   setCompList({
@@ -83,7 +83,7 @@ const drop = (e: any) => {
   });
 };
 
-const handleMouseDown = (e: any) => {
+const handleMouseDown = (e: MouseEvent) => {
   // 鼠标位置
   const startX = e.clientX;
   const startY = e.clientY;
@@ -91,7 +91,7 @@ const handleMouseDown = (e: any) => {
   const dcanvasX = Number(canvasX.value);
   const dcanvasY = Number(canvasY.value);
 
-  const move = (moveEvent: any) => {
+  const move = (moveEvent: MouseEvent) => {
     // 当前位置
     const currX = moveEvent.clientX;
     const currY = moveEvent.clientY;
@@ -111,15 +111,15 @@ const handleMouseDown = (e: any) => {
 
 const isZoomCompose = ref(false);
 onMounted(() => {
-  document.body.onkeydown = (e: any) => {
+  document.body.onkeydown = (e: KeyboardEvent) => {
     if (e.keyCode === 91) isZoomCompose.value = true;
   };
 
-  document.body.onkeyup = (e: any) => {
+  document.body.onkeyup = (e: KeyboardEvent) => {
     if (e.keyCode === 91) isZoomCompose.value = false;
   };
 
-  mainRef.value.onmousewheel = (e: any) => {
+  mainRef.value.onmousewheel = (e: WheelEvent) => {
     // 键盘回复
     if (isZoomCompose.value) {
       if (e.deltaY > 0) {

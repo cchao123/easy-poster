@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import { MATERIAL_LIST } from '~/constants';
 
-const dragstart = (e: any) => {
+const dragstart = (e: DragEvent) => {
   e.dataTransfer.setData('index', e.target.dataset.index)
 };
 
