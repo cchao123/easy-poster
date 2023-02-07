@@ -11,7 +11,7 @@
       <div class="material-icon">
         <div class="iconfont" :class="`icon-${mItem.icon}`"></div>
       </div>
-      <div class="material-name">{{ mItem.text }}</div>
+      <div class="material-name">{{ mItem.name }}</div>
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import { MATERIAL_LIST } from '~/constants';
 
-const dragstart = (e: DragEvent) => {
+const dragstart = (e: any) => {
   e.dataTransfer.setData('index', e.target.dataset.index)
 };
 

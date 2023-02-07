@@ -4,7 +4,6 @@
     <ConfigForm></ConfigForm>
     <div class="codeWrap">
       <!-- <pre>console.log(123)</pre> -->
-      {{ compList }}
     </div>
 
   </div>

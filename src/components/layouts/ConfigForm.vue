@@ -129,7 +129,7 @@
             <el-col :span="12">
               <span class="labelText">素材地址:</span>
               <el-input v-model="curCompConfig.url"
-                        placeholder="生成二维码所需链接"
+                        placeholder="生成二维码所需链接"
                         style="width: 300px" />
             </el-col>
 
@@ -137,29 +137,49 @@
         </template>
 
         <el-divider />
-        <h4>拖拽设置 📌 [ {{curCompConfig.point.x  }}, {{curCompConfig.point.y  }} ]</h4>
+        <h4>拖拽设置</h4>
         <el-row>
-          <el-col :span="24">
+          <el-col :span="3">
             <el-checkbox v-model="isCheckAll"
                          :indeterminate="isIndeterminate"
                          @change="handleCheckAllChange">拖拽锁定</el-checkbox>
           </el-col>
-          <el-checkbox-group v-model="curCompConfig.dragDirFixed"
-                             @change="handleCheckedCitiesChange">
-            <el-checkbox key="x"
-                         label="X">锁定X</el-checkbox>
-            <el-checkbox key="y"
-                         label="Y">锁定Y</el-checkbox>
-          </el-checkbox-group>
+          <el-col :span="3">
+            <el-checkbox-group v-model="curCompConfig.dragDirFixed"
+                               @change="handleCheckedCitiesChange">
+              <el-checkbox key="x"
+                           label="X">锁定X轴</el-checkbox>
+              <el-checkbox key="y"
+                           label="Y">锁定Y轴</el-checkbox>
+            </el-checkbox-group>
+          </el-col>
+          <el-col :span="10">
+            <div class="dirContainer">
+              <el-tooltip v-for="btn in POSITION_BUTTON"
+                          :key="btn.class"
+                          :content="btn.content"
+                          :placement="btn.placement">
+                <div class="icon-wrap iconfont"
+                     @click="changeFixedDirection(btn.direction)"
+                     :class="`${btn.class} ${btn.direction}`"></div>
+              </el-tooltip>
+            </div>
+          </el-col>
+          <el-col :span="5">
+            <el-row>
+              <el-col>
+                <span class="labelText">X轴:</span>
+                <el-input-number v-model="curCompConfig.point.x"
+                                 style="width: 120px" />
+              </el-col>
+              <el-col style="margin-top: 5px">
+                <span class="labelText">Y轴:</span>
+                <el-input-number v-model="curCompConfig.point.y"
+                                 style="width: 120px" />
+              </el-col>
+            </el-row>
 
-          <el-tooltip v-for="btn in POSITION_BUTTON"
-                      :key="btn.class"
-                      :content="btn.content"
-                      placement="top">
-            <div class="icon-wrap iconfont"
-                 @click="changeFixedDirection(btn.direction)"
-                 :class="btn.class"></div>
-          </el-tooltip>
+          </el-col>
         </el-row>
       </template>
     </div>
@@ -219,22 +239,45 @@ const handleCheckedCitiesChange = (value: string[]) => {
 }
 
 .icon-wrap {
+  position: absolute;
+  left: 50%;
+  right: 50%;
   width: 30px;
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 30px;
   background-color: var(--ep-fill-color-light);
   color: var(--ep-text-color-regular);
   border-radius: 4px;
 }
 
-.icon-r-180 {
-  transform: rotate(180deg);
+.dirContainer {
+  position: relative;
+  left: -30px;
 }
 
-.icon-r-90 {
-  transform: rotate(90deg);
+.top {
+  transform: translateY(-45px);
+}
+
+.left {
+  transform: translateX(-80px);
+}
+
+.bottom {
+  transform: translateY(45px) rotate(180deg);
+}
+
+.right {
+  transform: translateX(80px) rotate(180deg);
+}
+
+.center {
+  transform: translateX(-25px) rotate(90deg);
+}
+
+.middle {
+  transform: translateX(25px);
 }
 </style>

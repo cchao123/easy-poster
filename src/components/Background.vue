@@ -1,5 +1,5 @@
 <template>
-  <div><img class="bgg" src="https://mat1.gtimg.com/qqcdn/tnewsh5/2022surname/lottie/img_46.png" alt=""></div>
+  <div><img class="bgg" :src="curCompConfig.url" alt=""></div>
 </template>
 
 <script lang="ts" setup>
