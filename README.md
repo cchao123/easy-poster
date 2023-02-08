@@ -36,7 +36,4 @@ npm run dev
 
 See `src/styles/element/index.scss`.
 
-
-光标：http://c.biancheng.net/css3/cursor.html
-
-import顺序
+TODOE 处理：import顺序

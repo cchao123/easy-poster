@@ -223,8 +223,8 @@ const handleCheckedCitiesChange = (value: string[]) => {
 
 <style lang="postcss">
 .formWrap {
-  flex: 1;
   border-bottom: 1px solid var(--ep-menu-border-color);
+  padding-bottom: 20px;
 }
 
 .custom-form {
@@ -266,7 +266,7 @@ const handleCheckedCitiesChange = (value: string[]) => {
 }
 
 .bottom {
-  transform: translateY(45px) rotate(180deg);
+  transform: translateY(45px    ) rotate(180deg);
 }
 
 .right {

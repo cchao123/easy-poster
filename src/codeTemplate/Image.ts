@@ -1,10 +1,10 @@
 const html2Canvas = (params: any) => {
-  return `<div></div>`
+  return `1`
 };
 
 const pixiJs = (params: any) => {
   return `
-        const posterBg = createSprite('${params.url}', {
+        const image = createSprite('${params.url}', {
           width: ${params.width},
           height: ${params.height},
           x: ${params.point.x},
@@ -12,9 +12,10 @@ const pixiJs = (params: any) => {
         });`
 };
 
-export const getBackgroundTpl = (params: any) => {
+export const getImageTpl = (params: any) => {
   return {
     html2Canvas: html2Canvas(params),
     pixiJs: pixiJs(params),
   }
 }
+

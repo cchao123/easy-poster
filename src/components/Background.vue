@@ -3,8 +3,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useStore } from '~/store';
+import { getBackgroundTpl } from '~/codeTemplate';
 
 const store = useStore();
 const props = defineProps({
@@ -15,6 +16,7 @@ const props = defineProps({
 });
 
 const curCompConfig = computed(() => store.compList[props.index]);
+
 </script>
 <style lang="postcss">
 .bgg {

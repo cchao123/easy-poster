@@ -4,6 +4,7 @@ import { CHECK_ALL_VALUE, CHECK_MAX_LENGTH } from '~/constants';
 
 export const useStore = defineStore('easyPoster', {
   state: () => ({
+    output: 'pixiJs' as 'pixiJs' | 'html2Canvas',
     canvasConfig: {
       width: 375,
       height: 667,

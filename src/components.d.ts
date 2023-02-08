@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Background: typeof import('./components/Background.vue')['default']
     BaseHeader: typeof import('./components/layouts/BaseHeader.vue')['default']
+    CodeContainer: typeof import('./components/layouts/CodeContainer.vue')['default']
     ConfigForm: typeof import('./components/layouts/ConfigForm.vue')['default']
     Container: typeof import('./components/Container.vue')['default']
     ContentMain: typeof import('./components/layouts/ContentMain.vue')['default']
