@@ -42,7 +42,7 @@
               highlight-current-row>
       <el-table-column property="id"
                        label="id" />
-      <el-table-column label="缩略图">
+      <el-table-column label="thumbnail">
         <template #default="scope">
           <img class="thumbnail"
                :src="scope.row.thumbnail">
@@ -50,7 +50,7 @@
       </el-table-column>
 
       <el-table-column property="date"
-                       label="上次修改">
+                       label="last modified">
         <template #default="scope">
           <div style="display: flex; align-items: center">
             <el-icon>
@@ -62,7 +62,7 @@
       </el-table-column>
 
       <el-table-column property="remarks"
-                       label="备注"
+                       label="remarks"
                        width="150px">
         <template #default="scope">
           <el-input v-model="scope.row.remarks"
@@ -86,7 +86,7 @@
           <el-popconfirm title="应用替至画板?"
                          icon-color="#c93b33"
                          :icon="InfoFilled"
-                         @confirm="handleEdit">
+                         @confirm="handleEdit(scope)">
             <template #reference>
               <el-button link
                          type="primary"
@@ -114,10 +114,12 @@ import { toggleDark } from '~/composables';
 import { convertDOMToImage, formatFullDateNew, generateMixed } from '~/utils';
 import { Upload, List, SortDown, InfoFilled, Timer } from '@element-plus/icons-vue';
 import { useStore } from '~/store';
+
 const store = useStore();
-const { addHistoryList, delHistoryList } = store;
+const { addHistoryList, delHistoryList, setCurCanvas } = store;
 const historyList = computed(() => store.historyList);
-// const curCanvasIndex = computed(() => store.curCanvasIndex);
+const curCanvasId = computed(() => store.curCanvasId);
+const compList = computed(() => store.compList);
 
 const isSaveLoading = ref(false);
 const currentPage = ref(1);
@@ -126,6 +128,11 @@ const handleChange = (curPage: number) => {
 };
 
 const savaTpl = () => {
+  // 是保存还是追加？
+  if (compList.value.length <= 0)  {
+    ElMessage.error('画板为空');
+    return;
+  }
   if (historyList.value.length >= 15) {
     ElMessage.warning('不能保存更多，请在【历史】中删除');
     return;
@@ -138,13 +145,12 @@ const savaTpl = () => {
       quality: 0.1,
       callback: (base64: string) => {
         isSaveLoading.value = false;
-        const hashId = generateMixed(0);
         addHistoryList({
-          id: hashId,
-          remarks: `示例${hashId}`,
+          id: curCanvasId.value,
+          remarks: `示例${curCanvasId.value}`,
           date: new Date(),
           thumbnail: base64,
-        }, hashId);
+        });
       },
     });
   }
@@ -158,7 +164,10 @@ const handleDel = (scope: any) => {
   ElMessage.success('删除成功');
 };
 
-const handleEdit = () => {};
+const handleEdit = (scope: any) => {
+  setCurCanvas(scope.$index);
+  isHistoryShow.value = false;
+};
 </script>
 
 <style lang="postcss">

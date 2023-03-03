@@ -119,3 +119,4 @@ export const POSITION_BUTTON = [
 
 export const CHECK_ALL_VALUE = ['X', 'Y'];
 export const CHECK_MAX_LENGTH = CHECK_ALL_VALUE.length;
+

@@ -71,7 +71,7 @@ import Header from '~/components/template/Header.vue';
 import QrCode from '~/components/template/QrCode.vue';
 import { Delete, CaretTop, CaretBottom } from '@element-plus/icons-vue';
 
-import { driverFun, setDriveMessage } from '~/driver';
+import { driverFun, setDriveMessage } from '~/constants/driver';
 const driverStart = () => {
   setDriveMessage(() => {
     driverFun.start();
