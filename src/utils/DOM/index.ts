@@ -1,10 +1,10 @@
 
-type Dynamic = any;
+type any = any;
 
 // 获取元素距离页面顶部距离
-export const getElementToPageTop = (el: Dynamic) => {
+export const getElementToPageTop = (el: any) => {
   if (el.parentElement) {
-    const offsetTop: Dynamic = getElementToPageTop(el.parentElement) + el.offsetTop;
+    const offsetTop: any = getElementToPageTop(el.parentElement) + el.offsetTop;
     return offsetTop;
   }
   return el.offsetTop;

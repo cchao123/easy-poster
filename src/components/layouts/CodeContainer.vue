@@ -27,11 +27,19 @@ watch(
   { deep: true },
 );
 
-onMounted(()=> {
+const getApplicationCode = () => {
   codeRef.value = getStageCode(canvasConfig.value);
-})
+  nextTick(() => Prism.highlightAll());
+};
+onMounted(() => {
+  getApplicationCode();
+});
 
 const getCurCode = (curCompConfig: any) => {
+  if (!curCompConfig) {
+    getApplicationCode();
+    return;
+  }
   switch (curCompConfig.type) {
     case 'background':
       codeRef.value = getBackgroundTpl(curCompConfig)['pixiJs'];
@@ -48,8 +56,6 @@ const getCurCode = (curCompConfig: any) => {
     case 'image':
       codeRef.value = getImageTpl(curCompConfig)['pixiJs'];
       break;
-    //  default:
-    //     codeRef.value = getBackgroundTpl(curCompConfig)['pixiJs']
   }
   nextTick(() => Prism.highlightAll());
 };
@@ -62,5 +68,25 @@ const getCurCode = (curCompConfig: any) => {
   font-size: 14px;
   overflow-y: scroll;
   background-color: #2d2d2d;
+}
+
+.code-toolbar {
+  height: 100%;
+  background-color: #2d2d2d;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 100%;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #7d7d7d;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background-color: #939393;
 }
 </style>

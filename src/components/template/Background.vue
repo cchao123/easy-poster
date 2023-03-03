@@ -1,5 +1,8 @@
 <template>
-  <div><img class="bgg" :src="curCompConfig.url" alt=""></div>
+  <div>
+    <img class="bgg"
+         :src="curCompConfig.url">
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -16,7 +19,6 @@ const props = defineProps({
 });
 
 const curCompConfig = computed(() => store.compList[props.index]);
-
 </script>
 <style lang="postcss">
 .bgg {

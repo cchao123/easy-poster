@@ -29,6 +29,7 @@ export default defineComponent({
 body, html,#app {
   height: 100%;
   user-select: none;
+  overflow: hidden;
 }
 
 #app {
@@ -37,6 +38,7 @@ body, html,#app {
   text-align: center;
   /* color: var(--ep-text-color-primary);
   color: var(--color); */
+
 }
 
 .el-container {

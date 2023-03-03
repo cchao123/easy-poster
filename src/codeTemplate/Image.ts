@@ -4,12 +4,12 @@ const html2Canvas = (params: any) => {
 
 const pixiJs = (params: any) => {
   return `
-        const image = createSprite('${params.url}', {
-          width: ${params.width},
-          height: ${params.height},
-          x: ${params.point.x},
-          y: ${params.point.y},
-        });`
+      const image${params.compId} = createSprite('${params.url}', {
+        width: ${params.width},
+        height: ${params.height},
+        x: ${params.point.x},
+        y: ${params.point.y},
+      });`
 };
 
 export const getImageTpl = (params: any) => {

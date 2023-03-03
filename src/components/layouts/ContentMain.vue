@@ -2,7 +2,7 @@
   <div class="main"
        @mousedown="handleMouseDown"
        ref="mainRef">
-    <div class="iphone"
+    <div class="h5-view"
          :style="{
         width: `${canvasConfig.width}px`,
         height:`${canvasConfig.height}px`,
@@ -32,6 +32,30 @@
                 v-if="item.type === 'qrcode'" />
       </Edit>
     </div>
+
+    <div class="h5-bar"
+         v-if="curCompConfig">
+      <div :class="`bar-items iconfont icon-${curCompConfig.icon} bar-bt`"></div>
+      <el-icon class="bar-items"
+               @click="setCompZindex(curCompIndex, true
+      )">
+        <CaretTop />
+      </el-icon>
+      <el-icon class="bar-items"
+               @click="setCompZindex(curCompIndex, false
+      )">
+        <CaretBottom />
+      </el-icon>
+      <el-icon class="bar-items bar-bb"
+               @click="handleDelCurComp">
+        <Delete />
+      </el-icon>
+    </div>
+
+    <div class="h5-help"
+         @click.stop="driverStart">
+      <span class="iconfont icon-wenhao"></span>
+    </div>
   </div>
 </template>
 
@@ -39,12 +63,20 @@
 import { ref, onMounted, reactive, computed } from 'vue';
 import { MATERIAL_LIST } from '~/constants';
 import { useStore } from '~/store';
-import Container from '~/components/Container.vue';
-import Background from '~/components/Background.vue';
-import Image from '~/components/Image.vue';
-import Text from '~/components/Text.vue';
-import Header from '~/components/Header.vue';
-import QrCode from '~/components/QrCode.vue';
+import Container from '~/components/template/Container.vue';
+import Background from '~/components/template/Background.vue';
+import Image from '~/components/template/Image.vue';
+import Text from '~/components/template/Text.vue';
+import Header from '~/components/template/Header.vue';
+import QrCode from '~/components/template/QrCode.vue';
+import { Delete, CaretTop, CaretBottom } from '@element-plus/icons-vue';
+
+import { driverFun, setDriveMessage } from '~/driver';
+const driverStart = () => {
+  setDriveMessage(() => {
+    driverFun.start();
+  });
+};
 
 const SCROLL_BASE_NUM = 10;
 const ZOOM_BASE_NUM = 0.2;
@@ -65,7 +97,14 @@ const store = useStore();
 const compList = computed(() => store.compList);
 const canvasConfig = computed(() => store.canvasConfig);
 const curCompIndex = computed(() => store.curCompIndex);
-const { setCompList, setCurCompIndex } = store;
+const curCompConfig = computed(() => store.curCompConfig);
+const { setCompList, setCurCompIndex, setCompZindex, delCompList } = store;
+
+const handleCompIndex = () => {};
+
+const handleDelCurComp = () => {
+  delCompList(curCompIndex.value)
+};
 
 const dragover = (e: DragEvent) => {
   point = {
@@ -110,7 +149,9 @@ const handleMouseDown = (e: MouseEvent) => {
 };
 
 const isZoomCompose = ref(false);
+
 onMounted(() => {
+  if (false) driverStart();
   document.body.onkeydown = (e: KeyboardEvent) => {
     if (e.keyCode === 91) isZoomCompose.value = true;
   };
@@ -135,6 +176,7 @@ onMounted(() => {
 
 <style lang="postcss">
 .main {
+  position: relative;
   cursor: grab;
   overflow: hidden;
   flex: 1;
@@ -147,7 +189,7 @@ onMounted(() => {
   justify-content: center;
 }
 
-.iphone {
+.h5-view {
   position: relative;
   width: 375px;
   height: 667px;
@@ -155,5 +197,52 @@ onMounted(() => {
   box-shadow: 0 16px 48px 16px var(--ep-menu-border-color), 0 1px 3px var(--ep-menu-border-color),
     0 1px 6px -1px var(--ep-menu-border-color);
   background-color: #fff;
+}
+
+.h5-help {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 30px;
+  font-weight: 900;
+  background-color: var(--ep-fill-color-light);
+  color: var(--ep-text-color-regular);
+  cursor: help;
+}
+
+.h5-bar {
+  position: absolute;
+  right: 30px;
+  top: 80px;
+  width: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bar-items {
+  width: 30px;
+  height: 35px;
+  line-height: 35px;
+  background-color: var(--ep-fill-color-light);
+  color: var(--ep-text-color-regular);
+  margin-bottom: 2.5px;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.bar-bt {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.bar-bb {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 </style>

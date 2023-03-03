@@ -4,18 +4,18 @@ const html2Canvas = (params: any) => {
 
 const pixiJs = (params: any) => {
   return `
-          const userHead = createSprite('${params.url}', {
-            width: ${params.width},
-            height: ${params.width},
-            x: ${params.point.x},
-            y: ${params.point.y},
-          });
-          const graphics = new PIXI.Graphics();
-          graphics.beginFill(0xe20d3f);
-          graphics.drawCircle(85, 88, ${params.width / 2});
-          graphics.endFill();
-          userHead.mask = graphics;
-  `
+      const userHead${params.compId} = createSprite('${params.url}', {
+        width: ${params.width},
+        height: ${params.width},
+        x: ${params.point.x},
+        y: ${params.point.y},
+      });
+      
+      const graphics = new PIXI.Graphics();
+      graphics.beginFill(0xe20d3f);
+      graphics.drawCircle(85, 88, ${params.width / 2});
+      graphics.endFill();
+      userHead.mask = graphics;`
 };
 
 export const getHeadTpl = (params: any) => {

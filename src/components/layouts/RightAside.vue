@@ -27,7 +27,6 @@ const curCompConfig = computed(() => store.curCompConfig);
   border-left: 1px solid var(--ep-menu-border-color);
 }
 
-
 /* .touchBorder {
   cursor: col-resize;
   position: absolute;

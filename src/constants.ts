@@ -8,6 +8,7 @@ const COMMON_STYLE = {
   fontSize: 12,
   fontStyle: 'normal',
   fontWeight: 'normal',
+  zIndex: 0,
 }
 
 // 交互默认参数

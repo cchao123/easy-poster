@@ -1,15 +1,22 @@
 const html2Canvas = (params: any) => {
-  return `1`
+  return {
+    DOM: `<div></div>`,
+    CSS: `
+      .text1 {
+        
+      }
+    `,
+  }
 };
 
 const pixiJs = (params: any) => {
   return `
-        const number = new PIXI.Text('${params.textValue}', {
-          fontSize: ${params.fontSize},
-          fill: ${params.color},
-          fontWeight: ${params.fontWeight},
-        });`
-      };
+      const text${params.compId} = new PIXI.Text('${params.textValue}', {
+        fontSize: ${params.fontSize},
+        fill: ${params.fontColor},
+        fontWeight: ${params.fontWeight},
+      });`
+};
 
 export const getTextTpl = (params: any) => {
   return {

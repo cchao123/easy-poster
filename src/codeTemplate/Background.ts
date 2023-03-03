@@ -4,12 +4,12 @@ const html2Canvas = (params: any) => {
 
 const pixiJs = (params: any) => {
   return `
-        const posterBg = createSprite('${params.url}', {
-          width: ${params.width},
-          height: ${params.height},
-          x: ${params.point.x},
-          y: ${params.point.y},
-        });`
+      const posterBg${params.compId} = createSprite('${params.url}', {
+        width: ${params.width},
+        height: ${params.height},
+        x: ${params.point.x},
+        y: ${params.point.y},
+      });`
 };
 
 export const getBackgroundTpl = (params: any) => {

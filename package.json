@@ -20,6 +20,8 @@
     "@types/qrcode": "^1.5.0",
     "@typescript-eslint/parser": "^5.49.0",
     "@vitejs/plugin-vue": "^2.3.3",
+    "driver.js": "^0.9.8",
+    "html2canvas": "^1.4.1",
     "pinia": "^2.0.29",
     "qrcode": "^1.5.1",
     "sass": "^1.52.1",

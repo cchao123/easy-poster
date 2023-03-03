@@ -1,5 +1,6 @@
 <template>
-  <div class="aside-material" @dragstart="dragstart">
+  <div class="aside-material"
+       @dragstart="dragstart">
     <!-- <div class="material-items" draggable="true">
       <div class="material-icon">
         <div class="iconfont icon-suffix-psd"></div>
@@ -7,9 +8,14 @@
       <div class="material-name">解析PSD</div>
     </div> -->
 
-    <div class="material-items" :draggable="true" v-for="(mItem, mIndex) in MATERIAL_LIST" :key="mItem.icon" :data-index="mIndex">
+    <div class="material-items"
+         :draggable="true"
+         v-for="(mItem, mIndex) in MATERIAL_LIST"
+         :key="mItem.icon"
+         :data-index="mIndex">
       <div class="material-icon">
-        <div class="iconfont" :class="`icon-${mItem.icon}`"></div>
+        <div class="iconfont"
+             :class="`icon-${mItem.icon}`"></div>
       </div>
       <div class="material-name">{{ mItem.name }}</div>
     </div>
@@ -20,9 +26,8 @@
 import { MATERIAL_LIST } from '~/constants';
 
 const dragstart = (e: any) => {
-  e.dataTransfer.setData('index', e.target.dataset.index)
+  e.dataTransfer.setData('index', e.target.dataset.index);
 };
-
 </script>
 
 <style>

@@ -155,14 +155,15 @@
           </el-col>
           <el-col :span="10">
             <div class="dirContainer">
-              <el-tooltip v-for="btn in POSITION_BUTTON"
-                          :key="btn.class"
-                          :content="btn.content"
-                          :placement="btn.placement">
-                <div class="icon-wrap iconfont"
-                     @click="changeFixedDirection(btn.direction)"
-                     :class="`${btn.class} ${btn.direction}`"></div>
-              </el-tooltip>
+              <!-- <el-tooltip > -->
+              <div class="icon-wrap iconfont"
+                   v-for="btn in POSITION_BUTTON"
+                   :key="btn.class"
+                   :content="btn.content"
+                   :placement="btn.placement"
+                   @click="changeFixedDirection(btn.direction)"
+                   :class="`${btn.class} ${btn.direction}`"></div>
+              <!-- </el-tooltip> -->
             </div>
           </el-col>
           <el-col :span="5">
@@ -266,7 +267,7 @@ const handleCheckedCitiesChange = (value: string[]) => {
 }
 
 .bottom {
-  transform: translateY(45px    ) rotate(180deg);
+  transform: translateY(45px) rotate(180deg);
 }
 
 .right {

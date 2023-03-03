@@ -23,10 +23,22 @@ const props = defineProps({
 
 const setTextCompSize = ()=>{
   // textRef.value
-}
-onMounted(()=>{
-  setTextCompSize();
-})
+  // console.log(textRef.value.style.width)
+};
 
 const curCompConfig = computed(() => store.compList[props.index]);
+
+
+watch(
+  () => curCompConfig,
+  () => {
+    // console.log(curCompConfig.value)
+  },
+  { deep: true },
+);
+
+onMounted(()=>{
+  // setTextCompSize();
+});
+
 </script>

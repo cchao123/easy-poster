@@ -1,6 +1,6 @@
 <template>
   <div class="qrCode" id="qrCode">
-    <!-- <img :src="qrUrl" alt="" /> -->
+    <img :src="qrUrl" alt="" />
   </div>
 </template>
 

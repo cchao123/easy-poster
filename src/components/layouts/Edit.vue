@@ -2,7 +2,11 @@
   <div class="editWrap"
        :class="{ noDrop: curFixedStatus.length === CHECK_MAX_LENGTH, ewDrop: curFixedStatus.indexOf('Y') !== -1, nsDrop: curFixedStatus.indexOf('X') !== -1}"
        @mousedown.stop.prevent="handleMouseDown"
-       :style="`left: ${item.point.x}px; top: ${item.point.y}px;`">
+       :style="{
+          left: `${item.point.x}px`,
+          top: `${item.point.y}px`,
+          zIndex: `${item.zIndex}`,
+       }">
     <slot />
   </div>
 </template>
@@ -72,8 +76,6 @@ const handleMouseDown = (e: MouseEvent) => {
 .editWrap {
   cursor: move;
   position: absolute;
-  /* border: 1px solid #000; */
-  color: RED;
 }
 .editWrap:hover {
 }
