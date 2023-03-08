@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia';
 import { ElementStyle } from '~/types';
 import { CHECK_ALL_VALUE, CHECK_MAX_LENGTH, DEFAULT_TEMP } from '~/constants';
-import { generateMixed } from '~/utils';
+import { generateMixed, setStorage, getStorage } from '~/utils';
+setStorage('__HISTORTLIST', JSON.stringify(DEFAULT_TEMP));
 export const useStore = defineStore('easyPoster', {
   state: () => ({
     curCanvasId: generateMixed(5),
@@ -53,20 +54,28 @@ export const useStore = defineStore('easyPoster', {
         ...obj,
       }
     },
-    setCurCanvas(index: number) {
-      // 没保存就清空
-      // if ()this.historyList[index].compList = [];
-      // 
-
-      // 重置重置画板信息
+    clearCompList() {
+      this.compList = [];
+    },
+    async getStorageCurCanvas(index: number) {
+      const historyList = await getStorage('__HISTORTLIST');
+      this.compList = JSON.parse(historyList)[index].compList;
+      this.curCanvasId = JSON.parse(historyList)[index].id;
       this.curCanvasIndex = index;
-      this.curCanvasId = this.historyList[index].id;
-
-      this.compList = this.historyList[index].compList;
       this.curCompIndex = 0;
-
-
+      // console.log(1)
+      // console.log(2)
+      // console.log(2.4, this.historyList, index)
+      // console.log(2.5, this.historyList[1])
+      // console.log(2.6, this.historyList[index])
+      // this.compList = this.historyList[index].compList;
+      // console.log(3, this.compList)
       
+      // // 重置重置画板信息
+      // this.curCanvasIndex = index;
+      // this.curCanvasId = this.historyList[index].id;
+
+      // this.curCompIndex = 0;
       // console.log('his-ind',index)
       // console.log('his', this.historyList[index])
       // console.log('his', this.historyList[index].compList)
@@ -75,7 +84,10 @@ export const useStore = defineStore('easyPoster', {
     },
     addHistoryList(curItem: any) {
       if (this.curCanvasIndex !== null) {
-        this.historyList[this.curCanvasIndex] = curItem;
+        this.historyList[this.curCanvasIndex] = {
+          ...this.historyList[this.curCanvasIndex],
+          ...curItem,
+        };
       } else this.historyList.push(curItem);
     },
     delHistoryList(index: number) {
@@ -84,7 +96,6 @@ export const useStore = defineStore('easyPoster', {
   },
   getters: {
     curCompConfig(state) {
-      // console.log(state.compList)
       return state.compList[state.curCompIndex];
     },
     isIndeterminate (state) {

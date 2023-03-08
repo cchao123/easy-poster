@@ -2,10 +2,10 @@
   <div class="formWrap">
     <div class="custom-form">
       <div>
-        {{ compList }}
+        <!-- {{ compList }} -->
         <hr>
-        {{ historyList }}
-        <h4>画布设置————当前组件：{{ curCompIndex }} ————{{curCanvasId}}</h4>
+        <!-- {{ historyList }} -->
+        <h4>画布设置————当前组件：{{ curCompIndex }} ———— {{curCanvasId}}</h4>
         <el-row>
           <el-col :span="5">
             <span class="labelText">宽度:</span>
@@ -70,8 +70,6 @@
             <el-col :span="20">
               <span class="labelText">文字内容:</span>
               <el-input v-model="curCompConfig.textValue"
-                    @change="change"
-                    @input="input"
                         style="width: 525px" />
             </el-col>
           </el-row>
@@ -229,11 +227,6 @@ const handleCheckAllChange = (status: boolean) => {
 const handleCheckedCitiesChange = (value: string[]) => {
   const checkedCount = value.length;
 };
-
-
-const input = ()=>{
-  // console.log(2)
-}
 </script>
 
 <style lang="postcss">

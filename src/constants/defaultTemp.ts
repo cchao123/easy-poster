@@ -4,7 +4,7 @@ export const DEFAULT_TEMP = [
   {
     id: 'leqr95pz',
     date: 1677742012611,
-    remarks: '示例海报1',
+    remarks: '示例海报1xxx',
     thumbnail: centralaxis,
     compList: [
       {

@@ -108,7 +108,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { ref, computed ,nextTick} from 'vue';
 import { ElMessage } from 'element-plus';
 import { toggleDark } from '~/composables';
 import { convertDOMToImage, formatFullDateNew, generateMixed } from '~/utils';
@@ -116,7 +116,7 @@ import { Upload, List, SortDown, InfoFilled, Timer } from '@element-plus/icons-v
 import { useStore } from '~/store';
 
 const store = useStore();
-const { addHistoryList, delHistoryList, setCurCanvas } = store;
+const { addHistoryList, delHistoryList, clearCompList, getStorageCurCanvas } = store;
 const historyList = computed(() => store.historyList);
 const curCanvasId = computed(() => store.curCanvasId);
 const compList = computed(() => store.compList);
@@ -165,8 +165,11 @@ const handleDel = (scope: any) => {
 };
 
 const handleEdit = (scope: any) => {
-  setCurCanvas(scope.$index);
-  isHistoryShow.value = false;
+  clearCompList();
+  nextTick(()=>{
+    isHistoryShow.value = false;
+    getStorageCurCanvas(scope.$index);
+  })
 };
 </script>
 

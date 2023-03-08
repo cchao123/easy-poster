@@ -7,7 +7,7 @@ export interface ElementStyle {
   url?: String,
   // 文字
   textValue?: String,
-  fontSize?: String,
+  fontSize?: Number,
   fontStyle: String,
   fontWeight?: String,
   letterSpacing?: String,

@@ -30,9 +30,7 @@ const setTextCompSize = ()=>{
   })
 };
 
-// @TODO 为什么不直接用store 返回？
 const curCompConfig = computed(() => store.compList[props.index]);
-
 
 watch(
   () => curCompConfig.value.textValue,
