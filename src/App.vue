@@ -9,20 +9,8 @@
   </el-config-provider>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent, computed, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const dragstart = () => {
-      console.log('submit!')
-    }
-    return {
-      dragstart,
-    }
-  }
-})
-
 </script>
 
 <style lang="postcss">

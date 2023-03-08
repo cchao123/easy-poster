@@ -11,8 +11,8 @@ export const useStore = defineStore('easyPoster', {
       height: 667,
       background: '#fff',
     },
-    curCanvasIndex: null,
-    curCompIndex: 0, // 重置清楚
+    curCanvasIndex: null, // 当前操作画板小标
+    curCompIndex: -1, // 当前操作组件的下标
     compList: [] as unknown as ElementStyle,
     historyList: DEFAULT_TEMP,
   }),
@@ -27,11 +27,15 @@ export const useStore = defineStore('easyPoster', {
         compId: this.curCompIndex,
       })));
     },
-
     delCompList (index: Number) {
       this.compList.splice(index, 1);
       // 手动赋值
       this.curCompIndex = this.compList.length - 1;
+    },
+    setCompSize(index: number, w: number, h: number){
+      this.compList[index].width = w;
+      this.compList[index].height = h;
+      console.log(this.compList)
     },
     setCompPoint(index: number, key: string, pixel:  Number) {
       this.compList[index].point[key] = pixel;
@@ -50,10 +54,17 @@ export const useStore = defineStore('easyPoster', {
       }
     },
     setCurCanvas(index: number) {
+      // 没保存就清空
+      // if ()this.historyList[index].compList = [];
+      // 
       this.curCanvasIndex = index;
       this.curCanvasId = this.historyList[index].id;
-      this.compList = this.historyList[index].compList;
+
       this.curCompIndex = 0;
+      // console.log('his-ind',index)
+      // console.log('his', this.historyList[index])
+      // console.log('his', this.historyList[index].compList)
+      this.compList = this.historyList[index].compList;
     },
     setHistoryList() {
     },
@@ -68,16 +79,17 @@ export const useStore = defineStore('easyPoster', {
   },
   getters: {
     curCompConfig(state) {
+      // console.log(state.compList)
       return state.compList[state.curCompIndex];
     },
     isIndeterminate (state) {
-      return this.curCompConfig.dragDirFixed.length > 0 && this.curCompConfig.dragDirFixed.length < CHECK_MAX_LENGTH;
+      return state.curCompConfig.dragDirFixed.length > 0 && state.curCompConfig.dragDirFixed.length < CHECK_MAX_LENGTH;
     },
     isCheckAll (state) {
-      return this.curCompConfig.dragDirFixed.length === CHECK_MAX_LENGTH;
+      return state.curCompConfig.dragDirFixed.length === CHECK_MAX_LENGTH;
     },
     curFixedStatus(status) {
-      return this.curCompConfig.dragDirFixed;
+      return status.curCompConfig.dragDirFixed;
     },
   }
 });

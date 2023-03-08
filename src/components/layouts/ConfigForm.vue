@@ -2,7 +2,8 @@
   <div class="formWrap">
     <div class="custom-form">
       <div>
-        <h4>画布设置{{ curCompIndex }}</h4>
+        {{ compList[curCompIndex] }}
+        <h4>画布设置————当前组件：{{ curCompIndex }}</h4>
         <el-row>
           <el-col :span="5">
             <span class="labelText">宽度:</span>
@@ -67,6 +68,8 @@
             <el-col :span="20">
               <span class="labelText">文字内容:</span>
               <el-input v-model="curCompConfig.textValue"
+                    @change="change"
+                    @input="input"
                         style="width: 525px" />
             </el-col>
           </el-row>
@@ -191,9 +194,11 @@
 import { computed, reactive, ref } from 'vue';
 import { useStore } from '~/store';
 import { POSITION_BUTTON } from '~/constants';
-
 const store = useStore();
 const curCompIndex = computed(() => store.curCompIndex);
+const curCanvasIndex = computed(() => store.curCanvasIndex);
+const compList = computed(() => store.compList);
+
 const curCompConfig = computed(() => store.curCompConfig);
 const canvasConfig = computed(() => store.canvasConfig);
 const isIndeterminate = computed(() => store.isIndeterminate);
@@ -220,6 +225,11 @@ const handleCheckAllChange = (status: boolean) => {
 const handleCheckedCitiesChange = (value: string[]) => {
   const checkedCount = value.length;
 };
+
+
+const input = ()=>{
+  // console.log(2)
+}
 </script>
 
 <style lang="postcss">

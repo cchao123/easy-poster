@@ -8,11 +8,16 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from 'vue';
+import { nextTick } from 'vue';
+import { watch, computed, onMounted, ref } from 'vue';
 import { useStore } from '~/store';
 
 const store = useStore();
 const textRef = ref();
+const { curCompIndex, setCompSize } = store;
+
+const dynamicWidth = ref();
+const dynamicHeight = ref('auto');
 
 const props = defineProps({
   index: {
@@ -22,23 +27,26 @@ const props = defineProps({
 });
 
 const setTextCompSize = ()=>{
-  // textRef.value
-  // console.log(textRef.value.style.width)
+  const { offsetWidth, offsetHeight} = textRef.value;
+  console.log(offsetWidth)
+  setCompSize(curCompIndex, offsetWidth, offsetHeight);
 };
 
+// @TODO 为什么不直接用store 返回？
 const curCompConfig = computed(() => store.compList[props.index]);
 
 
-watch(
-  () => curCompConfig,
-  () => {
-    // console.log(curCompConfig.value)
-  },
-  { deep: true },
-);
+// watch(
+  // () => curCompConfig.value.textValue,
+  // () => {
+  //   nextTick(()=>{
+  //     setTextCompSize();
+  //   })
+  // },
+// );
 
 onMounted(()=>{
-  // setTextCompSize();
+  setTextCompSize();
 });
 
 </script>
