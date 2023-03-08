@@ -57,14 +57,19 @@ export const useStore = defineStore('easyPoster', {
       // 没保存就清空
       // if ()this.historyList[index].compList = [];
       // 
+
+      // 重置重置画板信息
       this.curCanvasIndex = index;
       this.curCanvasId = this.historyList[index].id;
 
+      this.compList = this.historyList[index].compList;
       this.curCompIndex = 0;
+
+
+      
       // console.log('his-ind',index)
       // console.log('his', this.historyList[index])
       // console.log('his', this.historyList[index].compList)
-      this.compList = this.historyList[index].compList;
     },
     setHistoryList() {
     },

@@ -12,12 +12,9 @@ import { nextTick } from 'vue';
 import { watch, computed, onMounted, ref } from 'vue';
 import { useStore } from '~/store';
 
-const store = useStore();
 const textRef = ref();
+const store = useStore();
 const { curCompIndex, setCompSize } = store;
-
-const dynamicWidth = ref();
-const dynamicHeight = ref('auto');
 
 const props = defineProps({
   index: {
@@ -29,7 +26,6 @@ const props = defineProps({
 const setTextCompSize = ()=>{
   nextTick(()=>{
     const { offsetWidth, offsetHeight, clientHeight, clientWidth } = textRef.value;
-    console.log(offsetWidth, offsetHeight, clientHeight, clientWidth);
     setCompSize(curCompIndex, offsetWidth, offsetHeight);
   })
 };

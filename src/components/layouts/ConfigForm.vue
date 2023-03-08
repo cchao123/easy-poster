@@ -2,8 +2,10 @@
   <div class="formWrap">
     <div class="custom-form">
       <div>
-        {{ compList[curCompIndex] }}
-        <h4>画布设置————当前组件：{{ curCompIndex }}</h4>
+        {{ compList }}
+        <hr>
+        {{ historyList }}
+        <h4>画布设置————当前组件：{{ curCompIndex }} ————{{curCanvasId}}</h4>
         <el-row>
           <el-col :span="5">
             <span class="labelText">宽度:</span>
@@ -196,8 +198,10 @@ import { useStore } from '~/store';
 import { POSITION_BUTTON } from '~/constants';
 const store = useStore();
 const curCompIndex = computed(() => store.curCompIndex);
+const curCanvasId = computed(() => store.curCanvasId);
 const curCanvasIndex = computed(() => store.curCanvasIndex);
 const compList = computed(() => store.compList);
+const historyList = computed(() => store.historyList);
 
 const curCompConfig = computed(() => store.curCompConfig);
 const canvasConfig = computed(() => store.canvasConfig);
