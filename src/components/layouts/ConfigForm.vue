@@ -78,7 +78,7 @@
             <el-col :span="8">
               <span class="labelText">字体大小:</span>
               <el-input-number v-model="curCompConfig.fontSize"
-                               min="12"
+                               :min="12"
                                :step="2" />
             </el-col>
             <el-col :span="8">
