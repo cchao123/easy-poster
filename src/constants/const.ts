@@ -3,6 +3,7 @@ const COMMON_STYLE = {
   width: 0,
   height: 0,
   url: '',
+  radius: 0,
   textValue: '文本内容',
   fontColor: '#000',
   fontSize: 12,
@@ -40,7 +41,7 @@ export const MATERIAL_LIST = [
     ...COMMON_PARAMS,
     width: 100,
     height: 100,
-    background: '#f2f2f2'
+    background: '#f2f2f2',
   },
   {
     icon: 'tupian',
@@ -67,6 +68,7 @@ export const MATERIAL_LIST = [
     url: 'https://bizaladdin-image.baidu.com/0/pic/1080140929_-251358729_-1837083577.jpg',
     width: 50,
     height: 50,
+    radius: 100,
   },
   {
     icon: 'erweima',
@@ -75,6 +77,8 @@ export const MATERIAL_LIST = [
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
     url: 'https://github.com/cchao123',
+    width: 55,
+    height: 55,
   },
 ];
 

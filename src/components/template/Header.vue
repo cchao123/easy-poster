@@ -1,8 +1,9 @@
 <template>
+         <!-- borderRadius: `${curCompConfig.radius}%`, -->
   <div class="header"
        :style="{
-         width:`${curCompConfig.width}px`,
-         height: `${curCompConfig.height}px`,
+         width: `${curCompConfig.width}px`,
+         height: `${curCompConfig.width}px`,
        }">
     <img :src="curCompConfig.url || errorImg"
          :onerror="error">

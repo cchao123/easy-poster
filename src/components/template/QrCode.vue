@@ -1,15 +1,21 @@
 <template>
-  <div class="qrCode" id="qrCode">
-    <img :src="qrUrl" alt="" />
+  <!-- borderRadius: `${curCompConfig.radius}%`, -->
+  <div class="qrCode"
+       :style="{
+    width: `${curCompConfig.width}px`,
+    height: `${curCompConfig.width}px`,
+  }">
+    <img :src="qrUrl"
+         alt="" />
   </div>
 </template>
 
 
 <script lang="ts" setup>
 import QRCode from 'qrcode';
-import { onMounted, ref, computed } from 'vue';
+import { watch, onMounted, ref, computed } from 'vue';
 import { useStore } from '~/store';
-import errorImg from '~/assets/image.png'
+import errorImg from '~/assets/image.png';
 
 const props = defineProps({
   index: {
@@ -22,9 +28,28 @@ const store = useStore();
 const curCompConfig = computed(() => store.compList[props.index]);
 
 const qrUrl = ref();
-onMounted(() => {
-  QRCode.toDataURL('http://www.baidu.com').then((url: string) => {
+
+const setQrCode = () => {
+  QRCode.toDataURL(curCompConfig.value.url).then((url: string) => {
     qrUrl.value = url;
   });
+};
+
+onMounted(() => {
+  setQrCode();
 });
+
+watch(
+  () => curCompConfig.value && curCompConfig.value.url,
+  () => {
+    setQrCode();
+  },
+);
 </script>
+
+
+<style lang="postcss">
+.qrCode img {
+  width: 100%;
+}
+</style>

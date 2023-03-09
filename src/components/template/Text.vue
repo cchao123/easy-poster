@@ -1,5 +1,6 @@
 <template>
-  <div ref="textRef" class="aaaaa" :style="{
+  <div ref="textRef"
+       :style="{
     fontSize: `${curCompConfig.fontSize}px`,
     fontWeight: `${curCompConfig.fontWeight}`,
     fontStyle: `${curCompConfig.fontStyle}`,
@@ -23,31 +24,32 @@ const props = defineProps({
   },
 });
 
-const setTextCompSize = ()=>{
-  nextTick(()=>{
-    const { offsetWidth, offsetHeight, clientHeight, clientWidth } = textRef.value;
-    setCompSize(curCompIndex, offsetWidth, offsetHeight);
-  })
+const setTextCompSize = () => {
+  nextTick(() => {
+    if (textRef.value) {
+      const { offsetWidth, offsetHeight, clientHeight, clientWidth } = textRef.value;
+      setCompSize(props.index, offsetWidth, offsetHeight);
+    }
+  });
 };
 
 const curCompConfig = computed(() => store.compList[props.index]);
 
 watch(
-  () => curCompConfig.value.textValue,
+  () => curCompConfig.value && curCompConfig.value.fontSize,
   () => {
     setTextCompSize();
   },
 );
 
 watch(
-  () => curCompConfig.value.fontSize,
+  () => curCompConfig.value && curCompConfig.value.textValue,
   () => {
     setTextCompSize();
   },
 );
 
-onMounted(()=>{
+onMounted(() => {
   setTextCompSize();
 });
-
 </script>

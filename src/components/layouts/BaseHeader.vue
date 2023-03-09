@@ -74,10 +74,20 @@
       <el-table-column fixed="right"
                        label="Operations">
         <template #default="scope">
-          <el-popconfirm title="确定删除该项?"
+          <el-popconfirm title="恢复预设状态?" v-if="['centralaxis', 'olympic'].includes(scope.row.id)"
+                         @confirm="handleReset(scope)">
+            <template #reference>
+              <el-button link
+                         type="primary"
+                         size="small">恢复</el-button>
+            </template>
+          </el-popconfirm>
+
+          <el-popconfirm v-else title="确定删除该项?"
                          @confirm="handleDel(scope)">
             <template #reference>
               <el-button link
+                        :disabled="['centralaxis', 'olympic'].includes(scope.row.id)"
                          type="primary"
                          size="small">删除</el-button>
             </template>
@@ -108,7 +118,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed ,nextTick} from 'vue';
+import { ref, computed, nextTick, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import { toggleDark } from '~/composables';
 import { convertDOMToImage, formatFullDateNew, generateMixed } from '~/utils';
@@ -116,20 +126,26 @@ import { Upload, List, SortDown, InfoFilled, Timer } from '@element-plus/icons-v
 import { useStore } from '~/store';
 
 const store = useStore();
-const { addHistoryList, delHistoryList, clearCompList, getStorageCurCanvas } = store;
+const { initHisList, addHistoryList, delHistoryList, clearCompList, getStorageCurCanvas , resetHistoryList} = store;
 const historyList = computed(() => store.historyList);
 const curCanvasId = computed(() => store.curCanvasId);
 const compList = computed(() => store.compList);
 
 const isSaveLoading = ref(false);
 const currentPage = ref(1);
+
+onMounted(()=>{
+  initHisList();
+});
+
 const handleChange = (curPage: number) => {
   currentPage.value = curPage;
 };
 
 const savaTpl = () => {
+  console.log(JSON.stringify(compList.value))
   // 是保存还是追加？
-  if (compList.value.length <= 0)  {
+  if (compList.value.length <= 0) {
     ElMessage.error('画板为空');
     return;
   }
@@ -146,30 +162,32 @@ const savaTpl = () => {
       callback: (base64: string) => {
         isSaveLoading.value = false;
         addHistoryList({
+          compList,
           id: curCanvasId.value,
           remarks: `示例${curCanvasId.value}`,
-          date: new Date(),
+          date: new Date().getTime(),
           thumbnail: base64,
         });
       },
     });
   }
-  // 保存缩略图
-  ElMessage.success('已保存入历史');
 };
 const isHistoryShow = ref(false);
 
 const handleDel = (scope: any) => {
   delHistoryList(scope.$index);
-  ElMessage.success('删除成功');
 };
 
 const handleEdit = (scope: any) => {
   clearCompList();
-  nextTick(()=>{
+  nextTick(() => {
     isHistoryShow.value = false;
     getStorageCurCanvas(scope.$index);
-  })
+  });
+};
+
+const handleReset = (scope: any)=> {
+  resetHistoryList(scope.$index)
 };
 </script>
 

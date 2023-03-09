@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { ElementStyle } from '~/types';
-import { CHECK_ALL_VALUE, CHECK_MAX_LENGTH, DEFAULT_TEMP } from '~/constants';
+import { CHECK_ALL_VALUE, CHECK_MAX_LENGTH, DEFAULT_TEMP, HISTORTLIST_KEY  } from '~/constants';
 import { generateMixed, setStorage, getStorage } from '~/utils';
-setStorage('__HISTORTLIST', JSON.stringify(DEFAULT_TEMP));
+import { ElMessage } from 'element-plus';
 export const useStore = defineStore('easyPoster', {
   state: () => ({
     curCanvasId: generateMixed(5),
@@ -12,12 +12,17 @@ export const useStore = defineStore('easyPoster', {
       height: 667,
       background: '#fff',
     },
-    curCanvasIndex: null, // 当前操作画板小标
+    curCanvasIndex: -1, // 当前操作画板小标
     curCompIndex: -1, // 当前操作组件的下标
     compList: [] as unknown as ElementStyle,
-    historyList: DEFAULT_TEMP,
+    historyList: [],
   }),
   actions: {
+    async initHisList () {
+      const hisList = await getStorage(HISTORTLIST_KEY);
+      if (hisList) this.historyList = JSON.parse(hisList);
+      else setStorage(HISTORTLIST_KEY, JSON.stringify(DEFAULT_TEMP));
+    },
     setCurCompIndex(curCompIndex: Number) {
       this.curCompIndex = curCompIndex;
     },
@@ -25,18 +30,18 @@ export const useStore = defineStore('easyPoster', {
       // @TODO push深拷贝
       this.compList.push(JSON.parse(JSON.stringify({
         ...compConfig,
-        compId: this.curCompIndex,
+        compId: `_${generateMixed(10).slice(0, 3)}`,
       })));
     },
     delCompList (index: Number) {
       this.compList.splice(index, 1);
       // 手动赋值
       this.curCompIndex = this.compList.length - 1;
+      // this.curCompIndex = 0;
     },
     setCompSize(index: number, w: number, h: number){
       this.compList[index].width = w;
       this.compList[index].height = h;
-      console.log(this.compList)
     },
     setCompPoint(index: number, key: string, pixel:  Number) {
       this.compList[index].point[key] = pixel;
@@ -58,44 +63,43 @@ export const useStore = defineStore('easyPoster', {
       this.compList = [];
     },
     async getStorageCurCanvas(index: number) {
-      const historyList = await getStorage('__HISTORTLIST');
+      const historyList = await getStorage(HISTORTLIST_KEY) || '[]';
       this.compList = JSON.parse(historyList)[index].compList;
       this.curCanvasId = JSON.parse(historyList)[index].id;
       this.curCanvasIndex = index;
-      this.curCompIndex = 0;
-      // console.log(1)
-      // console.log(2)
-      // console.log(2.4, this.historyList, index)
-      // console.log(2.5, this.historyList[1])
-      // console.log(2.6, this.historyList[index])
-      // this.compList = this.historyList[index].compList;
-      // console.log(3, this.compList)
-      
-      // // 重置重置画板信息
-      // this.curCanvasIndex = index;
-      // this.curCanvasId = this.historyList[index].id;
-
-      // this.curCompIndex = 0;
-      // console.log('his-ind',index)
-      // console.log('his', this.historyList[index])
-      // console.log('his', this.historyList[index].compList)
+      // 当前显示最后一个组件
+      this.curCompIndex = this.compList.length - 1;
     },
-    setHistoryList() {
-    },
-    addHistoryList(curItem: any) {
-      if (this.curCanvasIndex !== null) {
+    async addHistoryList(curItem: any) {
+      if (this.curCanvasIndex === -1) {
+        this.historyList.push({
+          ...curItem,
+        });
+        this.curCanvasIndex = this.historyList.length;
+      } else {
         this.historyList[this.curCanvasIndex] = {
           ...this.historyList[this.curCanvasIndex],
           ...curItem,
         };
-      } else this.historyList.push(curItem);
+      };
+      await setStorage(HISTORTLIST_KEY, JSON.stringify(this.historyList));
+      ElMessage.success('已保存入历史');
     },
-    delHistoryList(index: number) {
+    async delHistoryList(index: number) {
       this.historyList.splice(index, 1);
+      await setStorage(HISTORTLIST_KEY, JSON.stringify(this.historyList));
+      ElMessage.success('删除成功');
     },
+    async resetHistoryList(index: number) {
+      this.historyList.splice(index, 1, DEFAULT_TEMP[index])
+      await setStorage(HISTORTLIST_KEY, JSON.stringify(this.historyList));
+      ElMessage.success('恢复成功');
+      await this.getStorageCurCanvas(index);
+    }
   },
   getters: {
     curCompConfig(state) {
+      console.log('当前config', state.compList[state.curCompIndex])
       return state.compList[state.curCompIndex];
     },
     isIndeterminate (state) {

@@ -2,10 +2,8 @@
   <div class="formWrap">
     <div class="custom-form">
       <div>
-        <!-- {{ compList }} -->
-        <hr>
-        <!-- {{ historyList }} -->
-        <h4>画布设置————当前组件：{{ curCompIndex }} ———— {{curCanvasId}}</h4>
+        <!-- <h4>画布设置————当前组件：{{ curCompIndex }} —— CID{{ curCanvasIndex }}—— {{curCanvasId}}</h4> -->
+        <h4>画布设置</h4>
         <el-row>
           <el-col :span="5">
             <span class="labelText">宽度:</span>
@@ -113,22 +111,45 @@
           <el-divider />
           <h4>素材设置</h4>
           <el-row>
-            <el-col :span="5">
-              <span class="labelText">宽度:</span>
-              <el-input-number v-model="curCompConfig.width"
-                               :min="0"
-                               :max="375"
-                               controls-position="right"
-                               style="width: 90px" />
-            </el-col>
-            <el-col :span="5">
-              <span class="labelText">高度:</span>
-              <el-input-number v-model="curCompConfig.height"
-                               :min="0"
-                               :max="667"
-                               controls-position="right"
-                               style="width: 90px" />
-            </el-col>
+            <template v-if="[ 'head','qrcode'].includes(curCompConfig.type)">
+              <el-col :span="5">
+                <span class="labelText">宽高:</span>
+                <el-input-number v-model="curCompConfig.width"
+                                 @change="SyncSetHeight"
+                                 :min="0"
+                                 :max="375"
+                                 controls-position="right"
+                                 style="width: 90px" />
+
+              </el-col>
+              <!-- <el-col :span="5">
+                <span class="labelText">圆角:</span>
+                <el-input-number v-model="curCompConfig.radius"
+                                 :min="0"
+                                 :max="100"
+                                 controls-position="right"
+                                 style="width: 90px" />
+
+              </el-col> -->
+            </template>
+            <template v-else>
+              <el-col :span="5">
+                <span class="labelText">宽度:</span>
+                <el-input-number v-model="curCompConfig.width"
+                                 :min="0"
+                                 :max="375"
+                                 controls-position="right"
+                                 style="width: 90px" />
+              </el-col>
+              <el-col :span="5">
+                <span class="labelText">高度:</span>
+                <el-input-number v-model="curCompConfig.height"
+                                 :min="0"
+                                 :max="667"
+                                 controls-position="right"
+                                 style="width: 90px" />
+              </el-col>
+            </template>
             <el-col :span="12">
               <span class="labelText">素材地址:</span>
               <el-input v-model="curCompConfig.url"
@@ -197,6 +218,7 @@ import { POSITION_BUTTON } from '~/constants';
 const store = useStore();
 const curCompIndex = computed(() => store.curCompIndex);
 const curCanvasId = computed(() => store.curCanvasId);
+
 const curCanvasIndex = computed(() => store.curCanvasIndex);
 const compList = computed(() => store.compList);
 const historyList = computed(() => store.historyList);
@@ -218,6 +240,10 @@ const changeFixedDirection = (direction: string) => {
     middle: () => setCompPoint(curCompIndex.value, 'y', canvasConfig.value.height / 2 - curCompConfig.value.height / 2),
   };
   dirFun[direction]();
+};
+
+const SyncSetHeight = (num: number) => {
+  curCompConfig.value.height = num;
 };
 
 const handleCheckAllChange = (status: boolean) => {
