@@ -66,6 +66,7 @@ export const useStore = defineStore('easyPoster', {
       const historyList = await getStorage(HISTORTLIST_KEY) || '[]';
       this.compList = JSON.parse(historyList)[index].compList;
       this.curCanvasId = JSON.parse(historyList)[index].id;
+      this.canvasConfig = JSON.parse(historyList)[index].canvasConfig;
       this.curCanvasIndex = index;
       // 当前显示最后一个组件
       this.curCompIndex = this.compList.length - 1;

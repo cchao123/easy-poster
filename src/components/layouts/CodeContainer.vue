@@ -31,6 +31,7 @@ const getApplicationCode = () => {
   codeRef.value = getStageCode(canvasConfig.value);
   nextTick(() => Prism.highlightAll());
 };
+
 onMounted(() => {
   getApplicationCode();
 });

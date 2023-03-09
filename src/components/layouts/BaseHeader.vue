@@ -19,7 +19,7 @@
       <el-button size="large"
                  type="info"
                  @click="isHistoryShow = true">
-        历史记录
+        模板记录
       </el-button>
       <el-button size="large"
                  type="info"
@@ -32,11 +32,17 @@
                  size="large">
         查看代码
       </el-button>
+
+      <el-button plain
+                 color="#626aef"
+                 size="large">
+        恢复预设
+      </el-button>
     </div>
   </el-menu>
 
   <el-dialog v-model="isHistoryShow"
-             title="历史保存预览">
+             title="暂存模板列表">
     <el-table class="his-tab"
               :data="historyList.slice((currentPage-1)* 3, currentPage* 3)"
               highlight-current-row>
@@ -64,26 +70,21 @@
       <el-table-column property="remarks"
                        label="remarks"
                        width="150px">
-        <template #default="scope">
-          <el-input v-model="scope.row.remarks"
-                    placeholder="Please input"
-                    clearable />
-        </template>
       </el-table-column>
 
       <el-table-column fixed="right"
                        label="Operations">
         <template #default="scope">
-          <el-popconfirm title="恢复预设状态?" v-if="['centralaxis', 'olympic'].includes(scope.row.id)"
+          <!-- <el-popconfirm title="恢复预设状态?" v-if="['centralaxis', 'olympic'].includes(scope.row.id)"
                          @confirm="handleReset(scope)">
             <template #reference>
               <el-button link
                          type="primary"
                          size="small">恢复</el-button>
             </template>
-          </el-popconfirm>
+          </el-popconfirm> -->
 
-          <el-popconfirm v-else title="确定删除该项?"
+          <el-popconfirm title="确定删除该项?"
                          @confirm="handleDel(scope)">
             <template #reference>
               <el-button link
@@ -150,7 +151,7 @@ const savaTpl = () => {
     return;
   }
   if (historyList.value.length >= 15) {
-    ElMessage.warning('不能保存更多，请在【历史】中删除');
+    ElMessage.warning('不能保存更多，请在【模板记录】中删除');
     return;
   }
   isSaveLoading.value = true;

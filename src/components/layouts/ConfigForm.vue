@@ -145,7 +145,6 @@
                 <span class="labelText">高度:</span>
                 <el-input-number v-model="curCompConfig.height"
                                  :min="0"
-                                 :max="667"
                                  controls-position="right"
                                  style="width: 90px" />
               </el-col>

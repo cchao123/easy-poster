@@ -41,10 +41,19 @@ onMounted(() => {
 
 watch(
   () => curCompConfig.value && curCompConfig.value.url,
-  () => {
-    setQrCode();
+  (newConfig) => {
+    if (newConfig) {
+      setQrCode();
+    }
   },
 );
+
+// watch(
+//   () => curCompConfig. && curCompConfig.value.url,
+//   () => {
+//     setQrCode();
+//   },
+// );
 </script>
 
 

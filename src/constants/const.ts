@@ -49,8 +49,6 @@ export const MATERIAL_LIST = [
     name: '图片素材',
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
-    width: 60,
-    height: 60,
   },
   {
     icon: 'wenzi',

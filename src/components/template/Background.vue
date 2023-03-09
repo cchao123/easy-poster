@@ -1,15 +1,14 @@
 <template>
-  <div>
-    <img class="bgg"
-         :src="curCompConfig.url">
-  </div>
+  <img :src="curCompConfig.url"
+       :style="{
+         width: curCompConfig.width ? ` ${curCompConfig.width}px`: 'auto',
+         height: curCompConfig.height? ` ${curCompConfig.height}px`: 'auto',
+       }">
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useStore } from '~/store';
-import { getBackgroundTpl } from '~/codeTemplate';
-
 const store = useStore();
 const props = defineProps({
   index: {
@@ -17,12 +16,5 @@ const props = defineProps({
     default: 0,
   },
 });
-
 const curCompConfig = computed(() => store.compList[props.index]);
 </script>
-<style lang="postcss">
-.bgg {
-  width: 375px;
-  height: 667px;
-}
-</style>
