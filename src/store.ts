@@ -3,6 +3,7 @@ import { ElementStyle } from '~/types';
 import { CHECK_ALL_VALUE, CHECK_MAX_LENGTH, DEFAULT_TEMP, HISTORTLIST_KEY  } from '~/constants';
 import { generateMixed, setStorage, getStorage } from '~/utils';
 import { ElMessage } from 'element-plus';
+
 export const useStore = defineStore('easyPoster', {
   state: () => ({
     curCanvasId: generateMixed(5),
@@ -35,9 +36,7 @@ export const useStore = defineStore('easyPoster', {
     },
     delCompList (index: Number) {
       this.compList.splice(index, 1);
-      // 手动赋值
       this.curCompIndex = this.compList.length - 1;
-      // this.curCompIndex = 0;
     },
     setCompSize(index: number, w: number, h: number){
       this.compList[index].width = w;
@@ -63,12 +62,12 @@ export const useStore = defineStore('easyPoster', {
       this.compList = [];
     },
     async getStorageCurCanvas(index: number) {
-      const historyList = await getStorage(HISTORTLIST_KEY) || '[]';
-      this.compList = JSON.parse(historyList)[index].compList;
-      this.curCanvasId = JSON.parse(historyList)[index].id;
-      this.canvasConfig = JSON.parse(historyList)[index].canvasConfig;
+      const storeHistoryList = await getStorage(HISTORTLIST_KEY) || '[]';
+      const historyList = JSON.parse(storeHistoryList)[index];
+      this.compList = historyList.compList;
+      this.curCanvasId = historyList.id;
+      if (historyList.canvasConfig) this.canvasConfig = historyList.canvasConfig;
       this.curCanvasIndex = index;
-      // 当前显示最后一个组件
       this.curCompIndex = this.compList.length - 1;
     },
     async addHistoryList(curItem: any) {
@@ -100,7 +99,7 @@ export const useStore = defineStore('easyPoster', {
   },
   getters: {
     curCompConfig(state) {
-      console.log('当前config', state.compList[state.curCompIndex])
+      // console.log('当前config', state.compList[state.curCompIndex])
       return state.compList[state.curCompIndex];
     },
     isIndeterminate (state) {

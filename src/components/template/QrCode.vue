@@ -1,12 +1,10 @@
 <template>
   <!-- borderRadius: `${curCompConfig.radius}%`, -->
-  <div class="qrCode"
-       :style="{
+  <div class="qrCode" :style="{
     width: `${curCompConfig.width}px`,
     height: `${curCompConfig.width}px`,
   }">
-    <img :src="qrUrl"
-         alt="" />
+    <img :src="qrUrl" />
   </div>
 </template>
 
@@ -47,13 +45,6 @@ watch(
     }
   },
 );
-
-// watch(
-//   () => curCompConfig. && curCompConfig.value.url,
-//   () => {
-//     setQrCode();
-//   },
-// );
 </script>
 
 

@@ -22,7 +22,7 @@ const MESSAGE = [
     element: '.formWrap',
     popover: {
       title: '3️⃣ 参数设置',
-      description: '参数修改',
+      description: '个性化参数修改',
       position: 'left',
     },
   },
@@ -30,18 +30,18 @@ const MESSAGE = [
     element: '.codeWrap',
     popover: {
       title: '4️⃣ 代码预览',
-      description: '代码预览',
+      description: '所选组件代码预览',
       position: 'left',
     },
   },
-  // {
-  //   element: '.el-header',
-  //   popover: {
-  //     title: '5️⃣ 按钮区域',
-  //     description: '预览代码',
-  //     position: 'bottom',
-  //   },
-  // },
+  {
+    element: '.el-btn-container',
+    popover: {
+      title: '5️⃣ 按钮区域',
+      description: '更多操作：导出、上传等',
+      position: 'right',
+    },
+  },
 ];
 
 export const driverFun = new Driver({

@@ -7,7 +7,11 @@
           top: `${item.point.y}px`,
           zIndex: `${item.zIndex}`,
        }">
-    <slot />
+       <span class="bd-top"></span>
+       <span class="bd-btm"></span>
+       <span class="bd-left"></span>
+       <span class="bd-right"></span>
+      <slot />
   </div>
 </template>
 
@@ -77,8 +81,56 @@ const handleMouseDown = (e: MouseEvent) => {
   cursor: move;
   position: absolute;
 }
-.editWrap:hover {
+.bd-top {
+  display: none;
+  position: absolute;
+  left:0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  border-top: 1px dashed #000;
 }
+.bd-btm {
+  display: none;
+  position: absolute;
+  left:0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #000;
+}
+.bd-left {
+  display: none;
+  position: absolute;
+  left:0;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  border-left: 1px dashed #000;
+}
+.bd-right {
+  display: none;
+  position: absolute;
+  right:0;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  border-right: 1px dashed #000;
+}
+
+.editWrap:hover .bd-top {
+  display: block;
+}
+.editWrap:hover .bd-btm {
+  display: block;
+}
+.editWrap:hover .bd-left {
+  display: block;
+}
+.editWrap:hover .bd-right {
+  display: block;
+}
+
 
 .ewDrop {
   cursor: ew-resize;

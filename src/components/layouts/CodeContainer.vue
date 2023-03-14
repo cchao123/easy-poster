@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref, nextTick, watch } from 'vue';
 import { useStore } from '~/store';
-import { getStageCode, getBackgroundTpl, getContainerTpl, getTextTpl, getHeadTpl, getImageTpl } from '~/codeTemplate';
+import { getStageCode, getBackgroundTpl, getContainerTpl, getTextTpl, getHeadTpl, getImageTpl, getQrTpl } from '~/codeTemplate';
 const codeRef = ref('');
 const store = useStore();
 const compList = computed(() => store.compList);
@@ -29,7 +29,7 @@ watch(
 
 const getApplicationCode = () => {
   codeRef.value = getStageCode(canvasConfig.value);
-  nextTick(() => Prism.highlightAll());
+  nextTick(() => window.Prism.highlightAll());
 };
 
 onMounted(() => {
@@ -37,6 +37,7 @@ onMounted(() => {
 });
 
 const getCurCode = (curCompConfig: any) => {
+  // console.log(curCompConfig.type)
   if (!curCompConfig) {
     getApplicationCode();
     return;
@@ -57,8 +58,12 @@ const getCurCode = (curCompConfig: any) => {
     case 'image':
       codeRef.value = getImageTpl(curCompConfig)['pixiJs'];
       break;
+    case 'qrcode':
+      codeRef.value = getQrTpl(curCompConfig)['pixiJs'];
+      break;
+      
   }
-  nextTick(() => Prism.highlightAll());
+  nextTick(() => window.Prism.highlightAll());
 };
 </script>
 
