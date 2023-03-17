@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="isListDialogShow"
+  <el-dialog v-model="isListDialogShow"  @close="setListDialog(false)"
              :draggable="true"
              top="10vh"
              title="暂存模板列表">

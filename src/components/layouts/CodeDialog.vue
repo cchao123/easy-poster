@@ -1,5 +1,7 @@
 <template>
-  <el-dialog v-model="isCodeDialogShow"
+  <el-dialog v-model="isCodeDialogShow" @close="setCodeDialog(false)"
+
+  @open="openOver"
              :show-close="true"
              class="code-dialog"
              :fullscreen="true">
@@ -211,8 +213,11 @@
 import { computed } from 'vue';
 import { useStore } from '~/store';
 const store = useStore();
-// const isCodeDialogShow = computed(() => store.isCodeDialogShow);
-const isCodeDialogShow = false;
+const { setCodeDialog } = store;
+const isCodeDialogShow = computed(() => store.isCodeDialogShow);
+const openOver = ()=>{
+  window.Prism.highlightAll();
+}
 </script>
 
 

@@ -234,7 +234,10 @@ const changeFixedDirection = (direction: string) => {
     top: () => setCompPoint(curCompIndex.value, 'y', 0),
     left: () => setCompPoint(curCompIndex.value, 'x', 0),
     right: () => setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width - curCompConfig.value.width),
-    center: () => setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width / 2 - curCompConfig.value.width / 2),
+    center: () => {
+      if (curCompConfig.value.fontSize )setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width / 2 - curCompConfig.value.width)
+      else setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width / 2 - curCompConfig.value.width / 2)
+    },
     middle: () => setCompPoint(curCompIndex.value, 'y', canvasConfig.value.height / 2 - curCompConfig.value.height / 2),
   };
   dirFun[direction]();

@@ -60,7 +60,7 @@ const handleMouseDown = (e: MouseEvent) => {
     // 当前位置
     const currX = moveEvent.clientX * 2;
     const currY = moveEvent.clientY * 2;
-    console.log(currX, currY);
+    // console.log(currX, currY);
 
     const targetX = pointX + currX - startX;
     const targetY = pointY + currY - startY;
@@ -86,6 +86,7 @@ const handleMouseDown = (e: MouseEvent) => {
   position: absolute;
 }
 .bd-top {
+  animation: twinkle infinite 0.3s linear;
   display: none;
   position: absolute;
   left: 0;
@@ -95,6 +96,7 @@ const handleMouseDown = (e: MouseEvent) => {
   border-top: 1px dashed #000;
 }
 .bd-btm {
+  animation: twinkle infinite 0.3s linear;
   display: none;
   position: absolute;
   left: 0;
@@ -104,6 +106,7 @@ const handleMouseDown = (e: MouseEvent) => {
   border-bottom: 1px dashed #000;
 }
 .bd-left {
+  animation: twinkle infinite 0.3s linear;
   display: none;
   position: absolute;
   left: 0;
@@ -113,6 +116,7 @@ const handleMouseDown = (e: MouseEvent) => {
   border-left: 1px dashed #000;
 }
 .bd-right {
+  animation: twinkle infinite 0.3s linear;
   display: none;
   position: absolute;
   right: 0;
@@ -145,5 +149,20 @@ const handleMouseDown = (e: MouseEvent) => {
 
 .noDrop {
   cursor: no-drop;
+}
+
+@keyframes twinkle {
+  0% {
+    border-color: red;
+  }
+  30% {
+    border-color: blue;
+  }
+  60% {
+    border-color: green;
+  }
+  100% {
+    border-color: yellow;
+  }
 }
 </style>

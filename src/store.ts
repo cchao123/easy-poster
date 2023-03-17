@@ -18,7 +18,7 @@ export const useStore = defineStore('easyPoster', {
     compList: [] as unknown as ElementStyle,
     historyList: [],
     // ui
-    isCodeDialogShow: true,
+    isCodeDialogShow: false,
     isListDialogShow: false,
   }),
   actions: {

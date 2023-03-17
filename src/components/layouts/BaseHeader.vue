@@ -14,7 +14,7 @@
     <div class="el-btn-container">
       <el-button color="#626aef"
                  :icon="UploadFilled"
-                 size="large">
+                 size="large" @click="parsePSD">
         上传PSD
       </el-button>
       <el-button size="large"
@@ -22,6 +22,7 @@
                  type="primary"
                  :icon="List"
                  @click="setListDialog(true)">
+
         模板记录
       </el-button>
       <el-button size="large"
@@ -52,7 +53,7 @@
       </el-button>
     </div>
   </el-menu>
-  <ListDialog></ListDialog>
+  <ListDialog :isListDialogShow="isListDialogShow"></ListDialog>
   <CodeDialog></CodeDialog>
 </template>
 
@@ -72,8 +73,9 @@ const historyList = computed(() => store.historyList);
 const curCanvasId = computed(() => store.curCanvasId);
 const compList = computed(() => store.compList);
 
+
 const isSaveLoading = ref(false);
-const isCodeDialogShow = ref(true);
+
 const savaTpl = () => {
   console.log(JSON.stringify(compList.value));
   // 是保存还是追加？
@@ -109,6 +111,10 @@ const curCanvasIndex = computed(() => store.curCanvasIndex);
 const handleReset = () => {
   resetHistoryList(curCanvasIndex.value);
 };
+
+const parsePSD = ()=>{
+    ElMessage.info('设计稿转代码功能开发中');
+}
 </script>
 
 <style lang="postcss">
