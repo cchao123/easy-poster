@@ -1,8 +1,8 @@
 <template>
   <img :src="curCompConfig.url"
        :style="{
-         width: curCompConfig.width ? ` ${curCompConfig.width}px`: 'auto',
-         height: curCompConfig.height? ` ${curCompConfig.height}px`: 'auto',
+         width: curCompConfig.width ? ` ${curCompConfig.width / 2}px`: 'auto',
+         height: curCompConfig.height? ` ${curCompConfig.height / 2}px`: 'auto',
        }">
 </template>
 

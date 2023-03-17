@@ -9,14 +9,17 @@ export const useStore = defineStore('easyPoster', {
     curCanvasId: generateMixed(5),
     output: 'pixiJs' as 'pixiJs' | 'html2Canvas',
     canvasConfig: {
-      width: 375,
-      height: 667,
+      width: 750,
+      height: 1334,
       background: '#fff',
     },
     curCanvasIndex: -1, // 当前操作画板小标
     curCompIndex: -1, // 当前操作组件的下标
     compList: [] as unknown as ElementStyle,
     historyList: [],
+    // ui
+    isCodeDialogShow: true,
+    isListDialogShow: false,
   }),
   actions: {
     async initHisList () {
@@ -95,7 +98,13 @@ export const useStore = defineStore('easyPoster', {
       await setStorage(HISTORTLIST_KEY, JSON.stringify(this.historyList));
       ElMessage.success('恢复成功');
       await this.getStorageCurCanvas(index);
-    }
+    },
+    setCodeDialog(isShow: boolean) {
+      this.isCodeDialogShow = isShow;
+    },
+    setListDialog(isShow: boolean) {
+      this.isListDialogShow = isShow;
+    },
   },
   getters: {
     curCompConfig(state) {

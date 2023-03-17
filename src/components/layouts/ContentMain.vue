@@ -4,8 +4,8 @@
        ref="mainRef">
     <div class="h5-view"
          :style="{
-        width: `${canvasConfig.width}px`,
-        height:`${canvasConfig.height}px`,
+        width: `${canvasConfig.width / 2}px`,
+        height:`${canvasConfig.height/ 2}px`,
         backgroundColor: `${canvasConfig.background}`,
         transform: `scale(${canvasZoom}) translate3d(${canvasX}px, ${canvasY}px ,0)`,
       }"
@@ -87,8 +87,8 @@ const mainRef = ref();
 // 画布位置
 const canvasX = ref(0);
 const canvasY = ref(0);
-
 const canvasZoom = ref(1);
+
 let point = {
   x: 0,
   y: 0,
@@ -108,8 +108,8 @@ const handleDelCurComp = () => {
 
 const dragover = (e: DragEvent) => {
   point = {
-    x: e.layerX - canvasX.value,
-    y: e.layerY - canvasY.value,
+    x: (e.layerX - canvasX.value) * 2,
+    y: (e.layerY - canvasY.value) * 2,
   };
 };
 

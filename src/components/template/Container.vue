@@ -1,7 +1,7 @@
 <template>
   <div :style="{
-    width: `${curCompConfig.width}px`,
-    height: `${curCompConfig.height}px`,
+    width: `${curCompConfig.width / 2}px`,
+    height: `${curCompConfig.height / 2}px`,
     background: `${curCompConfig.background}`,
   }"></div>
 </template>

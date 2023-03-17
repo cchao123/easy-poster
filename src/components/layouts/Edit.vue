@@ -3,15 +3,15 @@
        :class="{ noDrop: curFixedStatus.length === CHECK_MAX_LENGTH, ewDrop: curFixedStatus.indexOf('Y') !== -1, nsDrop: curFixedStatus.indexOf('X') !== -1}"
        @mousedown.stop.prevent="handleMouseDown"
        :style="{
-          left: `${item.point.x}px`,
-          top: `${item.point.y}px`,
+          left: `${item.point.x / 2}px`,
+          top: `${item.point.y / 2}px`,
           zIndex: `${item.zIndex}`,
        }">
-       <span class="bd-top"></span>
-       <span class="bd-btm"></span>
-       <span class="bd-left"></span>
-       <span class="bd-right"></span>
-      <slot />
+    <span class="bd-top"></span>
+    <span class="bd-btm"></span>
+    <span class="bd-left"></span>
+    <span class="bd-right"></span>
+    <slot />
   </div>
 </template>
 
@@ -45,18 +45,22 @@ const props = defineProps({
 
 const handleMouseDown = (e: MouseEvent) => {
   setCurCompIndex(props.index);
-  // ele位置
+
+  // ele落地位置
   const pointX = props.item.point.x;
   const pointY = props.item.point.y;
 
+  // console.log(pointX, pointY)
   // 鼠标位置
-  const startX = e.clientX;
-  const startY = e.clientY;
+  const startX = e.clientX * 2;
+  const startY = e.clientY * 2;
+  // console.log(startX, startY)
 
   const move = (moveEvent: MouseEvent) => {
     // 当前位置
-    const currX = moveEvent.clientX;
-    const currY = moveEvent.clientY;
+    const currX = moveEvent.clientX * 2;
+    const currY = moveEvent.clientY * 2;
+    console.log(currX, currY);
 
     const targetX = pointX + currX - startX;
     const targetY = pointY + currY - startY;
@@ -84,7 +88,7 @@ const handleMouseDown = (e: MouseEvent) => {
 .bd-top {
   display: none;
   position: absolute;
-  left:0;
+  left: 0;
   top: 0;
   width: 100%;
   height: 1px;
@@ -93,7 +97,7 @@ const handleMouseDown = (e: MouseEvent) => {
 .bd-btm {
   display: none;
   position: absolute;
-  left:0;
+  left: 0;
   bottom: 0;
   width: 100%;
   height: 1px;
@@ -102,7 +106,7 @@ const handleMouseDown = (e: MouseEvent) => {
 .bd-left {
   display: none;
   position: absolute;
-  left:0;
+  left: 0;
   top: 0;
   width: 1px;
   height: 100%;
@@ -111,7 +115,7 @@ const handleMouseDown = (e: MouseEvent) => {
 .bd-right {
   display: none;
   position: absolute;
-  right:0;
+  right: 0;
   top: 0;
   width: 1px;
   height: 100%;
@@ -130,7 +134,6 @@ const handleMouseDown = (e: MouseEvent) => {
 .editWrap:hover .bd-right {
   display: block;
 }
-
 
 .ewDrop {
   cursor: ew-resize;

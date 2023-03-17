@@ -8,14 +8,14 @@
           <el-col :span="5">
             <span class="labelText">宽度:</span>
             <el-input-number v-model="canvasConfig.width"
-                             :min="375"
+                             :min="750"
                              controls-position="right"
                              style="width: 90px" />
           </el-col>
           <el-col :span="5">
             <span class="labelText">高度:</span>
             <el-input-number v-model="canvasConfig.height"
-                             :min="667"
+                             :min="1334"
                              controls-position="right"
                              style="width: 90px" />
           </el-col>
@@ -137,7 +137,6 @@
                 <span class="labelText">宽度:</span>
                 <el-input-number v-model="curCompConfig.width"
                                  :min="0"
-                                 :max="375"
                                  controls-position="right"
                                  style="width: 90px" />
               </el-col>

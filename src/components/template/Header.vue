@@ -2,8 +2,8 @@
          <!-- borderRadius: `${curCompConfig.radius}%`, -->
   <div class="header"
        :style="{
-         width: `${curCompConfig.width}px`,
-         height: `${curCompConfig.width}px`,
+         width: `${curCompConfig.width / 2}px`,
+         height: `${curCompConfig.width / 2}px`,
        }">
     <img :src="curCompConfig.url || errorImg"
          :onerror="error">

@@ -5,7 +5,7 @@ const MESSAGE = [
   {
     element: '.aside-material',
     popover: {
-      title: '1️⃣ 物料区域',
+      title: '1. 物料区域',
       description: '拖拽所需物料至画板预览',
       position: 'right',
     },
@@ -13,7 +13,7 @@ const MESSAGE = [
   {
     element: '.h5-view',
     popover: {
-      title: '2️⃣ 操作面板',
+      title: '2️. 操作面板',
       description: '拖拽至此, 用于预览编辑视图',
       position: 'right',
     },
@@ -21,7 +21,7 @@ const MESSAGE = [
   {
     element: '.formWrap',
     popover: {
-      title: '3️⃣ 参数设置',
+      title: '3️. 参数设置',
       description: '个性化参数修改',
       position: 'left',
     },
@@ -29,7 +29,7 @@ const MESSAGE = [
   {
     element: '.codeWrap',
     popover: {
-      title: '4️⃣ 代码预览',
+      title: '4️. 代码预览',
       description: '所选组件代码预览',
       position: 'left',
     },
@@ -37,7 +37,7 @@ const MESSAGE = [
   {
     element: '.el-btn-container',
     popover: {
-      title: '5️⃣ 按钮区域',
+      title: '5️. 按钮区域',
       description: '更多操作：导出、上传等',
       position: 'right',
     },

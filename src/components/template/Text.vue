@@ -1,7 +1,7 @@
 <template>
   <div ref="textRef"
        :style="{
-    fontSize: `${curCompConfig.fontSize}px`,
+    fontSize: `${curCompConfig.fontSize / 2}px`,
     fontWeight: `${curCompConfig.fontWeight}`,
     fontStyle: `${curCompConfig.fontStyle}`,
     color: `${curCompConfig.fontColor}`,
