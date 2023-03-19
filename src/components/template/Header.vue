@@ -1,14 +1,12 @@
 <template>
-         <!-- borderRadius: `${curCompConfig.radius}%`, -->
-  <div class="header"
+  <!-- borderRadius: `${curCompConfig.radius}%`, -->
+  <img class="header"
        :style="{
          width: `${curCompConfig.width / 2}px`,
          height: `${curCompConfig.width / 2}px`,
-       }">
-    <img :src="curCompConfig.url || errorImg"
-         :onerror="error">
-    {{ curCompConfig }}
-  </div>
+       }"
+       :src="curCompConfig.url || errorImg"
+       :onerror="error">
 </template>
 
 <script lang="ts" setup>

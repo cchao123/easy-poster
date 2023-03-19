@@ -1,14 +1,18 @@
 const html2Canvas = (params: any) => {
-  return `1`
+  return {
+    DOM: '',
+    CSS: '',
+  };
 };
 
 const pixiJs = (params: any) => {
+  const { compId, url, width, height, point } =params;
   return `
-      const 二维码${params.compId} = createSprite('${params.url}', {
-        width: ${params.width},
-        height: ${params.height},
-        x: ${params.point.x},
-        y: ${params.point.y},
+      const 二维码${compId} = createSprite('${url}', {
+        width: ${width},
+        height: ${height},
+        x: ${point.x},
+        y: ${point.y},
       });`
 };
 

@@ -1,14 +1,30 @@
 const html2Canvas = (params: any) => {
-  return `1`
+  const { type, compId, point, width, height, url } = params;
+  const { x, y } = point;
+  const compName = type + compId;
+  return {
+    DOM: `<img class="${compName}" src="${url}">`,
+    CSS: `
+      .${compName} {
+        position: absolute;
+        left: ${x}px;
+        top: ${y}px;
+        width: ${width}px;
+        height: ${height}px;
+      };
+    `,
+  };
 };
 
 const pixiJs = (params: any) => {
+  const { type, compId, url, width, height, point } = params;
+  const compName = type + compId;
   return `
-      const image${params.compId} = createSprite('${params.url}', {
-        width: ${params.width},
-        height: ${params.height},
-        x: ${params.point.x},
-        y: ${params.point.y},
+      const ${compName} = createSprite('${url}', {
+        width: ${width},
+        height: ${height},
+        x: ${point.x},
+        y: ${point.y},
       });`
 };
 

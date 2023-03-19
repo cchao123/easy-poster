@@ -42,24 +42,27 @@ const getCurCode = (curCompConfig: any) => {
     getApplicationCode();
     return;
   }
+
+  // const aaaa = 'pixiJs'
+  const aaaa = 'pixiJs'
   switch (curCompConfig.type) {
     case 'background':
-      codeRef.value = getBackgroundTpl(curCompConfig)['pixiJs'];
+      codeRef.value = getBackgroundTpl(curCompConfig)[aaaa];
       break;
     case 'container':
-      codeRef.value = getContainerTpl(curCompConfig)['pixiJs'];
+      codeRef.value = getContainerTpl(curCompConfig)[aaaa];
       break;
     case 'text':
-      codeRef.value = getTextTpl(curCompConfig)['pixiJs'];
+      codeRef.value = getTextTpl(curCompConfig)[aaaa];
       break;
     case 'head':
-      codeRef.value = getHeadTpl(curCompConfig)['pixiJs'];
+      codeRef.value = getHeadTpl(curCompConfig)[aaaa];
       break;
     case 'image':
-      codeRef.value = getImageTpl(curCompConfig)['pixiJs'];
+      codeRef.value = getImageTpl(curCompConfig)[aaaa];
       break;
     case 'qrcode':
-      codeRef.value = getQrTpl(curCompConfig)['pixiJs'];
+      codeRef.value = getQrTpl(curCompConfig)[aaaa];
       break;
       
   }

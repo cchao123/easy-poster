@@ -1,23 +1,32 @@
 const html2Canvas = (params: any) => {
+  const { compId, fontSize, point, textValue, fontColor, fontWeight, fontStyle } =params;
+  const { x, y } = point;
   return {
-    DOM: `<div></div>`,
+    DOM: `<div class="text${compId}">${textValue}</div>`,
     CSS: `
-      .text1 {
-        
+      .text${compId} {
+        position: absolute;
+        left: ${x}px;
+        top: ${y}px;
+        color: ${fontColor};
+        font-size: ${fontSize}px;
+        font-weight: ${fontWeight};
+        font-style: ${fontStyle};
       }
     `,
   }
 };
 
 const pixiJs = (params: any) => {
+  const { compId, fontSize, point, textValue, fontColor, fontWeight } =params;
   return `
-      const text${params.compId} = new PIXI.Text('${params.textValue}', {
-        fontSize: ${params.fontSize},
-        fill: '${params.fontColor}',
-        fontWeight: '${params.fontWeight}',
+      const text${compId} = new PIXI.Text('${textValue}', {
+        fontSize: ${fontSize},
+        fill: '${fontColor}',
+        fontWeight: '${fontWeight}',
       });
-      text${params.compId}.x = ${params.point.x};
-      text${params.compId}.y = ${params.point.y};
+      text${compId}.x = ${point.x};
+      text${compId}.y = ${point.y};
       `
 };
 

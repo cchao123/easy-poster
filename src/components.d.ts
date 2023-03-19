@@ -31,6 +31,7 @@ declare module '@vue/runtime-core' {
     ElPopconfirm: typeof import('element-plus/es')['ElPopconfirm']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     Header: typeof import('./components/template/Header.vue')['default']

@@ -14,7 +14,8 @@
     <div class="el-btn-container">
       <el-button color="#626aef"
                  :icon="UploadFilled"
-                 size="large" @click="parsePSD">
+                 size="large"
+                 @click="parsePSD">
         上传PSD
       </el-button>
       <el-button size="large"
@@ -51,7 +52,11 @@
                  size="large">
         <span>恢复预设</span>
       </el-button>
+      <el-switch class="codeType" v-model="codeType"
+                 active-text="html2Canvas"
+                 inactive-text="PixiJs " />
     </div>
+
   </el-menu>
   <ListDialog :isListDialogShow="isListDialogShow"></ListDialog>
   <CodeDialog></CodeDialog>
@@ -73,6 +78,7 @@ const historyList = computed(() => store.historyList);
 const curCanvasId = computed(() => store.curCanvasId);
 const compList = computed(() => store.compList);
 
+const codeType = ref();
 
 const isSaveLoading = ref(false);
 
@@ -112,9 +118,9 @@ const handleReset = () => {
   resetHistoryList(curCanvasIndex.value);
 };
 
-const parsePSD = ()=>{
-    ElMessage.info('设计稿转代码功能开发中');
-}
+const parsePSD = () => {
+  ElMessage.info('设计稿转代码功能开发中');
+};
 </script>
 
 <style lang="postcss">
@@ -135,6 +141,12 @@ const parsePSD = ()=>{
   position: absolute;
   left: 280px;
   top: 8px;
+}
+.codeType {
+  position: absolute;
+  top: 2px;
+  left: 682px;
+
 }
 </style>
 
