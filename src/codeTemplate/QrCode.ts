@@ -1,14 +1,16 @@
-const html2Canvas = (params: any) => {
+export const getQrTpl = (params: any) => {
   return {
-    DOM: '',
+    PIXI: '',
+    DOM: '<img src="${url}">',
     CSS: '',
   };
 };
 
 const pixiJs = (params: any) => {
-  const { compId, url, width, height, point } =params;
+  const { type, compId, url, width, height, point } =params;
+  const compName = type + compId;
   return `
-      const 二维码${compId} = createSprite('${url}', {
+      const ${compName} = createSprite('${url}', {
         width: ${width},
         height: ${height},
         x: ${point.x},
@@ -16,10 +18,10 @@ const pixiJs = (params: any) => {
       });`
 };
 
-export const getQrTpl = (params: any) => {
-  return {
-    html2Canvas: html2Canvas(params),
-    pixiJs: pixiJs(params),
-  }
-}
+// export const  = (params: any) => {
+//   return {
+//     html2Canvas: html2Canvas(params),
+//     pixiJs: pixiJs(params),
+//   }
+// }
 

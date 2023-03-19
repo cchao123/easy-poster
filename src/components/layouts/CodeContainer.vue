@@ -2,7 +2,9 @@
   <div class="codeWrap line-numbers">
     <pre>
         <code class="language-js">
-          {{ codeRef }}
+          {{ pixiCode }}
+          {{ domCode }}
+          {{ cssCode }}
         </code>
       </pre>
   </div>
@@ -12,7 +14,9 @@
 import { computed, onMounted, ref, nextTick, watch } from 'vue';
 import { useStore } from '~/store';
 import { getStageCode, getBackgroundTpl, getContainerTpl, getTextTpl, getHeadTpl, getImageTpl, getQrTpl } from '~/codeTemplate';
-const codeRef = ref('');
+const pixiCode = ref('');
+const domCode = ref('');
+const cssCode = ref('');
 const store = useStore();
 const compList = computed(() => store.compList);
 const output = computed(() => store.output);
@@ -28,7 +32,7 @@ watch(
 );
 
 const getApplicationCode = () => {
-  codeRef.value = getStageCode(canvasConfig.value);
+  pixiCode.value = getStageCode(canvasConfig.value);
   nextTick(() => window.Prism.highlightAll());
 };
 
@@ -43,28 +47,38 @@ const getCurCode = (curCompConfig: any) => {
     return;
   }
 
-  // const aaaa = 'pixiJs'
-  const aaaa = 'pixiJs'
+  console.log(getBackgroundTpl(curCompConfig))
   switch (curCompConfig.type) {
     case 'background':
-      codeRef.value = getBackgroundTpl(curCompConfig)[aaaa];
+      pixiCode.value = getBackgroundTpl(curCompConfig)['PIXI'];
+      domCode.value = getBackgroundTpl(curCompConfig)['DOM'];
+      cssCode.value = getBackgroundTpl(curCompConfig)['CSS'];
       break;
     case 'container':
-      codeRef.value = getContainerTpl(curCompConfig)[aaaa];
+      pixiCode.value = getContainerTpl(curCompConfig)['PIXI'];
+      domCode.value = getContainerTpl(curCompConfig)['DOM'];
+      cssCode.value = getContainerTpl(curCompConfig)['CSS'];
       break;
     case 'text':
-      codeRef.value = getTextTpl(curCompConfig)[aaaa];
+      pixiCode.value = getTextTpl(curCompConfig)['PIXI'];
+      domCode.value = getTextTpl(curCompConfig)['DOM'];
+      cssCode.value = getTextTpl(curCompConfig)['CSS'];
       break;
     case 'head':
-      codeRef.value = getHeadTpl(curCompConfig)[aaaa];
+      pixiCode.value = getHeadTpl(curCompConfig)['PIXI'];
+      domCode.value = getHeadTpl(curCompConfig)['DOM'];
+      cssCode.value = getHeadTpl(curCompConfig)['CSS'];
       break;
     case 'image':
-      codeRef.value = getImageTpl(curCompConfig)[aaaa];
+      pixiCode.value = getImageTpl(curCompConfig)['PIXI'];
+      domCode.value = getImageTpl(curCompConfig)['DOM'];
+      cssCode.value = getImageTpl(curCompConfig)['CSS'];
       break;
     case 'qrcode':
-      codeRef.value = getQrTpl(curCompConfig)[aaaa];
+      pixiCode.value = getQrTpl(curCompConfig)['PIXI'];
+      domCode.value = getQrTpl(curCompConfig)['DOM'];
+      cssCode.value = getQrTpl(curCompConfig)['CSS'];
       break;
-      
   }
   nextTick(() => window.Prism.highlightAll());
 };

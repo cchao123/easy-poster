@@ -1,8 +1,17 @@
-const html2Canvas = (params: any) => {
+export const getTextTpl = (params: any) => {
   const { compId, fontSize, point, textValue, fontColor, fontWeight, fontStyle } =params;
   const { x, y } = point;
   return {
-    DOM: `<div class="text${compId}">${textValue}</div>`,
+    PIXI: `
+      const text${compId} = new PIXI.Text('${textValue}', {
+        fontSize: ${fontSize},
+        fill: '${fontColor}',
+        fontWeight: '${fontWeight}',
+      });
+      text${compId}.x = ${point.x};
+      text${compId}.y = ${point.y};`,
+    DOM: `
+      <div class="text${compId}">${textValue}</div>`,
     CSS: `
       .text${compId} {
         position: absolute;
@@ -19,24 +28,8 @@ const html2Canvas = (params: any) => {
 
 const pixiJs = (params: any) => {
   const { compId, fontSize, point, textValue, fontColor, fontWeight } =params;
-  return `
-      const text${compId} = new PIXI.Text('${textValue}', {
-        fontSize: ${fontSize},
-        fill: '${fontColor}',
-        fontWeight: '${fontWeight}',
-      });
-      text${compId}.x = ${point.x};
-      text${compId}.y = ${point.y};
-      `
+  return 
 };
-
-export const getTextTpl = (params: any) => {
-  return {
-    html2Canvas: html2Canvas(params),
-    pixiJs: pixiJs(params),
-  }
-}
-
 
 
 

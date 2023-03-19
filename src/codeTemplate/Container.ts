@@ -1,9 +1,17 @@
-const html2Canvas = (params: any) => {
-  const { type, compId, point, width, height, background } = params;
+export const getContainerTpl = (params: any) => {
+  const { type, compId, width, height, background, point } = params;
   const { x, y } = point;
   const compName = type + compId;
   return {
-    DOM: `<div class="${compName}"></div>`,
+    PIXI: `
+      const ${compName}: PIXI.Container = new PIXI.Container();
+      ${compName}.witdh = ${width};
+      ${compName}.height =  ${height};
+      ${compName}.x =  ${point.x};
+      ${compName}.y =  ${point.y};
+    `,
+    DOM: `
+      <div class="${compName}"></div>`,
     CSS: `
       .${compName} {
         position: absolute;
@@ -16,22 +24,3 @@ const html2Canvas = (params: any) => {
     `,
   }
 };
-
-const pixiJs = (params: any) => {
-  const { type, compId, width, height, point } = params;
-  const compName = type + compId;
-  return `
-      const ${compName}: PIXI.Container = new PIXI.Container();
-      ${compName}.witdh = ${width};
-      ${compName}.height =  ${height};
-      ${compName}.x =  ${point.x};
-      ${compName}.y =  ${point.y};`
-};
-
-export const getContainerTpl = (params: any) => {
-  return {
-    html2Canvas: html2Canvas(params),
-    pixiJs: pixiJs(params),
-  }
-}
-

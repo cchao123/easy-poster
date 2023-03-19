@@ -1,9 +1,17 @@
-const html2Canvas = (params: any) => {
+export const getImageTpl = (params: any) => {
   const { type, compId, point, width, height, url } = params;
   const { x, y } = point;
   const compName = type + compId;
   return {
-    DOM: `<img class="${compName}" src="${url}">`,
+    PIXI: `
+      ${compName} = createSprite('${url}', {
+        width: ${width},
+        height: ${height},
+        x: ${point.x},
+        y: ${point.y},
+      });`,
+    DOM: `
+      <img class="${compName}" src="${url}">`,
     CSS: `
       .${compName} {
         position: absolute;
@@ -15,23 +23,3 @@ const html2Canvas = (params: any) => {
     `,
   };
 };
-
-const pixiJs = (params: any) => {
-  const { type, compId, url, width, height, point } = params;
-  const compName = type + compId;
-  return `
-      const ${compName} = createSprite('${url}', {
-        width: ${width},
-        height: ${height},
-        x: ${point.x},
-        y: ${point.y},
-      });`
-};
-
-export const getImageTpl = (params: any) => {
-  return {
-    html2Canvas: html2Canvas(params),
-    pixiJs: pixiJs(params),
-  }
-}
-
