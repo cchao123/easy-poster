@@ -1,21 +1,21 @@
-
-
 export const getStageCode = (canvasConfig: any) => {
-  const { width, height } = canvasConfig;
-  return `
-      // App.vue
+  const { width, height, background } = canvasConfig;
+  return {
+    PIXI: `
       const app = new PIXI.Application({
         width: ${width},
         height: ${height},
         antialias: true,
         transparent: true,
-      });
-
-      // common.js
-      import * as PIXI from 'pixi.js';
-      const createSprite = (assetsUrl: string, defaultParams: SpritesParams) => {
-        const newSprite = PIXI.Sprite.from(assetsUrl);
-        Object.keys(defaultParams).forEach((key: string) => (newSprite[key] = defaultParams[key]));
-        return newSprite;
-      };`
-}
+      });`,
+    DOM: `
+      <div class="posterDom"></div>`,
+    CSS: `
+      .posterDom {
+        position: relative;
+        width: ${width}px;
+        height: ${height}px;
+        background-color: ${background};
+      };`,
+  };
+};

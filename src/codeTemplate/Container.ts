@@ -20,7 +20,6 @@ export const getContainerTpl = (params: any) => {
         width: ${width}px;
         height: ${height}px;
         background-color: ${background};
-      }
-    `,
-  }
+      };`,
+  };
 };

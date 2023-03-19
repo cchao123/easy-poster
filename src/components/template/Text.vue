@@ -6,11 +6,6 @@
     fontStyle: `${curCompConfig.fontStyle}`,
     color: `${curCompConfig.fontColor}`,
   }">{{ curCompConfig.textValue }}</div>
-  <!-- {{ curCompConfig.fontSize }}
-  {{
-
-    curCompConfig.width 
-  }} -->
 </template>
 
 <script lang="ts" setup>
@@ -32,8 +27,8 @@ const props = defineProps({
 const setTextCompSize = () => {
   nextTick(() => {
     if (textRef.value) {
-      const { offsetWidth, offsetHeight, clientHeight, clientWidth } = textRef.value;
-      console.log(offsetWidth, offsetHeight, clientHeight, clientWidth)
+      const { offsetWidth, offsetHeight } = textRef.value;
+      // console.log(offsetWidth, offsetHeight, clientHeight, clientWidth)
       setCompSize(props.index, offsetWidth, offsetHeight);
     }
   });

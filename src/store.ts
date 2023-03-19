@@ -7,7 +7,7 @@ import { ElMessage } from 'element-plus';
 export const useStore = defineStore('easyPoster', {
   state: () => ({
     curCanvasId: generateMixed(5),
-    output: 'pixiJs' as 'pixiJs' | 'html2Canvas',
+    outputCodyType: 'pixiJs' as 'pixiJs' | 'html2Canvas',
     canvasConfig: {
       width: 750,
       height: 1334,

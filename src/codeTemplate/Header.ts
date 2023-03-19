@@ -12,11 +12,11 @@ export const getHeadTpl = (params: any) => {
       const userHead${compId} = createSprite('${url}', {
         width: ${width},
         height: ${width},
-      })
+      });
       const graphics${compId} = new PIXI.Graphics();
       graphics${compId}.beginFill(0xe20d3f);
       graphics${compId}.drawCircle(${radio + x},${radio + y}, ${radio});
-      graphics${compId}.endFill()
+      graphics${compId}.endFill();
       userWrap${compId}.mask = graphics${compId};
       userWrap${compId}.addChild(userHead${compId});`,
     DOM: `
@@ -28,7 +28,6 @@ export const getHeadTpl = (params: any) => {
         top: ${y}px;
         width: ${width}px;
         height: ${height}px;
-      };
-    `,
+      };`,
   };
 };

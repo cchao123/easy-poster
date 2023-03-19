@@ -52,9 +52,9 @@
                  size="large">
         <span>恢复预设</span>
       </el-button>
-      <el-switch class="codeType" v-model="codeType"
+      <el-switch class="codeType" v-model="outputCodyType"
                  active-text="html2Canvas"
-                 inactive-text="PixiJs " />
+                 inactive-text="pixiJs " />
     </div>
 
   </el-menu>
@@ -77,8 +77,8 @@ const { addHistoryList, resetHistoryList, setListDialog, setCodeDialog } = store
 const historyList = computed(() => store.historyList);
 const curCanvasId = computed(() => store.curCanvasId);
 const compList = computed(() => store.compList);
+const outputCodyType = computed(() => store.outputCodyType);
 
-const codeType = ref();
 
 const isSaveLoading = ref(false);
 

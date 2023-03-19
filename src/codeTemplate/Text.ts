@@ -21,15 +21,6 @@ export const getTextTpl = (params: any) => {
         font-size: ${fontSize}px;
         font-weight: ${fontWeight};
         font-style: ${fontStyle};
-      }
-    `,
+      };`,
   }
 };
-
-const pixiJs = (params: any) => {
-  const { compId, fontSize, point, textValue, fontColor, fontWeight } =params;
-  return 
-};
-
-
-

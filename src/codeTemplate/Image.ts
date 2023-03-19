@@ -19,7 +19,6 @@ export const getImageTpl = (params: any) => {
         top: ${y}px;
         width: ${width}px;
         height: ${height}px;
-      };
-    `,
+      };`,
   };
 };

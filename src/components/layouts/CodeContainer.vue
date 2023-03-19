@@ -3,17 +3,33 @@
     <pre>
         <code class="language-js">
           {{ pixiCode }}
+        </code>
+    </pre>
+     <pre>
+        <code class="language-js">
           {{ domCode }}
+        </code>
+    </pre>
+    <pre>
+        <code class="language-js">
           {{ cssCode }}
         </code>
-      </pre>
+    </pre>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, onMounted, ref, nextTick, watch } from 'vue';
 import { useStore } from '~/store';
-import { getStageCode, getBackgroundTpl, getContainerTpl, getTextTpl, getHeadTpl, getImageTpl, getQrTpl } from '~/codeTemplate';
+import {
+  getStageCode,
+  getBackgroundTpl,
+  getContainerTpl,
+  getTextTpl,
+  getHeadTpl,
+  getImageTpl,
+  getQrTpl,
+} from '~/codeTemplate';
 const pixiCode = ref('');
 const domCode = ref('');
 const cssCode = ref('');
@@ -22,6 +38,7 @@ const compList = computed(() => store.compList);
 const output = computed(() => store.output);
 const curCompConfig = computed(() => store.curCompConfig);
 const canvasConfig = computed(() => store.canvasConfig);
+const codyType = computed(() => store.canvasConfig);
 
 watch(
   () => curCompConfig,
@@ -32,7 +49,9 @@ watch(
 );
 
 const getApplicationCode = () => {
-  pixiCode.value = getStageCode(canvasConfig.value);
+  pixiCode.value = getStageCode(canvasConfig.value)['PIXI'];
+  domCode.value = getStageCode(canvasConfig.value)['DOM'];
+  cssCode.value = getStageCode(canvasConfig.value)['CSS'];
   nextTick(() => window.Prism.highlightAll());
 };
 
@@ -47,7 +66,7 @@ const getCurCode = (curCompConfig: any) => {
     return;
   }
 
-  console.log(getBackgroundTpl(curCompConfig))
+  console.log(getBackgroundTpl(curCompConfig));
   switch (curCompConfig.type) {
     case 'background':
       pixiCode.value = getBackgroundTpl(curCompConfig)['PIXI'];
