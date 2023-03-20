@@ -16,6 +16,6 @@ export const getStageCode = (canvasConfig: any) => {
         width: ${width}px;
         height: ${height}px;
         background-color: ${background};
-      };`,
+      }`,
   };
 };

@@ -52,39 +52,44 @@
                  size="large">
         <span>恢复预设</span>
       </el-button>
-      <el-switch class="codeType" v-model="outputCodyType"
-                 active-text="html2Canvas"
-                 inactive-text="pixiJs " />
+      <div class="codeType" :class="{ codeTypeIndex  : isCodeDialogShow }">
+        <el-switch v-model="outputCodyType"
+                @change="changeOutput"
+                inactive-color="#626aef"
+                :active-value="HTML2CANVAS"
+                 :active-text="HTML2CANVAS"
+                 :inactive-value="PIXI"
+                 :inactive-text="PIXI" />
+      </div>
     </div>
-
   </el-menu>
-  <ListDialog :isListDialogShow="isListDialogShow"></ListDialog>
-  <CodeDialog></CodeDialog>
+  <ListDialog />
+  <CodeDialog />
 </template>
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { ElMessage } from 'element-plus';
+import { ElMessage, ElDialog } from 'element-plus';
 import { toggleDark } from '~/composables';
+import { PIXI, HTML2CANVAS } from '~/constants';
 import { convertDOMToImage, generateMixed } from '~/utils';
 import { UploadFilled, List, InfoFilled, RefreshLeft, View } from '@element-plus/icons-vue';
-import { useStore } from '~/store';
 import ListDialog from '~/components/layouts/ListDialog.vue';
 import CodeDialog from '~/components/layouts/CodeDialog.vue';
+import { useStore } from '~/store';
 
 const store = useStore();
-const { addHistoryList, resetHistoryList, setListDialog, setCodeDialog } = store;
+const isCodeDialogShow = computed(() => store.isCodeDialogShow);
 const historyList = computed(() => store.historyList);
 const curCanvasId = computed(() => store.curCanvasId);
 const compList = computed(() => store.compList);
-const outputCodyType = computed(() => store.outputCodyType);
+const outputCodyType = ref(1111);
 
+const { addHistoryList, resetHistoryList, setListDialog, setCodeDialog, setOutputCode } = store;
 
 const isSaveLoading = ref(false);
-
 const savaTpl = () => {
-  console.log(JSON.stringify(compList.value));
-  // 是保存还是追加？
+  // console.log(JSON.stringify(compList.value));
   if (compList.value.length <= 0) {
     ElMessage.error('画板为空');
     return;
@@ -121,6 +126,10 @@ const handleReset = () => {
 const parsePSD = () => {
   ElMessage.info('设计稿转代码功能开发中');
 };
+
+const changeOutput = (aaaa: any)=> {
+  setOutputCode(aaaa)
+};
 </script>
 
 <style lang="postcss">
@@ -142,11 +151,19 @@ const parsePSD = () => {
   left: 280px;
   top: 8px;
 }
+
 .codeType {
+  background-color: var(--ep-menu-bg-color);
   position: absolute;
   top: 2px;
   left: 682px;
+  padding: 2px 10px;
+  border-radius: 20px;
+}
 
+.codeTypeIndex {
+  z-index: 3000;
+  box-shadow: 0 1px 40px 1px var(--ep-menu-border-color);
 }
 </style>
 

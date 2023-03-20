@@ -1,16 +1,16 @@
 <template>
   <div class="codeWrap line-numbers">
-    <pre>
+    <pre v-show="outputCodyType === PIXI">
         <code class="language-js">
           {{ pixiCode }}
         </code>
     </pre>
-     <pre>
+    <pre v-show="outputCodyType === HTML2CANVAS">
         <code class="language-js">
           {{ domCode }}
         </code>
     </pre>
-    <pre>
+    <pre v-show="outputCodyType === HTML2CANVAS">
         <code class="language-js">
           {{ cssCode }}
         </code>
@@ -30,15 +30,15 @@ import {
   getImageTpl,
   getQrTpl,
 } from '~/codeTemplate';
+import { PIXI, HTML2CANVAS } from '~/constants';
 const pixiCode = ref('');
 const domCode = ref('');
 const cssCode = ref('');
 const store = useStore();
 const compList = computed(() => store.compList);
-const output = computed(() => store.output);
 const curCompConfig = computed(() => store.curCompConfig);
 const canvasConfig = computed(() => store.canvasConfig);
-const codyType = computed(() => store.canvasConfig);
+const outputCodyType = computed(() => store.outputCodyType);
 
 watch(
   () => curCompConfig,
@@ -47,6 +47,15 @@ watch(
   },
   { deep: true },
 );
+
+watch(
+  () => canvasConfig,
+  () => {
+    getApplicationCode();
+  },
+  { deep: true },
+);
+
 
 const getApplicationCode = () => {
   pixiCode.value = getStageCode(canvasConfig.value)['PIXI'];

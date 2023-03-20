@@ -5,12 +5,14 @@
              :show-close="true"
              class="code-dialog"
              :fullscreen="true">
-    <div class="code-container line-numbers">
-        <div class="code-drawer">
-          // clone实例项目https://github.com/cchao123/pixi-demo , 点击右侧copy替换<code>components/pixiContainer.vue</code>内预览
+    <div class="code-container line-numbers" v-if="isCodeDialogShow">
+        <div class="code-tips">
+          clone演示DEMO：<a href="https://github.com/cchao123/cchao123" target="_blank">https://github.com/cchao123/cchao123</a> , copy替换<span class="code-highlight">/components/pixiContainer.vue</span>运行预览
         </div>
         <pre>
-        <code class="language-js"> 
+        <code v-show="outputCodyType === PIXI" class="language-js">
+          <template v-for="item in compList"><template v-if="item.type === 'background'">{{ getBackgroundTpl(item).PIXI }}</template><template v-if="item.type === 'container'">{{ getContainerTpl(item).PIXI }}</template><template v-if="item.type === 'text'">{{ getTextTpl(item).PIXI }}</template><template v-if="item.type === 'head'">{{ getHeadTpl(item).PIXI }}</template><template v-if="item.type === 'image'">{{ getImageTpl(item).PIXI }}</template><template v-if="item.type === 'qrcode'">{{ getQrTpl(item).PIXI }}</template>
+          </template></code><code v-show="outputCodyType === HTML2CANVAS" class="language-js"> 
       &lt;template&gt;
           <template v-for="item in compList"><template v-if="item.type === 'background'">{{ getBackgroundTpl(item).DOM }}</template><template v-if="item.type === 'container'">{{ getContainerTpl(item).DOM }}</template><template v-if="item.type === 'text'">{{ getTextTpl(item).DOM }}</template><template v-if="item.type === 'head'">{{ getHeadTpl(item).DOM }}</template><template v-if="item.type === 'image'">{{ getImageTpl(item).DOM }}</template><template v-if="item.type === 'qrcode'">{{ getQrTpl(item).DOM }}</template>
           </template>
@@ -20,19 +22,15 @@
           </template>
       &lt;/style&gt;
         </code>
-        
-        <code v-if="false" class="language-js">
-          <template v-for="item in compList"><template v-if="item.type === 'background'">{{ getBackgroundTpl(item).PIXI }}</template><template v-if="item.type === 'container'">{{ getContainerTpl(item).PIXI }}</template><template v-if="item.type === 'text'">{{ getTextTpl(item).PIXI }}</template><template v-if="item.type === 'head'">{{ getHeadTpl(item).PIXI }}</template><template v-if="item.type === 'image'">{{ getImageTpl(item).PIXI }}</template><template v-if="item.type === 'qrcode'">{{ getQrTpl(item).PIXI }}</template>
-          </template>
-        </code>
         </pre>
     </div>
   </el-dialog>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useStore } from '~/store';
+import { PIXI, HTML2CANVAS } from '~/constants';
 import {
   getStageCode,
   getBackgroundTpl,
@@ -47,12 +45,10 @@ const store = useStore();
 const { setCodeDialog } = store;
 const isCodeDialogShow = computed(() => store.isCodeDialogShow);
 const compList = computed(() => store.compList);
+const outputCodyType = computed(() => store.outputCodyType);
 const openOver = () => {
   window.Prism.highlightAll();
 };
-onMounted(()=>{
-  openOver();
-});
 </script>
 
 
@@ -72,8 +68,6 @@ onMounted(()=>{
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-
-
 .ep-drawer__header {
   /* height: 60px; */
   margin-bottom: 15px;
@@ -84,21 +78,19 @@ onMounted(()=>{
   margin-bottom: 10px;
 }
 
-
-
-
-/* ::-webkit-scrollbar {
-  height: 10px;
-  width: 100%;
+.code-dialog .code-toolbar {
+  height: 85vh;
+  overflow: scroll;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: #7d7d7d;
-  border-radius: 20px;
+.code-tips {
+  text-align: left;
+  text-indent: 50px;
+  color: #cfd2da;
 }
 
-::-webkit-scrollbar-track {
-  border-radius: 20px;
-  background-color: #939393;
-} */
+.code-highlight {
+  background-color: #1e1e1e;
+  color: #6899eb;
+}
 </style>

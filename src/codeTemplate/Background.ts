@@ -19,6 +19,6 @@ export const getBackgroundTpl = (params: any) => {
         top: ${y}px;
         width: ${width}px;
         height: ${height}px;
-      };`,
+      }`,
   };
 };

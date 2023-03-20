@@ -992,4 +992,8 @@ export const DEFAULT_TEMP = [
 ]
 
 
-export const HISTORTLIST_KEY = '__HISTORT_LIST'
+export const HISTORTLIST_KEY = '__HISTORT_LIST';
+
+export const PIXI = 'PixiJs';
+
+export const HTML2CANVAS = 'html2Canvas';

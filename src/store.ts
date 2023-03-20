@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia';
 import { ElementStyle } from '~/types';
-import { CHECK_ALL_VALUE, CHECK_MAX_LENGTH, DEFAULT_TEMP, HISTORTLIST_KEY  } from '~/constants';
+import { CHECK_ALL_VALUE, CHECK_MAX_LENGTH, DEFAULT_TEMP, HISTORTLIST_KEY, PIXI } from '~/constants';
 import { generateMixed, setStorage, getStorage } from '~/utils';
 import { ElMessage } from 'element-plus';
 
 export const useStore = defineStore('easyPoster', {
   state: () => ({
     curCanvasId: generateMixed(5),
-    outputCodyType: 'pixiJs' as 'pixiJs' | 'html2Canvas',
+    outputCodyType: PIXI,
     canvasConfig: {
       width: 750,
       height: 1334,
@@ -40,6 +40,9 @@ export const useStore = defineStore('easyPoster', {
     delCompList (index: Number) {
       this.compList.splice(index, 1);
       this.curCompIndex = this.compList.length - 1;
+    },
+    setQrUrl(index: number, url: string) {
+      this.compList[index].textValue = url;
     },
     setCompSize(index: number, w: number, h: number){
       this.compList[index].width = w;
@@ -104,6 +107,9 @@ export const useStore = defineStore('easyPoster', {
     },
     setListDialog(isShow: boolean) {
       this.isListDialogShow = isShow;
+    },
+    setOutputCode(outputCodyType: string) {
+      this.outputCodyType = outputCodyType; 
     },
   },
   getters: {

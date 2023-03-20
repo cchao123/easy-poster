@@ -1,5 +1,5 @@
 export const getTextTpl = (params: any) => {
-  const { compId, fontSize, point, textValue, fontColor, fontWeight, fontStyle } =params;
+  const { compId, width, fontSize, point, textValue, fontColor, fontWeight, fontStyle } =params;
   const { x, y } = point;
   return {
     PIXI: `
@@ -15,12 +15,13 @@ export const getTextTpl = (params: any) => {
     CSS: `
       .text${compId} {
         position: absolute;
+        width: ${width}px;
         left: ${x}px;
         top: ${y}px;
         color: ${fontColor};
         font-size: ${fontSize}px;
         font-weight: ${fontWeight};
         font-style: ${fontStyle};
-      };`,
+      }`,
   }
 };

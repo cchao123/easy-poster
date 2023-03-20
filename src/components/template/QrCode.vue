@@ -24,12 +24,13 @@ const props = defineProps({
 
 const store = useStore();
 const curCompConfig = computed(() => store.compList[props.index]);
-
+const { setQrUrl } = store;
 const qrUrl = ref();
 
 const setQrCode = () => {
   QRCode.toDataURL(curCompConfig.value.url).then((url: string) => {
     qrUrl.value = url;
+    setQrUrl(props.index, url);
   });
 };
 
