@@ -5,32 +5,37 @@
              :show-close="true"
              class="code-dialog"
              :fullscreen="true">
-    <div class="code-container line-numbers" v-if="isCodeDialogShow">
-        <div class="code-tips">
-          clone演示DEMO：<a href="https://github.com/cchao123/cchao123" target="_blank">https://github.com/cchao123/cchao123</a> , copy替换<span class="code-highlight">/components/pixiContainer.vue</span>运行预览
-        </div>
+    <template v-if="isCodeDialogShow">
+      <div class="code-container line-numbers"
+           v-show="outputCodyType === OutputType.PIXI">
         <pre>
-        <code v-show="outputCodyType === PIXI" class="language-js">
-          <template v-for="item in compList"><template v-if="item.type === 'background'">{{ getBackgroundTpl(item).PIXI }}</template><template v-if="item.type === 'container'">{{ getContainerTpl(item).PIXI }}</template><template v-if="item.type === 'text'">{{ getTextTpl(item).PIXI }}</template><template v-if="item.type === 'head'">{{ getHeadTpl(item).PIXI }}</template><template v-if="item.type === 'image'">{{ getImageTpl(item).PIXI }}</template><template v-if="item.type === 'qrcode'">{{ getQrTpl(item).PIXI }}</template>
-          </template></code><code v-show="outputCodyType === HTML2CANVAS" class="language-js"> 
+          <code class="language-js">
+            <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.TEXT">{{ getTextTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).PIXI }}</template></template></code>
+        </pre>
+      </div>
+
+      <div class="code-container line-numbers"
+           v-show="outputCodyType === OutputType.HTML2CANVAS">
+        <pre>
+          <code class="language-js"> 
       &lt;template&gt;
-          <template v-for="item in compList"><template v-if="item.type === 'background'">{{ getBackgroundTpl(item).DOM }}</template><template v-if="item.type === 'container'">{{ getContainerTpl(item).DOM }}</template><template v-if="item.type === 'text'">{{ getTextTpl(item).DOM }}</template><template v-if="item.type === 'head'">{{ getHeadTpl(item).DOM }}</template><template v-if="item.type === 'image'">{{ getImageTpl(item).DOM }}</template><template v-if="item.type === 'qrcode'">{{ getQrTpl(item).DOM }}</template>
-          </template>
+      <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).DOM }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).DOM }}</template><template v-if="item.type === TemplateType.TEXT">{{ getTextTpl(item).DOM }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).DOM }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).DOM }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).DOM }}</template></template>
       &lt;/template&gt;
 
-      &lt;style&gt;<template v-for="item in compList"><template v-if="item.type === 'background'">{{ getBackgroundTpl(item).CSS }}</template><template v-if="item.type === 'container'">{{ getContainerTpl(item).CSS }}</template><template v-if="item.type === 'text'">{{ getTextTpl(item).CSS }}</template><template v-if="item.type === 'head'">{{ getHeadTpl(item).CSS }}</template><template v-if="item.type === 'image'">{{ getImageTpl(item).CSS }}</template><template v-if="item.type === 'qrcode'">{{ getQrTpl(item).CSS }}</template>
-          </template>
+      &lt;style&gt;
+      <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).CSS }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).CSS }}</template><template v-if="item.type === 'text'">{{ getTextTpl(item).CSS }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).CSS }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).CSS }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).CSS }}</template></template>
       &lt;/style&gt;
-        </code>
+          </code>
         </pre>
-    </div>
+      </div>
+    </template>
   </el-dialog>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useStore } from '~/store';
-import { PIXI, HTML2CANVAS } from '~/constants';
+import { OutputType, TemplateType } from '~/constants';
 import {
   getStageCode,
   getBackgroundTpl,
@@ -83,6 +88,10 @@ const openOver = () => {
   overflow: scroll;
 }
 
+.code-dialog .line-numbers-rows {
+  left: -6.5em !important;
+}
+
 .code-tips {
   text-align: left;
   text-indent: 50px;
@@ -93,4 +102,6 @@ const openOver = () => {
   background-color: #1e1e1e;
   color: #6899eb;
 }
+
+
 </style>

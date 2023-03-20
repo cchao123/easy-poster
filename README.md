@@ -36,4 +36,6 @@ npm run dev
 
 See `src/styles/element/index.scss`.
 
-TODOE 处理：import顺序
+1.处理：import顺序
+2.定义全局类型
+3.postcss

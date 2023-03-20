@@ -1,5 +1,5 @@
 export const getTextTpl = (params: any) => {
-  const { compId, width, fontSize, point, textValue, fontColor, fontWeight, fontStyle } =params;
+  const { compId, width, fontSize, point, textValue, fontColor, fontWeight, fontStyle } = params;
   const { x, y } = point;
   return {
     PIXI: `

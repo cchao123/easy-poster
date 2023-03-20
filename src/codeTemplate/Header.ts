@@ -28,6 +28,7 @@ export const getHeadTpl = (params: any) => {
         top: ${y}px;
         width: ${width}px;
         height: ${height}px;
+        border-radius: 50px;
       }`,
   };
 };

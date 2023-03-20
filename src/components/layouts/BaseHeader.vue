@@ -56,10 +56,10 @@
         <el-switch v-model="outputCodyType"
                 @change="changeOutput"
                 inactive-color="#626aef"
-                :active-value="HTML2CANVAS"
-                 :active-text="HTML2CANVAS"
-                 :inactive-value="PIXI"
-                 :inactive-text="PIXI" />
+                :active-value="OutputType.HTML2CANVAS"
+                 :active-text="OutputType.HTML2CANVAS"
+                 :inactive-value="OutputType.PIXI"
+                 :inactive-text="OutputType.PIXI" />
       </div>
     </div>
   </el-menu>
@@ -71,7 +71,7 @@
 import { ref, computed } from 'vue';
 import { ElMessage, ElDialog } from 'element-plus';
 import { toggleDark } from '~/composables';
-import { PIXI, HTML2CANVAS } from '~/constants';
+import { OutputType } from '~/constants';
 import { convertDOMToImage, generateMixed } from '~/utils';
 import { UploadFilled, List, InfoFilled, RefreshLeft, View } from '@element-plus/icons-vue';
 import ListDialog from '~/components/layouts/ListDialog.vue';

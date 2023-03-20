@@ -177,7 +177,6 @@
           </el-col>
           <el-col :span="10">
             <div class="dirContainer">
-              <!-- <el-tooltip > -->
               <div class="icon-wrap iconfont"
                    v-for="btn in POSITION_BUTTON"
                    :key="btn.class"
@@ -185,7 +184,6 @@
                    :placement="btn.placement"
                    @click="changeFixedDirection(btn.direction)"
                    :class="`${btn.class} ${btn.direction}`"></div>
-              <!-- </el-tooltip> -->
             </div>
           </el-col>
           <el-col :span="5">
@@ -216,11 +214,9 @@ import { POSITION_BUTTON } from '~/constants';
 const store = useStore();
 const curCompIndex = computed(() => store.curCompIndex);
 const curCanvasId = computed(() => store.curCanvasId);
-
 const curCanvasIndex = computed(() => store.curCanvasIndex);
 const compList = computed(() => store.compList);
 const historyList = computed(() => store.historyList);
-
 const curCompConfig = computed(() => store.curCompConfig);
 const canvasConfig = computed(() => store.canvasConfig);
 const isIndeterminate = computed(() => store.isIndeterminate);

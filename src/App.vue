@@ -14,7 +14,9 @@ import { defineComponent, computed, ref } from 'vue';
 </script>
 
 <style lang="postcss">
-body, html,#app {
+body,
+html,
+#app {
   height: 100%;
   user-select: none;
   overflow: hidden;
@@ -26,7 +28,6 @@ body, html,#app {
   text-align: center;
   /* color: var(--ep-text-color-primary);
   color: var(--color); */
-
 }
 
 .el-container {
@@ -35,5 +36,4 @@ body, html,#app {
   height: 100%;
   overflow: hidden;
 }
-
 </style>

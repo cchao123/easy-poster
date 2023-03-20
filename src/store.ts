@@ -1,13 +1,19 @@
 import { defineStore } from 'pinia';
-import { ElementStyle } from '~/types';
-import { CHECK_ALL_VALUE, CHECK_MAX_LENGTH, DEFAULT_TEMP, HISTORTLIST_KEY, PIXI } from '~/constants';
-import { generateMixed, setStorage, getStorage } from '~/utils';
 import { ElMessage } from 'element-plus';
+import { ElementStyle } from '~/types';
+import { generateMixed, setStorage, getStorage } from '~/utils';
+import { 
+  CHECK_ALL_VALUE,
+  CHECK_MAX_LENGTH,
+  DEFAULT_TEMP,
+  HISTORTLIST_KEY,
+  OutputType,
+} from '~/constants';
 
 export const useStore = defineStore('easyPoster', {
   state: () => ({
     curCanvasId: generateMixed(5),
-    outputCodyType: PIXI,
+    outputCodyType: OutputType.PIXI,
     canvasConfig: {
       width: 750,
       height: 1334,
