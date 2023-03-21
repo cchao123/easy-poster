@@ -1,13 +1,6 @@
 <template>
   <div class="aside-material"
        @dragstart="dragstart">
-    <!-- <div class="material-items" draggable="true">
-      <div class="material-icon">
-        <div class="iconfont icon-suffix-psd"></div>
-      </div>
-      <div class="material-name">解析PSD</div>
-    </div> -->
-
     <div class="material-items"
          :draggable="true"
          v-for="(mItem, mIndex) in MATERIAL_LIST"

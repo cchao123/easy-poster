@@ -61,6 +61,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, reactive, computed } from 'vue';
+import { Delete, CaretTop, CaretBottom } from '@element-plus/icons-vue';
 import { MATERIAL_LIST } from '~/constants';
 import { useStore } from '~/store';
 import Container from '~/components/template/Container.vue';
@@ -69,7 +70,6 @@ import Image from '~/components/template/Image.vue';
 import Text from '~/components/template/Text.vue';
 import Header from '~/components/template/Header.vue';
 import QrCode from '~/components/template/QrCode.vue';
-import { Delete, CaretTop, CaretBottom } from '@element-plus/icons-vue';
 
 import { driverFun, setDriveMessage } from '~/constants/driver';
 const driverStart = () => {

@@ -21,10 +21,36 @@ const COMMON_PARAMS = {
   dragDirFixed: [],
 }
 
+// 本地存储key
+export const HISTORTLIST_KEY = '__HISTORT_LIST';
+
+// code输出类型
+export enum OutputType {
+  PIXI = 'PixiJs',
+  HTML2CANVAS = 'html2Canvas',
+}
+
+// code类型
+export enum CodeType {
+  PIXI = 'PIXI',
+  DOM = 'DOM',
+  CSS = 'CSS',
+}
+// 模板组件类型
+export enum TemplateType {
+  BACKGROUND = 'background',
+  CONTAINER = 'container',
+  TEXT = 'text',
+  HEAD = 'head',
+  IMAGE = 'image',
+  QRCODE = 'qrcode',
+}
+
+// 物料组件
 export const MATERIAL_LIST = [
   {
     icon: 'background',
-    type: 'background',
+    type: TemplateType.BACKGROUND,
     name: '海报背景',
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
@@ -35,7 +61,7 @@ export const MATERIAL_LIST = [
   },
   {
     icon: 'rongqi',
-    type: 'container',
+    type: TemplateType.CONTAINER,
     name: '元素容器',
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
@@ -45,21 +71,21 @@ export const MATERIAL_LIST = [
   },
   {
     icon: 'tupian',
-    type: 'image',
+    type: TemplateType.IMAGE,
     name: '图片素材',
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
   },
   {
     icon: 'wenzi',
-    type: 'text',
+    type: TemplateType.TEXT,
     name: '文本内容',
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
   },
   {
     icon: 'touxiang',
-    type: 'head',
+    type: TemplateType.HEAD,
     name: '用户头像',
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
@@ -70,7 +96,7 @@ export const MATERIAL_LIST = [
   },
   {
     icon: 'erweima',
-    type: 'qrcode',
+    type: TemplateType.QRCODE,
     name: '二维码',
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
@@ -80,6 +106,7 @@ export const MATERIAL_LIST = [
   },
 ];
 
+// 辅助遥控
 export const POSITION_BUTTON = [
   {
     direction: 'center',
@@ -120,5 +147,6 @@ export const POSITION_BUTTON = [
 ];
 
 export const CHECK_ALL_VALUE = ['X', 'Y'];
+
 export const CHECK_MAX_LENGTH = CHECK_ALL_VALUE.length;
 

@@ -2,16 +2,12 @@
   <el-config-provider namespace="ep">
     <BaseHeader />
     <div class="el-container">
-      <LeftAside></LeftAside>
-      <ContentMain></ContentMain>
-      <RightAside></RightAside>
+      <DragAside />
+      <ContentMain />
+      <ActionAside />
     </div>
   </el-config-provider>
 </template>
-
-<script lang="ts" setup>
-import { defineComponent, computed, ref } from 'vue';
-</script>
 
 <style lang="postcss">
 body,

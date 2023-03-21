@@ -5,6 +5,7 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ActionAside: typeof import('./components/layouts/ActionAside.vue')['default']
     Background: typeof import('./components/template/Background.vue')['default']
     BaseHeader: typeof import('./components/layouts/BaseHeader.vue')['default']
     CodeContainer: typeof import('./components/layouts/CodeContainer.vue')['default']
@@ -12,6 +13,7 @@ declare module '@vue/runtime-core' {
     ConfigForm: typeof import('./components/layouts/ConfigForm.vue')['default']
     Container: typeof import('./components/template/Container.vue')['default']
     ContentMain: typeof import('./components/layouts/ContentMain.vue')['default']
+    DragAside: typeof import('./components/layouts/DragAside.vue')['default']
     Edit: typeof import('./components/layouts/Edit.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
@@ -36,10 +38,8 @@ declare module '@vue/runtime-core' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     Header: typeof import('./components/template/Header.vue')['default']
     Image: typeof import('./components/template/Image.vue')['default']
-    LeftAside: typeof import('./components/layouts/LeftAside.vue')['default']
     ListDialog: typeof import('./components/layouts/ListDialog.vue')['default']
     QrCode: typeof import('./components/template/QrCode.vue')['default']
-    RightAside: typeof import('./components/layouts/RightAside.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Test: typeof import('./components/layouts/test.vue')['default']

@@ -88,7 +88,7 @@ const getCurCode = (curCompConfig: any) => {
     case TemplateType.HEAD:
       curTempCode.value = getHeadTpl(curCompConfig);
       break;
-    case TemplateType.IAMGE:
+    case TemplateType.IMAGE:
       curTempCode.value = getImageTpl(curCompConfig);
       break;
     case TemplateType.QRCODE:

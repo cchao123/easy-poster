@@ -990,25 +990,3 @@ export const DEFAULT_TEMP = [
   ],
   }
 ]
-
-export const HISTORTLIST_KEY = '__HISTORT_LIST';
-
-export enum OutputType {
-  PIXI = 'PixiJs',
-  HTML2CANVAS = 'html2Canvas',
-} 
-
-export enum TemplateType {
-  BACKGROUND = 'background',
-  CONTAINER = 'container',
-  TEXT = 'text',
-  HEAD = 'head',
-  IAMGE = 'image',
-  QRCODE = 'qrcode',
-}
-
-export enum CodeType {
-  PIXI = 'PIXI',
-  DOM = 'DOM',
-  CSS = 'CSS',
-}
