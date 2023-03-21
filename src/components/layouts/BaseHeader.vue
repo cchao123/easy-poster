@@ -68,7 +68,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { ref, computed, reactive } from 'vue';
 import { ElMessage, ElDialog } from 'element-plus';
 import { toggleDark } from '~/composables';
 import { OutputType } from '~/constants';
@@ -83,7 +83,7 @@ const isCodeDialogShow = computed(() => store.isCodeDialogShow);
 const historyList = computed(() => store.historyList);
 const curCanvasId = computed(() => store.curCanvasId);
 const compList = computed(() => store.compList);
-const outputCodyType = ref(1111);
+const outputCodyType = ref(OutputType.PIXI);
 
 const { addHistoryList, resetHistoryList, setListDialog, setCodeDialog, setOutputCode } = store;
 
@@ -101,6 +101,8 @@ const savaTpl = () => {
   isSaveLoading.value = true;
   const DOM: HTMLElement | null = document.querySelector('.h5-view');
   if (DOM) {
+    // @TODO 解构可以消除响应
+    const { compList } = store;
     convertDOMToImage({
       DOM,
       quality: 0.1,

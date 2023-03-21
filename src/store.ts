@@ -37,7 +37,6 @@ export const useStore = defineStore('easyPoster', {
       this.curCompIndex = curCompIndex;
     },
     setCompList(compConfig: any) {
-      // @TODO push深拷贝
       this.compList.push(JSON.parse(JSON.stringify({
         ...compConfig,
         compId: `_${generateMixed(10).slice(0, 3)}`,
@@ -105,7 +104,7 @@ export const useStore = defineStore('easyPoster', {
     async resetHistoryList(index: number) {
       this.historyList.splice(index, 1, DEFAULT_TEMP[index])
       await setStorage(HISTORTLIST_KEY, JSON.stringify(this.historyList));
-      ElMessage.success('恢复成功');
+      ElMessage.success('恢复成功并保存入历史');
       await this.getStorageCurCanvas(index);
     },
     setCodeDialog(isShow: boolean) {
@@ -131,6 +130,16 @@ export const useStore = defineStore('easyPoster', {
     },
     curFixedStatus(status) {
       return status.curCompConfig.dragDirFixed;
+    },
+    pixiLastCode () {
+      let compNameStr = '';
+      const sortList = [...this.compList];
+      sortList.sort((a, b) => a.zIndex - b.zIndex);
+      sortList.map((item: any, index: number)=>{
+        compNameStr += `${item.type}${item.compId}${sortList.length === index + 1 ? '' : ', '}`;
+        return compNameStr;
+      });
+      return `app.stage.addChild(${compNameStr});`
     },
   }
 });

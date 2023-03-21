@@ -19,17 +19,17 @@
             :index="idx"
             :item="item">
         <Container :index="idx"
-                   v-if="item.type === 'container'" />
+                   v-if="item.type === TemplateType.CONTAINER" />
         <Background :index="idx"
-                    v-if="item.type === 'background'" />
+                    v-if="item.type === TemplateType.BACKGROUND" />
         <Image :index="idx"
-               v-if="item.type === 'image'" />
+               v-if="item.type === TemplateType.IMAGE" />
         <Text :index="idx"
-              v-if="item.type === 'text'" />
+              v-if="item.type === TemplateType.TEXT" />
         <Header :index="idx"
-                v-if="item.type === 'head'" />
+                v-if="item.type === TemplateType.HEAD" />
         <QrCode :index="idx"
-                v-if="item.type === 'qrcode'" />
+                v-if="item.type === TemplateType.QRCODE" />
       </Edit>
     </div>
 
@@ -62,7 +62,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, reactive, computed } from 'vue';
 import { Delete, CaretTop, CaretBottom } from '@element-plus/icons-vue';
-import { MATERIAL_LIST } from '~/constants';
+import { MATERIAL_LIST, TemplateType } from '~/constants';
 import { useStore } from '~/store';
 import Container from '~/components/template/Container.vue';
 import Background from '~/components/template/Background.vue';

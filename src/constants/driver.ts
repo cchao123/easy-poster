@@ -30,16 +30,16 @@ const MESSAGE = [
     element: '.codeWrap',
     popover: {
       title: '4️. 代码预览',
-      description: '所选组件代码预览',
+      description: '当前编辑组件代码预览',
       position: 'left',
     },
   },
   {
     element: '.el-btn-container',
     popover: {
-      title: '5️. 按钮区域',
-      description: '更多操作：导出、上传等',
-      position: 'right',
+      title: '5️. 操作区',
+      description: '上传psd、查看/保存编辑记录、查看最终产物',
+      position: 'bottom',
     },
   },
 ];

@@ -10,7 +10,9 @@
            v-show="outputCodyType === OutputType.PIXI">
         <pre>
           <code class="language-js">
-            <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.TEXT">{{ getTextTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).PIXI }}</template></template></code>
+            <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.TEXT">{{ getTextTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).PIXI }}</template></template>
+      {{ pixiLastCode }}
+          </code>
         </pre>
       </div>
 
@@ -46,11 +48,22 @@ import {
   getQrTpl,
 } from '~/codeTemplate';
 
+
+const sortByAge = (arr: any[]) => {
+  const newArr = [...arr];
+  newArr.sort((a, b) => a.zIndex - b.zIndex);
+  return newArr;
+}
+
+
+
 const store = useStore();
 const { setCodeDialog } = store;
 const isCodeDialogShow = computed(() => store.isCodeDialogShow);
 const compList = computed(() => store.compList);
 const outputCodyType = computed(() => store.outputCodyType);
+const pixiLastCode = computed(() =>  store.pixiLastCode);
+
 const openOver = () => {
   window.Prism.highlightAll();
 };

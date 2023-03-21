@@ -73,8 +73,6 @@ const getCurCode = (curCompConfig: any) => {
     getApplicationCode();
     return;
   };
-
-  console.log(getBackgroundTpl(curCompConfig));
   switch (curCompConfig.type) {
     case TemplateType.BACKGROUND:
       curTempCode.value = getBackgroundTpl(curCompConfig);

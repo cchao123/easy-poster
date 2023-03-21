@@ -42,7 +42,6 @@ declare module '@vue/runtime-core' {
     QrCode: typeof import('./components/template/QrCode.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Test: typeof import('./components/layouts/test.vue')['default']
     Text: typeof import('./components/template/Text.vue')['default']
   }
 }

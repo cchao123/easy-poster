@@ -5,8 +5,7 @@
          width: `${curCompConfig.width / 2}px`,
          height: `${curCompConfig.width / 2}px`,
        }"
-       :src="curCompConfig.url || errorImg"
-       :onerror="error">
+       :src="curCompConfig.url || errorImg">
 </template>
 
 <script lang="ts" setup>
