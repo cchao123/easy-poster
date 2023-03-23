@@ -7,6 +7,7 @@ export const getStageCode = (canvasConfig: any) => {
         height: ${height},
         antialias: true,
         transparent: true,
+        backgroundColor: ${background.replace('#', '0x')},
       });`,
     DOM: `
       <div class="posterDom"></div>`,

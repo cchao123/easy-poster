@@ -1,8 +1,8 @@
+// TIPS: Only the contents within a circle at the center should be rendered onto the screen.
 export const getHeadTpl = (params: any) => {
   const { type, compId, point, width, height, url } = params;
   const { x, y } = point;
   const compName = type + compId;
-  // TODO 判断是否是圆形
   const radio = width / 2;
   return {
     PIXI: `

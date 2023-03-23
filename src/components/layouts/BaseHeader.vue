@@ -89,7 +89,7 @@ const { addHistoryList, resetHistoryList, setListDialog, setCodeDialog, setOutpu
 
 const isSaveLoading = ref(false);
 const savaTpl = () => {
-  // console.log(JSON.stringify(compList.value));
+  console.log(JSON.stringify(compList.value));
   if (compList.value.length <= 0) {
     ElMessage.error('画板为空');
     return;

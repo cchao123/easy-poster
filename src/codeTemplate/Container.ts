@@ -5,10 +5,14 @@ export const getContainerTpl = (params: any) => {
   return {
     PIXI: `
       const ${compName}: PIXI.Container = new PIXI.Container();
-      ${compName}.witdh = ${width};
+      ${compName}.width = ${width};
       ${compName}.height =  ${height};
-      ${compName}.x =  ${point.x};
-      ${compName}.y =  ${point.y};
+      ${compName}.x =  ${x};
+      ${compName}.y =  ${y};
+      const graphics${compId} = new PIXI.Graphics();
+      graphics${compId}.beginFill(${background.replace('#', '0x')});
+      graphics${compId}.drawRect(0, 0, ${width}, ${height});
+      ${compName}.addChild(graphics${compId});
     `,
     DOM: `
       <div class="${compName}"></div>`,

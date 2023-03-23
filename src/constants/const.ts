@@ -151,3 +151,29 @@ export const CHECK_ALL_VALUE = ['X', 'Y'];
 
 export const CHECK_MAX_LENGTH = CHECK_ALL_VALUE.length;
 
+export const predefineColors = [
+  '#ff4500',
+  '#ff8c00',
+  '#ffd700',
+  '#90ee90',
+  '#00ced1',
+  '#1e90ff',
+  '#c71585',
+  '#529b2e',
+  '#b88230',
+  '#c45656',
+]
+
+export const fontDefineColors = [
+  '#000000',
+  '#303133', 
+  '#606266', 
+  '#909399', 
+  '#A8ABB2',
+  '#C0C4CC',
+  '#CDD0D6', 
+  '#D4D7DE', 
+  '#DCDFE6', 
+  '#F2F3F5',
+]
+

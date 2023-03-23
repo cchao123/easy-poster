@@ -22,7 +22,7 @@
           <el-col :span="12">
             <span class="labelText">画布颜色:</span>
             <el-color-picker v-model="canvasConfig.background"
-                             show-alpha />
+                             :predefine="predefineColors" />
           </el-col>
 
         </el-row>
@@ -36,21 +36,21 @@
             <el-col :span="5">
               <span class="labelText">宽度:</span>
               <el-input-number v-model="curCompConfig.width"
-                               :max="375"
+                               :max="canvasConfig.width"
                                controls-position="right"
                                style="width: 90px" />
             </el-col>
             <el-col :span="5">
               <span class="labelText">高度:</span>
               <el-input-number v-model="curCompConfig.height"
-                               :max="667"
+                               :max="canvasConfig.height"
                                controls-position="right"
                                style="width: 90px" />
             </el-col>
             <el-col :span="12">
               <span class="labelText">画布颜色:</span>
               <el-color-picker v-model="curCompConfig.background"
-                               show-alpha />
+                               :predefine="predefineColors" />
             </el-col>
 
           </el-row>
@@ -62,8 +62,7 @@
           <el-row>
             <el-col :span="4">
               <span class="labelText">字体颜色:</span>
-              <el-color-picker v-model="curCompConfig.fontColor"
-                               show-alpha />
+              <el-color-picker v-model="curCompConfig.fontColor" :predefine="fontDefineColors" />
             </el-col>
             <el-col :span="20">
               <span class="labelText">文字内容:</span>
@@ -210,7 +209,7 @@
 <script lang="ts" setup>
 import { computed, reactive, ref } from 'vue';
 import { useStore } from '~/store';
-import { POSITION_BUTTON } from '~/constants';
+import { POSITION_BUTTON, predefineColors, fontDefineColors, TemplateType } from '~/constants';
 const store = useStore();
 const curCompIndex = computed(() => store.curCompIndex);
 const curCanvasId = computed(() => store.curCanvasId);
@@ -231,8 +230,9 @@ const changeFixedDirection = (direction: string) => {
     left: () => setCompPoint(curCompIndex.value, 'x', 0),
     right: () => setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width - curCompConfig.value.width),
     center: () => {
-      if (curCompConfig.value.fontSize )setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width / 2 - curCompConfig.value.width)
-      else setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width / 2 - curCompConfig.value.width / 2)
+      if (curCompConfig.value.type === TemplateType.TEXT)
+        setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width / 2 - curCompConfig.value.width);
+      else setCompPoint(curCompIndex.value, 'x', canvasConfig.value.width / 2 - curCompConfig.value.width / 2);
     },
     middle: () => setCompPoint(curCompIndex.value, 'y', canvasConfig.value.height / 2 - curCompConfig.value.height / 2),
   };
