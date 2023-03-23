@@ -8,9 +8,14 @@
     <template v-if="isCodeDialogShow">
       <div class="code-container line-numbers"
            v-show="outputCodyType === OutputType.PIXI">
+        <div class="code-tips">
+          clone演示DEMO：<a href="https://github.com/cchao123/cchao123"
+             target="_blank">https://github.com/cchao123/cchao123</a> , copy替换<span class="code-highlight">/components/pixiContainer.vue</span>运行预览
+        </div>
         <pre>
           <code class="language-js">
-            <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.TEXT">{{ getTextTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).PIXI }}</template></template>
+            <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.TEXT">{{ getTextTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).PIXI }}</template>
+            </template>
       {{ pixiLastCode }}
           </code>
         </pre>
@@ -18,6 +23,10 @@
 
       <div class="code-container line-numbers"
            v-show="outputCodyType === OutputType.HTML2CANVAS">
+        <div class="code-tips">
+          clone演示DEMO：<a href="https://github.com/cchao123/cchao123"
+             target="_blank">https://github.com/cchao123/cchao123</a> , copy替换<span class="code-highlight">/components/pixiContainer.vue</span>运行预览
+        </div>
         <pre>
           <code class="language-js"> 
       &lt;template&gt;
@@ -39,7 +48,7 @@ import { computed } from 'vue';
 import { useStore } from '~/store';
 import { OutputType, TemplateType } from '~/constants';
 import {
-  getStageCode,
+  // getStageCode,
   getBackgroundTpl,
   getContainerTpl,
   getTextTpl,
@@ -48,21 +57,13 @@ import {
   getQrTpl,
 } from '~/codeTemplate';
 
-
-const sortByAge = (arr: any[]) => {
-  const newArr = [...arr];
-  newArr.sort((a, b) => a.zIndex - b.zIndex);
-  return newArr;
-}
-
-
-
 const store = useStore();
 const { setCodeDialog } = store;
 const isCodeDialogShow = computed(() => store.isCodeDialogShow);
 const compList = computed(() => store.compList);
 const outputCodyType = computed(() => store.outputCodyType);
-const pixiLastCode = computed(() =>  store.pixiLastCode);
+const pixiLastCode = computed(() => store.pixiLastCode);
+const canvasConfig = computed(() => store.canvasConfig);
 
 const openOver = () => {
   window.Prism.highlightAll();
@@ -86,6 +87,17 @@ const openOver = () => {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.code-dialog button {
+  font-size: 30px;
+  color: #979797;
+  font-weight: bolder;
+  background-color: #515151;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
 .ep-drawer__header {
   /* height: 60px; */
   margin-bottom: 15px;
@@ -98,7 +110,7 @@ const openOver = () => {
 
 .code-dialog .code-toolbar {
   height: 85vh;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .code-dialog .line-numbers-rows {
@@ -115,6 +127,4 @@ const openOver = () => {
   background-color: #1e1e1e;
   color: #6899eb;
 }
-
-
 </style>

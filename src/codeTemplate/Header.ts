@@ -6,9 +6,9 @@ export const getHeadTpl = (params: any) => {
   const radio = width / 2;
   return {
     PIXI: `
-      const userWrap${compId}: PIXI.Container = new PIXI.Container();
-      userWrap${compId}.x = ${x};
-      userWrap${compId}.y = ${y};
+      const ${compName}: PIXI.Container = new PIXI.Container();
+      ${compName}.x = ${x};
+      ${compName}.y = ${y};
       const userHead${compId} = createSprite('${url}', {
         width: ${width},
         height: ${width},
@@ -17,8 +17,8 @@ export const getHeadTpl = (params: any) => {
       graphics${compId}.beginFill(0xe20d3f);
       graphics${compId}.drawCircle(${radio + x},${radio + y}, ${radio});
       graphics${compId}.endFill();
-      userWrap${compId}.mask = graphics${compId};
-      userWrap${compId}.addChild(userHead${compId});`,
+      ${compName}.mask = graphics${compId};
+      ${compName}.addChild(userHead${compId});`,
     DOM: `
       <img class="${compName}" src="${url}">`,
     CSS: `

@@ -1,3 +1,4 @@
+const DEFAULT_HEAD = 'https://avatars1.githubusercontent.com/u/24643401';
 // 样式默认参数
 const COMMON_STYLE = {
   width: 0,
@@ -89,7 +90,7 @@ export const MATERIAL_LIST = [
     name: '用户头像',
     ...COMMON_STYLE,
     ...COMMON_PARAMS,
-    url: 'https://bizaladdin-image.baidu.com/0/pic/1080140929_-251358729_-1837083577.jpg',
+    url: DEFAULT_HEAD,
     width: 100,
     height: 100,
     radius: 100,
