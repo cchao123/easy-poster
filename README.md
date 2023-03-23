@@ -5,19 +5,19 @@
 ### [模板-element-plus-vite-starter](https://github.com/element-plus/element-plus-vite-starter)
 
 ## 项目结构
-
+```
 |- src
-	|- codeTemplate        	// 模板字符串
+	|- codeTemplate     // 模板字符串
 	|- components
-		｜- layouts           // 页面布局
-		｜- template          // 组件UI层
+		｜- layouts     // 页面布局
+		｜- template    // 组件UI层
 	｜- composables
 	｜- constants
-		｜- defaultTemp 		  // 预设海报
-		｜- driver 		        // 预设指引	
-	｜- styles              // Custom theme
+		｜- defaultTemp // 预设海报
+		｜- driver      // 预设指引	
+	｜- styles          // Custom theme
 ｜- dist
-
+```
 ## Project setup
 
 ```bash
