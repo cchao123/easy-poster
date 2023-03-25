@@ -37,6 +37,7 @@ export const useStore = defineStore('easyPoster', {
       this.curCompIndex = curCompIndex;
     },
     setCompList(compConfig: any) {
+      console.log(compConfig)
       this.compList.push(JSON.parse(JSON.stringify({
         ...compConfig,
         compId: `_${generateMixed(10).slice(0, 3)}`,
@@ -68,6 +69,10 @@ export const useStore = defineStore('easyPoster', {
         ...this.compList[index],
         ...obj,
       }
+    },
+    coverCompList (arr: any) {
+      this.setCurCompIndex(0)
+      this.compList = arr;
     },
     clearCompList() {
       this.compList = [];

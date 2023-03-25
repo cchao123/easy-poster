@@ -63,6 +63,7 @@
       </div>
     </div>
   </el-menu>
+  <PsdDialog />
   <ListDialog />
   <CodeDialog />
 </template>
@@ -74,6 +75,7 @@ import { toggleDark } from '~/composables';
 import { OutputType } from '~/constants';
 import { convertDOMToImage, generateMixed } from '~/utils';
 import { UploadFilled, List, InfoFilled, RefreshLeft, View } from '@element-plus/icons-vue';
+import PsdDialog from '~/components/layouts/PsdDialog.vue';
 import ListDialog from '~/components/layouts/ListDialog.vue';
 import CodeDialog from '~/components/layouts/CodeDialog.vue';
 import { useStore } from '~/store';

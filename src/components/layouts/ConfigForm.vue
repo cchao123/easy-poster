@@ -2,7 +2,7 @@
   <div class="formWrap">
     <div class="custom-form">
       <div>
-        <!-- <h4>画布设置————当前组件：{{ curCompIndex }} —— CID{{ curCanvasIndex }}—— {{curCanvasId}}</h4> -->
+        <h4>画布设置————当前组件：{{ curCompIndex }} —— CID{{ curCanvasIndex }}—— {{curCanvasId}}</h4>
         <h4>画布设置</h4>
         <el-row>
           <el-col :span="5">

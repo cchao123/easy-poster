@@ -111,18 +111,5 @@ const getCurCode = (curCompConfig: any) => {
   background-color: #2d2d2d;
 }
 
-::-webkit-scrollbar {
-  height: 10px;
-  width: 100%;
-}
 
-::-webkit-scrollbar-thumb {
-  background-color: #7d7d7d;
-  border-radius: 20px;
-}
-
-::-webkit-scrollbar-track {
-  border-radius: 20px;
-  background-color: #939393;
-}
 </style>

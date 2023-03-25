@@ -9,8 +9,8 @@
       <div class="code-container line-numbers"
            v-show="outputCodyType === OutputType.PIXI">
         <div class="code-tips">
-          clone演示DEMO：<a href="https://github.com/cchao123/cchao123"
-             target="_blank">https://github.com/cchao123/cchao123</a> , copy替换<span class="code-highlight">/components/pixiContainer.vue</span>运行预览
+          clone演示DEMO：<a href="https://github.com/cchao123/poster-demo"
+             target="_blank">poster-demo</a> copy面板代码将<span class="code-highlight">src/pages/pixi/index.vue</span>文件中<span class="code-highlight"> initPoster</span>方法的内容替换。
         </div>
         <pre>
           <code class="language-js">
@@ -24,8 +24,8 @@
       <div class="code-container line-numbers"
            v-show="outputCodyType === OutputType.HTML2CANVAS">
         <div class="code-tips">
-          clone演示DEMO：<a href="https://github.com/cchao123/cchao123"
-             target="_blank">https://github.com/cchao123/cchao123</a> , copy替换<span class="code-highlight">/components/pixiContainer.vue</span>运行预览
+          clone演示DEMO：<a href="https://github.com/cchao123/poster-demo"
+             target="_blank">poster-demo</a> copy面板代码覆盖<span class="code-highlight">src/pages/html2canvas/posterDom.vue</span>中内容。
         </div>
         <pre>
           <code class="language-js"> 
@@ -126,5 +126,7 @@ const openOver = () => {
 .code-highlight {
   background-color: #1e1e1e;
   color: #6899eb;
+  padding: 1.5px 3px;
+  border-radius: 5px;
 }
 </style>
