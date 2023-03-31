@@ -40,7 +40,6 @@ declare module '@vue/runtime-core' {
     Header: typeof import('./components/template/Header.vue')['default']
     Image: typeof import('./components/template/Image.vue')['default']
     ListDialog: typeof import('./components/layouts/ListDialog.vue')['default']
-    PsdDialog: typeof import('./components/layouts/PsdDialog.vue')['default']
     QrCode: typeof import('./components/template/QrCode.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

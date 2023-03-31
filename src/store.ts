@@ -26,6 +26,7 @@ export const useStore = defineStore('easyPoster', {
     // ui
     isCodeDialogShow: false,
     isListDialogShow: false,
+    delStatus: false,
   }),
   actions: {
     async initHisList () {
@@ -37,13 +38,15 @@ export const useStore = defineStore('easyPoster', {
       this.curCompIndex = curCompIndex;
     },
     setCompList(compConfig: any) {
-      console.log(compConfig)
+      // console.log(compConfig)
       this.compList.push(JSON.parse(JSON.stringify({
         ...compConfig,
         compId: `_${generateMixed(10).slice(0, 3)}`,
       })));
+      this.delStatus = false;
     },
     delCompList (index: Number) {
+      this.delStatus = true;
       this.compList.splice(index, 1);
       this.curCompIndex = this.compList.length - 1;
     },

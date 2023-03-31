@@ -1,7 +1,7 @@
 export const getImageTpl = (params: any) => {
   const { type, compId, point, width, height, url } = params;
   const { x, y } = point;
-  const compName = type + compId;
+  const compName = type + compId; 
   return {
     PIXI: `
       const ${compName} = createSprite('${url}', {

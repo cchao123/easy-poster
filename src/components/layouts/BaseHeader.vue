@@ -12,12 +12,19 @@
       </button>
     </el-menu-item>
     <div class="el-btn-container">
-      <el-button color="#626aef"
-                 :icon="UploadFilled"
-                 size="large"
-                 @click="parsePSD">
-        上传PSD
-      </el-button>
+      <el-upload :auto-upload="false" class="psd-btn"
+      ref="upload"
+      :limit="1"
+      :before-upload="beforeAvatarUpload"
+      :on-exceed="handleExceed"
+                 :on-change="parsePSD">
+        <el-button color="#626aef"
+                   :icon="UploadFilled"
+                   size="large"
+                   :loading="isParseLoading"
+                   type="primary">解析PSD</el-button>
+      </el-upload>
+
       <el-button size="large"
                  color="#626aef"
                  type="primary"
@@ -52,34 +59,35 @@
                  size="large">
         <span>恢复预设</span>
       </el-button>
-      <div class="codeType" :class="{ codeTypeIndex  : isCodeDialogShow }">
+      <div class="codeType"
+           :class="{ codeTypeIndex  : isCodeDialogShow }">
         <el-switch v-model="outputCodyType"
-                @change="changeOutput"
-                inactive-color="#626aef"
-                :active-value="OutputType.HTML2CANVAS"
-                 :active-text="OutputType.HTML2CANVAS"
-                 :inactive-value="OutputType.PIXI"
-                 :inactive-text="OutputType.PIXI" />
+                   @change="changeOutput"
+                   inactive-color="#626aef"
+                   :active-value="OutputType.HTML2CANVAS"
+                   :active-text="OutputType.HTML2CANVAS"
+                   :inactive-value="OutputType.PIXI"
+                   :inactive-text="OutputType.PIXI" />
       </div>
     </div>
   </el-menu>
-  <PsdDialog />
   <ListDialog />
   <CodeDialog />
 </template>
 
 <script lang="ts" setup>
+import PSD from 'psd.js';
 import { ref, computed, reactive } from 'vue';
 import { ElMessage, ElDialog } from 'element-plus';
 import { toggleDark } from '~/composables';
 import { OutputType } from '~/constants';
-import { convertDOMToImage, generateMixed } from '~/utils';
+import { convertDOMToImage, generateMixed, base64Toblob } from '~/utils';
 import { UploadFilled, List, InfoFilled, RefreshLeft, View } from '@element-plus/icons-vue';
-import PsdDialog from '~/components/layouts/PsdDialog.vue';
 import ListDialog from '~/components/layouts/ListDialog.vue';
 import CodeDialog from '~/components/layouts/CodeDialog.vue';
 import { useStore } from '~/store';
-
+import { genFileId } from 'element-plus'
+import type { UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
 const store = useStore();
 const isCodeDialogShow = computed(() => store.isCodeDialogShow);
 const historyList = computed(() => store.historyList);
@@ -87,7 +95,16 @@ const curCanvasId = computed(() => store.curCanvasId);
 const compList = computed(() => store.compList);
 const outputCodyType = ref(OutputType.PIXI);
 
-const { addHistoryList, resetHistoryList, setListDialog, setCodeDialog, setOutputCode } = store;
+const {
+  addHistoryList,
+  resetHistoryList,
+  setListDialog,
+  setCodeDialog,
+  setOutputCode,
+  clearCompList,
+  setCompList,
+  setCurCompIndex,
+} = store;
 
 const isSaveLoading = ref(false);
 const savaTpl = () => {
@@ -103,8 +120,7 @@ const savaTpl = () => {
   isSaveLoading.value = true;
   const DOM: HTMLElement | null = document.querySelector('.h5-view');
   if (DOM) {
-    // @TODO 解构可以消除响应
-    const { compList } = store;
+    const { compList } = store; // @TODO 解构可以消除响应
     convertDOMToImage({
       DOM,
       quality: 0.1,
@@ -127,13 +143,99 @@ const handleReset = () => {
   resetHistoryList(curCanvasIndex.value);
 };
 
-const parsePSD = () => {
-  ElMessage.info('设计稿转代码功能开发中');
+const changeOutput = (OutputType: OutputType) => {
+  setOutputCode(OutputType);
 };
 
-const changeOutput = (aaaa: any)=> {
-  setOutputCode(aaaa)
+
+const isParseLoading = ref(false);
+const parsePSD = (file: any) => {
+  isParseLoading.value = true;
+  clearCompList();
+  var url = URL.createObjectURL(file.raw);
+  PSD.fromURL(url).then((result: any) => {
+    // 建议把不group合并为layer-递归处理所有layer转化为base64
+    const tree = result.tree().children();
+
+    // result.layers.map((aaa:any, index: number)=>{
+    //   console.log(aaa.image.toBase64())
+    //   const base64 = aaa.image.toBase64();
+    //   const blobUrl = base64Toblob(base64)
+    // setCompList({
+    //       dragDirFixed: [],
+    //       fontColor: '#000',
+    //       fontSize: 24,
+    //       fontStyle: 'normal',
+    //       fontWeight: 'normal',
+    //       width: aaa.width,
+    //       height: aaa.height,
+    //       icon: 'tupian',
+    //       name: aaa.name,
+    //       radius: 0,
+    //       textValue: '文本内容',
+    //       type: 'image',
+    //       url: blobUrl,
+    //       zIndex: index,
+    //       point: { x: aaa.left, y: aaa.top },
+    //     });
+    // })
+    parsePsdTree(tree, 1);
+  });
 };
+
+const parsePsdTree = (tree: any, round: any) => {
+  return tree.forEach((treeItems: any, index: number) => {
+    if (treeItems.isGroup()) parsePsdTree(treeItems._children, 2);
+    else {
+      try {
+        // console.log(index, treeItems.name);
+        const { width, height, left, top, name, layer } = treeItems;
+        const base64 = treeItems.layer.image.toBase64();
+        const blobUrl = base64Toblob(base64)
+       
+        setCurCompIndex(compList.value.length);
+        setCompList({
+          dragDirFixed: [],
+          fontColor: '#000',
+          fontSize: 24,
+          fontStyle: 'normal',
+          fontWeight: 'normal',
+          width: treeItems.width,
+          height: treeItems.height,
+          icon: 'tupian',
+          name: index + treeItems.name,
+          radius: 0,
+          textValue: '文本内容',
+          type: 'image',
+          url: blobUrl,
+          zIndex: index,
+          point: { x: treeItems.left, y: treeItems.top },
+        });
+      } catch {
+        // console.error(treeItems.name);
+      }
+      isParseLoading.value = false;
+    }
+  });
+};
+const upload = ref<UploadInstance>();
+const handleExceed: UploadProps['onExceed'] = (files) => {
+  upload.value!.clearFiles()
+  const file = files[0] as UploadRawFile
+  file.uid = genFileId()
+  upload.value!.handleStart(file)
+}
+
+const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
+  if (rawFile.type !== 'image/jpeg') {
+    ElMessage.error('Avatar picture must be JPG format!')
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 2) {
+    ElMessage.error('Avatar picture size can not exceed 2MB!')
+    return false
+  }
+  return true
+}
 </script>
 
 <style lang="postcss">
@@ -151,9 +253,14 @@ const changeOutput = (aaaa: any)=> {
 }
 
 .el-btn-container {
+  display: flex;
   position: absolute;
   left: 280px;
   top: 8px;
+}
+
+.psd-btn {
+  margin-right: 12px;
 }
 
 .codeType {

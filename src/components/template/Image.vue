@@ -5,10 +5,9 @@
        v-else
        :src="curCompConfig.url"
        :style="{
-         width: curCompConfig.width ? ` ${curCompConfig.width}px`: 'auto',
-         height: curCompConfig.height ? ` ${curCompConfig.height}px`: 'auto',
+         width: curCompConfig.width ? ` ${curCompConfig.width / 2}px`: 'auto',
+         height: curCompConfig.height ? ` ${curCompConfig.height / 2}px`: 'auto',
        }">
-       {{curCompConfig.width  }}
 </template>
 
 <script lang="ts" setup>
@@ -26,6 +25,7 @@ const props = defineProps({
 
 const store = useStore();
 const curCompConfig = computed(() => store.compList[props.index]);
+const delStatus = computed(() => store.delStatus);
 const { setCompSize } = store;
 
 const imageRef = ref();
@@ -37,16 +37,18 @@ const setTextCompSize = () => {
 
 watch(
   () => curCompConfig.value && curCompConfig.value.url,
-  (newConfig) => {
-    if (newConfig === '') setCompSize(props.index, 0, 0);
-    else {
-      nextTick(() => {
-        if (imageRef.value) {
-          imageRef.value.onload = () => {
-            setTextCompSize();
-          };
-        }
-      });
+  (url) => {
+    if (!delStatus.value) {
+      if (url === '') setCompSize(props.index, 0, 0);
+      else {
+        nextTick(() => {
+          if (imageRef.value) {
+            imageRef.value.onload = () => {
+              setTextCompSize();
+            };
+          }
+        });
+      }
     }
   },
 );
