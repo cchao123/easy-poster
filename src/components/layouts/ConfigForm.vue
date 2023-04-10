@@ -209,6 +209,7 @@
 <script lang="ts" setup>
 import { computed, reactive, ref } from 'vue';
 import { useStore } from '~/store';
+import { DirFun, Direction } from '~/types';
 import { POSITION_BUTTON, predefineColors, fontDefineColors, TemplateType } from '~/constants';
 const store = useStore();
 const curCompIndex = computed(() => store.curCompIndex);
@@ -222,9 +223,8 @@ const isIndeterminate = computed(() => store.isIndeterminate);
 const isCheckAll = computed(() => store.isCheckAll);
 const { setCheckAllStatus, setCompPoint } = store;
 
-const changeFixedDirection = (direction: string) => {
-  const { setDOMparams } = store;
-  const dirFun = {
+const changeFixedDirection = (direction: Direction) => {
+  const dirFun: DirFun = {
     bottom: () => setCompPoint(curCompIndex.value, 'y', canvasConfig.value.height - curCompConfig.value.height),
     top: () => setCompPoint(curCompIndex.value, 'y', 0),
     left: () => setCompPoint(curCompIndex.value, 'x', 0),

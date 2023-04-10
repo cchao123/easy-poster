@@ -20,6 +20,7 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref, nextTick, watch } from 'vue';
+import { MaterialListItemType } from '~/constants/type';
 import { useStore } from '~/store';
 import {
   getStageCode,
@@ -67,8 +68,7 @@ onMounted(() => {
   getApplicationCode();
 });
 
-const getCurCode = (curCompConfig: any) => {
-  // console.log(curCompConfig.type)
+const getCurCode = (curCompConfig: MaterialListItemType) => {
   if (!curCompConfig) {
     getApplicationCode();
     return;
@@ -92,6 +92,8 @@ const getCurCode = (curCompConfig: any) => {
     case TemplateType.QRCODE:
       curTempCode.value = getQrTpl(curCompConfig);
       break;
+    default:
+      return `ERROR - ${curCompConfig.type}`;
   }
   nextTick(() => window.Prism.highlightAll());
 };

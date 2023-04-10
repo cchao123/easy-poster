@@ -1,4 +1,5 @@
-export const getImageTpl = (params: any) => {
+import { CompItem } from '~/types';
+export const getImageTpl = (params: CompItem) => {
   const { type, compId, point, width, height, url } = params;
   const { x, y } = point;
   const compName = type + compId; 

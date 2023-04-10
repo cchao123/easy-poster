@@ -1,5 +1,6 @@
 // TIPS: Only the contents within a circle at the center should be rendered onto the screen.
-export const getHeadTpl = (params: any) => {
+import { CompItem } from '~/types';
+export const getHeadTpl = (params: CompItem) => {
   const { type, compId, point, width, height, url } = params;
   const { x, y } = point;
   const compName = type + compId;

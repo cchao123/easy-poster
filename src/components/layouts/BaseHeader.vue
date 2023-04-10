@@ -81,13 +81,14 @@ import { ref, computed, reactive } from 'vue';
 import { ElMessage, ElDialog } from 'element-plus';
 import { toggleDark } from '~/composables';
 import { OutputType } from '~/constants';
+import { CompItem } from '~/types';
 import { convertDOMToImage, generateMixed, base64Toblob } from '~/utils';
 import { UploadFilled, List, InfoFilled, RefreshLeft, View } from '@element-plus/icons-vue';
 import ListDialog from '~/components/layouts/ListDialog.vue';
 import CodeDialog from '~/components/layouts/CodeDialog.vue';
 import { useStore } from '~/store';
 import { genFileId } from 'element-plus'
-import type { UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
+import type { UploadFile, UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
 const store = useStore();
 const isCodeDialogShow = computed(() => store.isCodeDialogShow);
 const historyList = computed(() => store.historyList);
@@ -149,36 +150,13 @@ const changeOutput = (OutputType: OutputType) => {
 
 
 const isParseLoading = ref(false);
-const parsePSD = (file: any) => {
+const parsePSD = (file: UploadFile) => {
   isParseLoading.value = true;
   clearCompList();
   var url = URL.createObjectURL(file.raw);
   PSD.fromURL(url).then((result: any) => {
     // 建议把不group合并为layer-递归处理所有layer转化为base64
     const tree = result.tree().children();
-
-    // result.layers.map((aaa:any, index: number)=>{
-    //   console.log(aaa.image.toBase64())
-    //   const base64 = aaa.image.toBase64();
-    //   const blobUrl = base64Toblob(base64)
-    // setCompList({
-    //       dragDirFixed: [],
-    //       fontColor: '#000',
-    //       fontSize: 24,
-    //       fontStyle: 'normal',
-    //       fontWeight: 'normal',
-    //       width: aaa.width,
-    //       height: aaa.height,
-    //       icon: 'tupian',
-    //       name: aaa.name,
-    //       radius: 0,
-    //       textValue: '文本内容',
-    //       type: 'image',
-    //       url: blobUrl,
-    //       zIndex: index,
-    //       point: { x: aaa.left, y: aaa.top },
-    //     });
-    // })
     parsePsdTree(tree, 1);
   });
 };

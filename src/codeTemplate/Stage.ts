@@ -1,4 +1,5 @@
-export const getStageCode = (canvasConfig: any) => {
+import { CanvasConfig } from '~/types';
+export const getStageCode = (canvasConfig: CanvasConfig) => {
   const { width, height, background } = canvasConfig;
   return {
     PIXI: `

@@ -28,7 +28,6 @@ const setTextCompSize = () => {
   nextTick(() => {
     if (textRef.value) {
       const { offsetWidth, offsetHeight } = textRef.value;
-      // console.log(offsetWidth, offsetHeight, clientHeight, clientWidth)
       setCompSize(props.index, offsetWidth, offsetHeight);
     }
   });

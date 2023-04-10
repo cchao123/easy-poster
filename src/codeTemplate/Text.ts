@@ -1,4 +1,5 @@
-export const getTextTpl = (params: any) => {
+import { CompItem } from '~/types';
+export const getTextTpl = (params: CompItem) => {
   const { compId, width, fontSize, point, textValue, fontColor, fontWeight, fontStyle } = params;
   const { x, y } = point;
   return {

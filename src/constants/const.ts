@@ -1,6 +1,9 @@
+import { CommonStyle, CommonParams, CompItem } from '~/types';
+
 const DEFAULT_HEAD = 'https://avatars1.githubusercontent.com/u/24643401';
+
 // 样式默认参数
-const COMMON_STYLE = {
+const COMMON_STYLE: CommonStyle = {
   width: 0,
   height: 0,
   url: '',
@@ -11,10 +14,11 @@ const COMMON_STYLE = {
   fontStyle: 'normal',
   fontWeight: 'normal',
   zIndex: 0,
+  background: '#000',
 }
 
 // 交互默认参数
-const COMMON_PARAMS = {
+const COMMON_PARAMS: CommonParams = {
   point: {
     x: 0,
     y: 0,
@@ -37,6 +41,7 @@ export enum CodeType {
   DOM = 'DOM',
   CSS = 'CSS',
 }
+
 // 模板组件类型
 export enum TemplateType {
   BACKGROUND = 'background',
@@ -48,7 +53,7 @@ export enum TemplateType {
 }
 
 // 物料组件
-export const MATERIAL_LIST = [
+export const MATERIAL_LIST: CompItem[] = [
   {
     icon: 'background',
     type: TemplateType.BACKGROUND,

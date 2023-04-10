@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ElMessage } from 'element-plus';
-import { ElementStyle } from '~/types';
+import { CompItem, CanvasConfig } from '~/types';
 import { generateMixed, setStorage, getStorage } from '~/utils';
 import { 
   CHECK_ALL_VALUE,
@@ -18,12 +18,12 @@ export const useStore = defineStore('easyPoster', {
       width: 750,
       height: 1334,
       background: '#fff',
-    },
+    } as CanvasConfig,
     curCanvasIndex: -1, // 当前操作画板小标
     curCompIndex: -1, // 当前操作组件的下标
-    compList: [] as unknown as ElementStyle,
+    compList: [] as unknown as CompItem,
     historyList: [],
-    // ui
+    // UI STATUS
     isCodeDialogShow: false,
     isListDialogShow: false,
     delStatus: false,
@@ -37,8 +37,7 @@ export const useStore = defineStore('easyPoster', {
     setCurCompIndex(curCompIndex: Number) {
       this.curCompIndex = curCompIndex;
     },
-    setCompList(compConfig: any) {
-      // console.log(compConfig)
+    setCompList(compConfig: CompItem) {
       this.compList.push(JSON.parse(JSON.stringify({
         ...compConfig,
         compId: `_${generateMixed(10).slice(0, 3)}`,
@@ -67,16 +66,6 @@ export const useStore = defineStore('easyPoster', {
     setCheckAllStatus(status: boolean) {
       status ? this.curCompConfig.dragDirFixed = CHECK_ALL_VALUE: this.curCompConfig.dragDirFixed = []
     },
-    setDOMparams(index: number, obj: any) {
-      this.compList[index] = {
-        ...this.compList[index],
-        ...obj,
-      }
-    },
-    coverCompList (arr: any) {
-      this.setCurCompIndex(0)
-      this.compList = arr;
-    },
     clearCompList() {
       this.compList = [];
     },
@@ -89,7 +78,7 @@ export const useStore = defineStore('easyPoster', {
       this.curCanvasIndex = index;
       this.curCompIndex = this.compList.length - 1;
     },
-    async addHistoryList(curItem: any) {
+    async addHistoryList(curItem: CompItem) {
       if (this.curCanvasIndex === -1) {
         this.historyList.push({
           ...curItem,
@@ -143,7 +132,7 @@ export const useStore = defineStore('easyPoster', {
       let compNameStr = '';
       const sortList = [...this.compList];
       sortList.sort((a, b) => a.zIndex - b.zIndex);
-      sortList.map((item: any, index: number)=>{
+      sortList.map((item: CompItem, index: number)=>{
         compNameStr += `${item.type}${item.compId}${sortList.length === index + 1 ? '' : ', '}`;
         return compNameStr;
       });

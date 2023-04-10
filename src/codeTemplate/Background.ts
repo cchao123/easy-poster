@@ -1,4 +1,5 @@
-export const getBackgroundTpl = (params: any) => {
+import { CompItem } from '~/types';
+export const getBackgroundTpl = (params: CompItem) => {
   const { type, compId, point, width, height, url } = params;
   const { x, y } = point;
   const compName = type + compId;

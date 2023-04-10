@@ -113,7 +113,7 @@ const dragover = (e: DragEvent) => {
   };
 };
 
-const drop = (e: DragEvent) => {
+const drop = (e: { dataTransfer: { getData: (arg0: string) => any; }; }) => {
   setCurCompIndex(compList.value.length);
   const materialIndex = e.dataTransfer.getData('index');
   setCompList({

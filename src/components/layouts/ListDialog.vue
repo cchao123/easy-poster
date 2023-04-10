@@ -1,5 +1,6 @@
 <template>
-  <el-dialog v-model="isListDialogShow"  @close="setListDialog(false)"
+  <el-dialog v-model="isListDialogShow"
+             @close="setListDialog(false)"
              :draggable="true"
              top="10vh"
              title="暂存模板列表">
@@ -35,9 +36,8 @@
       <el-table-column fixed="right"
                        label="Operations">
         <template #default="scope">
-
           <el-popconfirm title="确定删除该项?"
-                         @confirm="handleDel(scope)">
+                         @confirm="handleDel(scope.$index)">
             <template #reference>
               <el-button link
                          :disabled="['centralaxis', 'olympic'].includes(scope.row.id)"
@@ -49,7 +49,7 @@
           <el-popconfirm title="应用替至画板?"
                          icon-color="#c93b33"
                          :icon="InfoFilled"
-                         @confirm="handleEdit(scope)">
+                         @confirm="handleEdit(scope.$index)">
             <template #reference>
               <el-button link
                          type="primary"
@@ -85,20 +85,19 @@ onMounted(() => {
   initHisList();
 });
 
-
-const getCvsInTabIndex = (index: any) => {
+const getCvsInTabIndex = (index: number) => {
   return index + (currentPage.value - 1) * 3;
 };
 
-const handleDel = (scope: any) => {
-  delHistoryList(getCvsInTabIndex(scope.$index));
+const handleDel = (index: number) => {
+  delHistoryList(getCvsInTabIndex(index));
 };
 
-const handleEdit = (scope: any) => {
+const handleEdit = (index: number) => {
   clearCompList();
   nextTick(() => {
     setListDialog(false);
-    getStorageCurCanvas(getCvsInTabIndex(scope.$index));
+    getStorageCurCanvas(getCvsInTabIndex(index));
   });
 };
 
@@ -112,7 +111,6 @@ const handleChange = (curPage: number) => {
 <style lang="postcss">
 .thumbnail {
   width: 80px;
-  /* height: 120px; */
 }
 
 .his-tab {

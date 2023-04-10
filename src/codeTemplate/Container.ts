@@ -1,4 +1,5 @@
-export const getContainerTpl = (params: any) => {
+import { CompItem } from '~/types';
+export const getContainerTpl = (params: CompItem) => {
   const { type, compId, width, height, background, point } = params;
   const { x, y } = point;
   const compName = type + compId;

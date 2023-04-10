@@ -1,4 +1,5 @@
-export const getQrTpl = (params: any) => {
+import { CompItem } from '~/types';
+export const getQrTpl = (params: CompItem) => {
   const { type, compId, textValue, width, height, point } = params;
   const compName = type + compId;
   const { x, y } = point;
