@@ -6,14 +6,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
-import { useStore } from '~/store';
 import ConfigForm from '~/components/layouts/ConfigForm.vue';
 import CodeContainer from '~/components/layouts/CodeContainer.vue';
-
-const store = useStore();
-const compList = computed(() => store.compList);
-const curCompConfig = computed(() => store.curCompConfig);
 </script>
 
 <style lang="postcss" scoped>

@@ -20,7 +20,7 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref, nextTick, watch } from 'vue';
-import { MaterialListItemType } from '~/constants/type';
+import { CompItem } from '~/types';
 import { useStore } from '~/store';
 import {
   getStageCode,
@@ -38,7 +38,6 @@ const curTempCode = ref({
   CSS: '',
 });
 const store = useStore();
-const compList = computed(() => store.compList);
 const curCompConfig = computed(() => store.curCompConfig);
 const canvasConfig = computed(() => store.canvasConfig);
 const outputCodyType = computed(() => store.outputCodyType);
@@ -68,7 +67,7 @@ onMounted(() => {
   getApplicationCode();
 });
 
-const getCurCode = (curCompConfig: MaterialListItemType) => {
+const getCurCode = (curCompConfig: CompItem) => {
   if (!curCompConfig) {
     getApplicationCode();
     return;

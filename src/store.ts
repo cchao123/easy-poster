@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ElMessage } from 'element-plus';
-import { CompItem, CanvasConfig } from '~/types';
+import { CompItem, CanvasConfig, HistoryItem } from '~/types';
 import { generateMixed, setStorage, getStorage } from '~/utils';
 import { 
   CHECK_ALL_VALUE,
@@ -12,6 +12,7 @@ import {
 
 export const useStore = defineStore('easyPoster', {
   state: () => ({
+    curCompConfig: {} as CompItem,
     curCanvasId: generateMixed(5),
     outputCodyType: OutputType.PIXI,
     canvasConfig: {
@@ -21,8 +22,8 @@ export const useStore = defineStore('easyPoster', {
     } as CanvasConfig,
     curCanvasIndex: -1, // 当前操作画板小标
     curCompIndex: -1, // 当前操作组件的下标
-    compList: [] as unknown as CompItem,
-    historyList: [],
+    compList: [] as CompItem[],
+    historyList:  [] as HistoryItem[],
     // UI STATUS
     isCodeDialogShow: false,
     isListDialogShow: false,
@@ -34,7 +35,7 @@ export const useStore = defineStore('easyPoster', {
       if (hisList) this.historyList = JSON.parse(hisList);
       else setStorage(HISTORTLIST_KEY, JSON.stringify(DEFAULT_TEMP));
     },
-    setCurCompIndex(curCompIndex: Number) {
+    setCurCompIndex(curCompIndex: number) {
       this.curCompIndex = curCompIndex;
     },
     setCompList(compConfig: CompItem) {
@@ -44,7 +45,7 @@ export const useStore = defineStore('easyPoster', {
       })));
       this.delStatus = false;
     },
-    delCompList (index: Number) {
+    delCompList (index: number) {
       this.delStatus = true;
       this.compList.splice(index, 1);
       this.curCompIndex = this.compList.length - 1;
@@ -56,7 +57,7 @@ export const useStore = defineStore('easyPoster', {
       this.compList[index].width = w;
       this.compList[index].height = h;
     },
-    setCompPoint(index: number, key: string, pixel:  Number) {
+    setCompPoint(index: number, key: string, pixel:  number) {
       this.compList[index].point[key] = pixel;
     },
     setCompZindex(index: number, isAdd: boolean) {
@@ -64,7 +65,7 @@ export const useStore = defineStore('easyPoster', {
       else this.compList[index].zIndex--;
     },
     setCheckAllStatus(status: boolean) {
-      status ? this.curCompConfig.dragDirFixed = CHECK_ALL_VALUE: this.curCompConfig.dragDirFixed = []
+      status ? this.curCompConfig.dragDirFixed = CHECK_ALL_VALUE: this.curCompConfig.dragDirFixed = [];
     },
     clearCompList() {
       this.compList = [];
@@ -78,7 +79,7 @@ export const useStore = defineStore('easyPoster', {
       this.curCanvasIndex = index;
       this.curCompIndex = this.compList.length - 1;
     },
-    async addHistoryList(curItem: CompItem) {
+    async addHistoryList(curItem: HistoryItem) {
       if (this.curCanvasIndex === -1) {
         this.historyList.push({
           ...curItem,
@@ -110,13 +111,12 @@ export const useStore = defineStore('easyPoster', {
     setListDialog(isShow: boolean) {
       this.isListDialogShow = isShow;
     },
-    setOutputCode(outputCodyType: string) {
+    setOutputCode(outputCodyType: OutputType) {
       this.outputCodyType = outputCodyType; 
     },
   },
   getters: {
     curCompConfig(state) {
-      // console.log('当前config', state.compList[state.curCompIndex])
       return state.compList[state.curCompIndex];
     },
     isIndeterminate (state) {

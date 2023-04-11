@@ -1,12 +1,11 @@
 <template>
   <div class="editWrap"
-       :class="{ noDrop: curFixedStatus.length === CHECK_MAX_LENGTH, ewDrop: curFixedStatus.indexOf('Y') !== -1, nsDrop: curFixedStatus.indexOf('X') !== -1}"
-       @mousedown.stop.prevent="handleMouseDown"
-       :style="{
-          left: `${item.point.x / 2}px`,
-          top: `${item.point.y / 2}px`,
-          zIndex: `${item.zIndex}`,
-       }">
+    :class="{ noDrop: curFixedStatus.length === CHECK_MAX_LENGTH, ewDrop: curFixedStatus.indexOf('Y') !== -1, nsDrop: curFixedStatus.indexOf('X') !== -1 }"
+    @mousedown.stop.prevent="handleMouseDown" :style="{
+      left: `${item.point.x / 2}px`,
+      top: `${item.point.y / 2}px`,
+      zIndex: `${item.zIndex}`,
+    }">
     <span class="bd-top"></span>
     <span class="bd-btm"></span>
     <span class="bd-left"></span>
@@ -16,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useStore } from '~/store';
 import { CHECK_MAX_LENGTH } from '~/constants';
 
@@ -27,7 +26,7 @@ const curFixedStatus = computed(() => store.curFixedStatus);
 const props = defineProps({
   item: {
     type: Object,
-    default: () => {},
+    default: () => { },
   },
   index: {
     type: Number,
@@ -50,11 +49,9 @@ const handleMouseDown = (e: MouseEvent) => {
   const pointX = props.item.point.x;
   const pointY = props.item.point.y;
 
-  // console.log(pointX, pointY)
   // 鼠标位置
   const startX = e.clientX * 2;
   const startY = e.clientY * 2;
-  // console.log(startX, startY)
 
   const move = (moveEvent: MouseEvent) => {
     // 当前位置
@@ -65,7 +62,6 @@ const handleMouseDown = (e: MouseEvent) => {
     const targetX = pointX + currX - startX;
     const targetY = pointY + currY - startY;
 
-    // x + w >= 375
     curFixedStatus.value.indexOf('Y') === -1 && setCompPoint(props.index, 'y', targetY > 0 ? targetY : 0);
     curFixedStatus.value.indexOf('X') === -1 && setCompPoint(props.index, 'x', targetX > 0 ? targetX : 0);
   };
@@ -85,6 +81,7 @@ const handleMouseDown = (e: MouseEvent) => {
   cursor: move;
   position: absolute;
 }
+
 .bd-top {
   animation: twinkle infinite 0.3s linear;
   display: none;
@@ -95,6 +92,7 @@ const handleMouseDown = (e: MouseEvent) => {
   height: 1px;
   border-top: 1px dashed #000;
 }
+
 .bd-btm {
   animation: twinkle infinite 0.3s linear;
   display: none;
@@ -105,6 +103,7 @@ const handleMouseDown = (e: MouseEvent) => {
   height: 1px;
   border-bottom: 1px dashed #000;
 }
+
 .bd-left {
   animation: twinkle infinite 0.3s linear;
   display: none;
@@ -115,6 +114,7 @@ const handleMouseDown = (e: MouseEvent) => {
   height: 100%;
   border-left: 1px dashed #000;
 }
+
 .bd-right {
   animation: twinkle infinite 0.3s linear;
   display: none;
@@ -129,12 +129,15 @@ const handleMouseDown = (e: MouseEvent) => {
 .editWrap:hover .bd-top {
   display: block;
 }
+
 .editWrap:hover .bd-btm {
   display: block;
 }
+
 .editWrap:hover .bd-left {
   display: block;
 }
+
 .editWrap:hover .bd-right {
   display: block;
 }
@@ -155,14 +158,16 @@ const handleMouseDown = (e: MouseEvent) => {
   0% {
     border-color: red;
   }
+
   30% {
     border-color: blue;
   }
+
   60% {
     border-color: green;
   }
+
   100% {
     border-color: yellow;
   }
-}
-</style>
+}</style>

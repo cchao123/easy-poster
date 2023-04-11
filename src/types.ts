@@ -2,14 +2,14 @@ export interface CommonStyle {
   width: number;
   height: number;
   url: string;
-  radius: number;
+  radius?: number;
   textValue: string;
   fontColor: string;
   fontSize: number;
   fontStyle: string;
   fontWeight: string;
   zIndex: number;
-  background: string;
+  background?: string;
 }
 
 export interface CommonParams {
@@ -22,8 +22,17 @@ export interface CompItem extends CommonStyle, CommonParams {
   type: string,
   name: string,
   compId?: string,
+  index?: number;
 }
 
+export interface HistoryItem {
+  id: string,
+  remarks: string,
+  date: number,
+  thumbnail: string,
+  compList: CompItem[],
+  canvasConfig?: CanvasConfig,
+}
 export interface DirFun {
   bottom: () => void;
   top: () => void;
@@ -35,7 +44,12 @@ export interface DirFun {
 
 export type Direction = keyof DirFun;
 
-
+export interface PositionBtnItem {
+  direction: Direction;
+  content: string;
+  class: string;
+  placement: string;
+}
 export interface CanvasConfig {
   width: number;
   height: number;

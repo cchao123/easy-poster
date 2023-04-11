@@ -1,14 +1,9 @@
 <template>
-  <div class="aside-material"
-       @dragstart="dragstart">
-    <div class="material-items"
-         :draggable="true"
-         v-for="(mItem, mIndex) in MATERIAL_LIST"
-         :key="mItem.icon"
-         :data-index="mIndex">
+  <div class="aside-material" @dragstart="dragstart">
+    <div class="material-items" :draggable="true" v-for="(mItem, mIndex) in MATERIAL_LIST" :key="mItem.icon"
+      :data-index="mIndex">
       <div class="material-icon">
-        <div class="iconfont"
-             :class="`icon-${mItem.icon}`"></div>
+        <div class="iconfont" :class="`icon-${mItem.icon}`"></div>
       </div>
       <div class="material-name">{{ mItem.name }}</div>
     </div>
@@ -18,17 +13,8 @@
 <script lang="ts" setup>
 import { MATERIAL_LIST } from '~/constants';
 
-const dragstart = (e: {
-  dataTransfer: {
-    setData: (arg0: string, arg1: number) => void;
-  };
-  target: {
-    dataset: {
-      index: number;
-    };
-  };
-}) => {
-  e.dataTransfer.setData('index', e.target.dataset.index);
+const dragstart = (payload: DragEvent) => {
+  payload?.dataTransfer?.setData('index', payload?.target?.dataset?.index);
 };
 </script>
 
@@ -53,9 +39,11 @@ const dragstart = (e: {
   justify-content: center;
   align-items: center;
 }
+
 .material-icon .iconfont {
   font-size: 35px;
 }
+
 .material-name {
   margin-top: 10px;
   font-size: 14px;

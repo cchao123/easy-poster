@@ -6,3 +6,5 @@ declare global {
       Prism: any; //全局变量名
     }
 }
+
+declare module 'psd.js';

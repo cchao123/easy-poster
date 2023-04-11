@@ -2,29 +2,21 @@
   <div class="formWrap">
     <div class="custom-form">
       <div>
-        {{curCompConfig }}
+        <!-- {{curCompConfig }} -->
         <h4>画布设置</h4>
         <el-row>
           <el-col :span="5">
             <span class="labelText">宽度:</span>
-            <el-input-number v-model="canvasConfig.width"
-                             :min="750"
-                             controls-position="right"
-                             style="width: 90px" />
+            <el-input-number v-model="canvasConfig.width" :min="750" controls-position="right" style="width: 90px" />
           </el-col>
           <el-col :span="5">
             <span class="labelText">高度:</span>
-            <el-input-number v-model="canvasConfig.height"
-                             :min="1334"
-                             controls-position="right"
-                             style="width: 90px" />
+            <el-input-number v-model="canvasConfig.height" :min="1334" controls-position="right" style="width: 90px" />
           </el-col>
           <el-col :span="12">
             <span class="labelText">画布颜色:</span>
-            <el-color-picker v-model="canvasConfig.background"
-                             :predefine="predefineColors" />
+            <el-color-picker v-model="canvasConfig.background" :predefine="predefineColors" />
           </el-col>
-
         </el-row>
       </div>
 
@@ -35,22 +27,17 @@
           <el-row>
             <el-col :span="5">
               <span class="labelText">宽度:</span>
-              <el-input-number v-model="curCompConfig.width"
-                               :max="canvasConfig.width"
-                               controls-position="right"
-                               style="width: 90px" />
+              <el-input-number v-model="curCompConfig.width" :max="canvasConfig.width" controls-position="right"
+                style="width: 90px" />
             </el-col>
             <el-col :span="5">
               <span class="labelText">高度:</span>
-              <el-input-number v-model="curCompConfig.height"
-                               :max="canvasConfig.height"
-                               controls-position="right"
-                               style="width: 90px" />
+              <el-input-number v-model="curCompConfig.height" :max="canvasConfig.height" controls-position="right"
+                style="width: 90px" />
             </el-col>
             <el-col :span="12">
               <span class="labelText">画布颜色:</span>
-              <el-color-picker v-model="curCompConfig.background"
-                               :predefine="predefineColors" />
+              <el-color-picker v-model="curCompConfig.background" :predefine="predefineColors" />
             </el-col>
 
           </el-row>
@@ -66,41 +53,29 @@
             </el-col>
             <el-col :span="20">
               <span class="labelText">文字内容:</span>
-              <el-input v-model="curCompConfig.textValue"
-                        style="width: 525px" />
+              <el-input v-model="curCompConfig.textValue" style="width: 525px" />
             </el-col>
           </el-row>
           <br>
           <el-row>
             <el-col :span="8">
               <span class="labelText">字体大小:</span>
-              <el-input-number v-model="curCompConfig.fontSize"
-                               :min="12"
-                               :step="2" />
+              <el-input-number v-model="curCompConfig.fontSize" :min="12" :step="2" />
             </el-col>
             <el-col :span="8">
               <span class="labelText">字体样式:</span>
-              <el-select v-model="curCompConfig.fontStyle"
-                         style="width: 150px"
-                         placeholder="normal">
-                <el-option label="normal"
-                           value="normal" />
-                <el-option label="italic"
-                           value="italic" />
+              <el-select v-model="curCompConfig.fontStyle" style="width: 150px" placeholder="normal">
+                <el-option label="normal" value="normal" />
+                <el-option label="italic" value="italic" />
               </el-select>
             </el-col>
 
             <el-col :span="8">
               <span class="labelText">字体粗细:</span>
-              <el-select v-model="curCompConfig.fontWeight"
-                         style="width: 150px"
-                         placeholder="normal">
-                <el-option label="normal"
-                           value="normal" />
-                <el-option label="bold"
-                           value="bold" />
-                <el-option label="bolder"
-                           value="bolder" />
+              <el-select v-model="curCompConfig.fontWeight" style="width: 150px" placeholder="normal">
+                <el-option label="normal" value="normal" />
+                <el-option label="bold" value="bold" />
+                <el-option label="bolder" value="bolder" />
               </el-select>
             </el-col>
           </el-row>
@@ -110,48 +85,27 @@
           <el-divider />
           <h4>素材设置</h4>
           <el-row>
-            <template v-if="[ 'head','qrcode'].includes(curCompConfig.type)">
+            <template v-if="['head', 'qrcode'].includes(curCompConfig.type)">
               <el-col :span="5">
                 <span class="labelText">宽高:</span>
-                <el-input-number v-model="curCompConfig.width"
-                                 @change="SyncSetHeight"
-                                 :min="0"
-                                 :max="375"
-                                 controls-position="right"
-                                 style="width: 90px" />
+                <el-input-number v-model="curCompConfig.width" @change="SyncSetHeight(curCompConfig.width)" :min="0" :max="375"
+                  controls-position="right" style="width: 90px" />
 
               </el-col>
-              <!-- <el-col :span="5">
-                <span class="labelText">圆角:</span>
-                <el-input-number v-model="curCompConfig.radius"
-                                 :min="0"
-                                 :max="100"
-                                 controls-position="right"
-                                 style="width: 90px" />
-
-              </el-col> -->
             </template>
             <template v-else>
               <el-col :span="5">
                 <span class="labelText">宽度:</span>
-                <el-input-number v-model="curCompConfig.width"
-                                 :min="0"
-                                 controls-position="right"
-                                 style="width: 90px" />
+                <el-input-number v-model="curCompConfig.width" :min="0" controls-position="right" style="width: 90px" />
               </el-col>
               <el-col :span="5">
                 <span class="labelText">高度:</span>
-                <el-input-number v-model="curCompConfig.height"
-                                 :min="0"
-                                 controls-position="right"
-                                 style="width: 90px" />
+                <el-input-number v-model="curCompConfig.height" :min="0" controls-position="right" style="width: 90px" />
               </el-col>
             </template>
             <el-col :span="12">
               <span class="labelText">素材地址:</span>
-              <el-input v-model="curCompConfig.url"
-                        placeholder="生成二维码所需链接"
-                        style="width: 300px" />
+              <el-input v-model="curCompConfig.url" placeholder="生成二维码所需链接" style="width: 300px" />
             </el-col>
 
           </el-row>
@@ -161,41 +115,31 @@
         <h4>拖拽设置</h4>
         <el-row>
           <el-col :span="3">
-            <el-checkbox v-model="isCheckAll"
-                         :indeterminate="isIndeterminate"
-                         @change="handleCheckAllChange">拖拽锁定</el-checkbox>
+            <el-checkbox v-model="isCheckAll" :indeterminate="isIndeterminate"
+              @change="handleCheckAllChange(isCheckAll)">拖拽锁定</el-checkbox>
           </el-col>
           <el-col :span="3">
-            <el-checkbox-group v-model="curCompConfig.dragDirFixed"
-                               @change="handleCheckedCitiesChange">
-              <el-checkbox key="x"
-                           label="X">锁定X轴</el-checkbox>
-              <el-checkbox key="y"
-                           label="Y">锁定Y轴</el-checkbox>
+            <el-checkbox-group v-model="curCompConfig.dragDirFixed">
+              <el-checkbox key="x" label="X">锁定X轴</el-checkbox>
+              <el-checkbox key="y" label="Y">锁定Y轴</el-checkbox>
             </el-checkbox-group>
           </el-col>
           <el-col :span="10">
             <div class="dirContainer">
-              <div class="icon-wrap iconfont"
-                   v-for="btn in POSITION_BUTTON"
-                   :key="btn.class"
-                   :content="btn.content"
-                   :placement="btn.placement"
-                   @click="changeFixedDirection(btn.direction)"
-                   :class="`${btn.class} ${btn.direction}`"></div>
+              <div class="icon-wrap iconfont" v-for="btn in POSITION_BUTTON" :key="btn.class" :content="btn.content"
+                :placement="btn.placement" @click="changeFixedDirection(btn.direction)"
+                :class="`${btn.class} ${btn.direction}`"></div>
             </div>
           </el-col>
           <el-col :span="5">
             <el-row>
               <el-col>
                 <span class="labelText">X轴:</span>
-                <el-input-number v-model="curCompConfig.point.x"
-                                 style="width: 120px" />
+                <el-input-number v-model="curCompConfig.point.x" style="width: 120px" />
               </el-col>
               <el-col style="margin-top: 5px">
                 <span class="labelText">Y轴:</span>
-                <el-input-number v-model="curCompConfig.point.y"
-                                 style="width: 120px" />
+                <el-input-number v-model="curCompConfig.point.y" style="width: 120px" />
               </el-col>
             </el-row>
 
@@ -207,16 +151,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive, ref } from 'vue';
+import { computed } from 'vue';
 import { useStore } from '~/store';
 import { DirFun, Direction } from '~/types';
 import { POSITION_BUTTON, predefineColors, fontDefineColors, TemplateType } from '~/constants';
 const store = useStore();
 const curCompIndex = computed(() => store.curCompIndex);
-const curCanvasId = computed(() => store.curCanvasId);
-const curCanvasIndex = computed(() => store.curCanvasIndex);
-const compList = computed(() => store.compList);
-const historyList = computed(() => store.historyList);
 const curCompConfig = computed(() => store.curCompConfig);
 const canvasConfig = computed(() => store.canvasConfig);
 const isIndeterminate = computed(() => store.isIndeterminate);
@@ -245,10 +185,6 @@ const SyncSetHeight = (num: number) => {
 
 const handleCheckAllChange = (status: boolean) => {
   setCheckAllStatus(status);
-};
-
-const handleCheckedCitiesChange = (value: string[]) => {
-  const checkedCount = value.length;
 };
 </script>
 

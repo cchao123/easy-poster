@@ -13,7 +13,6 @@
 import QRCode from 'qrcode';
 import { watch, onMounted, ref, computed } from 'vue';
 import { useStore } from '~/store';
-import errorImg from '~/assets/image.png';
 
 const props = defineProps({
   index: {
@@ -49,7 +48,7 @@ watch(
 </script>
 
 
-<style lang="postcss">
+<style lang="scss">
 .qrCode img {
   width: 100%;
 }

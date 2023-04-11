@@ -1,4 +1,4 @@
-import { CommonStyle, CommonParams, CompItem } from '~/types';
+import { CommonStyle, CommonParams, CompItem, PositionBtnItem } from '~/types';
 
 const DEFAULT_HEAD = 'https://avatars1.githubusercontent.com/u/24643401';
 
@@ -113,7 +113,7 @@ export const MATERIAL_LIST: CompItem[] = [
 ];
 
 // 辅助遥控
-export const POSITION_BUTTON = [
+export const POSITION_BUTTON: PositionBtnItem[]  = [
   {
     direction: 'center',
     content: '水平居中',

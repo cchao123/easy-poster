@@ -1,20 +1,15 @@
 <template>
-  <img v-if="!curCompConfig.url"
-       :src="errorImg">
-  <img ref="imageRef"
-       v-else
-       :src="curCompConfig.url"
-       :style="{
-         width: curCompConfig.width ? ` ${curCompConfig.width / 2}px`: 'auto',
-         height: curCompConfig.height ? ` ${curCompConfig.height / 2}px`: 'auto',
-       }">
+  <img v-if="!curCompConfig.url" :src="errorImg">
+  <img ref="imageRef" v-else :src="curCompConfig.url" :style="{
+    width: curCompConfig.width ? ` ${curCompConfig.width / 2}px` : 'auto',
+    height: curCompConfig.height ? ` ${curCompConfig.height / 2}px` : 'auto',
+  }">
 </template>
 
 <script lang="ts" setup>
 import { watch, ref, onMounted, computed, nextTick } from 'vue';
 import { useStore } from '~/store';
 import errorImg from '~/assets/image.png';
-import { getClientRect } from '~/utils';
 
 const props = defineProps({
   index: {

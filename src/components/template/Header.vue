@@ -1,18 +1,15 @@
 <template>
   <!-- borderRadius: `${curCompConfig.radius}%`, -->
-  <img class="header"
-       :style="{
-         width: `${curCompConfig.width / 2}px`,
-         height: `${curCompConfig.width / 2}px`,
-       }"
-       :src="curCompConfig.url || errorImg">
+  <img class="header" :style="{
+    width: `${curCompConfig.width / 2}px`,
+    height: `${curCompConfig.width / 2}px`,
+  }" :src="curCompConfig.url || errorImg">
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, computed } from 'vue';
+import { computed } from 'vue';
 import { useStore } from '~/store';
 import errorImg from '~/assets/head.png';
-import { getClientRect } from '~/utils';
 
 const props = defineProps({
   index: {
@@ -30,6 +27,7 @@ const curCompConfig = computed(() => store.compList[props.index]);
   overflow: hidden;
   border-radius: 50%;
 }
+
 .header img {
   width: 100%;
   height: 100%;

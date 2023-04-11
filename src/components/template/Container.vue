@@ -9,7 +9,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useStore } from '~/store';
-import errorImg from '~/assets/image.png'
 
 const props = defineProps({
   index: {
@@ -22,5 +21,4 @@ const store = useStore();
 const curCompConfig = computed(() => store.compList[props.index]);
 </script>
 
-<style lang="postcss">
-</style>
+<style lang="postcss"></style>

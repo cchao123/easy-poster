@@ -1,69 +1,49 @@
 <template>
-  <div class="main"
-       @mousedown="handleMouseDown"
-       ref="mainRef">
-    <div class="h5-view"
-         :style="{
-        width: `${canvasConfig.width / 2}px`,
-        height:`${canvasConfig.height/ 2}px`,
-        backgroundColor: `${canvasConfig.background}`,
-        transform: `scale(${canvasZoom}) translate3d(${canvasX}px, ${canvasY}px ,0)`,
-      }"
-         @drop="drop"
-         @dragover.prevent="dragover">
-
-      <Edit v-for="(item, idx) in compList"
-            :canvasX="canvasX"
-            :canvasY="canvasY"
-            :key="idx"
-            :index="idx"
-            :item="item">
-        <Container :index="idx"
-                   v-if="item.type === TemplateType.CONTAINER" />
-        <Background :index="idx"
-                    v-if="item.type === TemplateType.BACKGROUND" />
-        <Image :index="idx"
-               v-if="item.type === TemplateType.IMAGE" />
-        <Text :index="idx"
-              v-if="item.type === TemplateType.TEXT" />
-        <Header :index="idx"
-                v-if="item.type === TemplateType.HEAD" />
-        <QrCode :index="idx"
-                v-if="item.type === TemplateType.QRCODE" />
+  <div class="main" @mousedown="handleMouseDown" ref="mainRef">
+    <div class="h5-view" :style="{
+      width: `${canvasConfig.width / 2}px`,
+      height: `${canvasConfig.height / 2}px`,
+      backgroundColor: `${canvasConfig.background}`,
+      transform: `scale(${canvasZoom}) translate3d(${canvasX}px, ${canvasY}px ,0)`,
+    }" @drop="drop" @dragover.prevent="dragover">
+      <Edit v-for="(item, idx) in compList" :canvasX="canvasX" :canvasY="canvasY" :key="idx" :index="idx" :item="item">
+        <Container :index="idx" v-if="item.type === TemplateType.CONTAINER" />
+        <Background :index="idx" v-if="item.type === TemplateType.BACKGROUND" />
+        <Image :index="idx" v-if="item.type === TemplateType.IMAGE" />
+        <Text :index="idx" v-if="item.type === TemplateType.TEXT" />
+        <Header :index="idx" v-if="item.type === TemplateType.HEAD" />
+        <QrCode :index="idx" v-if="item.type === TemplateType.QRCODE" />
       </Edit>
     </div>
 
-    <div class="h5-bar"
-         v-if="curCompConfig">
+    <div class="h5-bar" v-if="curCompConfig">
       <div :class="`bar-items iconfont icon-${curCompConfig.icon} bar-bt`"></div>
-      <el-icon class="bar-items"
-               @click="setCompZindex(curCompIndex, true
-      )">
+
+      <el-icon class="bar-items" @click="setCompZindex(curCompIndex, true)">
         <CaretTop />
       </el-icon>
-      <el-icon class="bar-items"
-               @click="setCompZindex(curCompIndex, false
-      )">
+
+      <el-icon class="bar-items" @click="setCompZindex(curCompIndex, false)">
         <CaretBottom />
       </el-icon>
-      <el-icon class="bar-items bar-bb"
-               @click="handleDelCurComp">
+
+      <el-icon class="bar-items bar-bb" @click="handleDelCurComp">
         <Delete />
       </el-icon>
     </div>
 
-    <div class="h5-help"
-         @click.stop="driverStart">
+    <div class="h5-help" @click.stop="driverStart">
       <span class="iconfont icon-wenhao"></span>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, reactive, computed } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { Delete, CaretTop, CaretBottom } from '@element-plus/icons-vue';
 import { MATERIAL_LIST, TemplateType } from '~/constants';
 import { useStore } from '~/store';
+
 import Container from '~/components/template/Container.vue';
 import Background from '~/components/template/Background.vue';
 import Image from '~/components/template/Image.vue';
@@ -100,20 +80,18 @@ const curCompIndex = computed(() => store.curCompIndex);
 const curCompConfig = computed(() => store.curCompConfig);
 const { setCompList, setCurCompIndex, setCompZindex, delCompList } = store;
 
-const handleCompIndex = () => {};
-
 const handleDelCurComp = () => {
   delCompList(curCompIndex.value)
 };
 
-const dragover = (e: DragEvent) => {
+const dragover: (e: DragEvent | any) => void | undefined = (e) => {
   point = {
     x: (e.layerX - canvasX.value) * 2,
     y: (e.layerY - canvasY.value) * 2,
   };
 };
 
-const drop = (e: { dataTransfer: { getData: (arg0: string) => any; }; }) => {
+const drop: (e: DragEvent | any) => void | undefined = (e) => {
   setCurCompIndex(compList.value.length);
   const materialIndex = e.dataTransfer.getData('index');
   setCompList({

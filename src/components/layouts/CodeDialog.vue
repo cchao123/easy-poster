@@ -48,7 +48,6 @@ import { computed } from 'vue';
 import { useStore } from '~/store';
 import { OutputType, TemplateType } from '~/constants';
 import {
-  // getStageCode,
   getBackgroundTpl,
   getContainerTpl,
   getTextTpl,
@@ -63,7 +62,6 @@ const isCodeDialogShow = computed(() => store.isCodeDialogShow);
 const compList = computed(() => store.compList);
 const outputCodyType = computed(() => store.outputCodyType);
 const pixiLastCode = computed(() => store.pixiLastCode);
-const canvasConfig = computed(() => store.canvasConfig);
 
 const openOver = () => {
   window.Prism.highlightAll();

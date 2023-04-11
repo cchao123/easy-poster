@@ -1,6 +1,5 @@
 <template>
-  <div ref="textRef"
-       :style="{
+  <div ref="textRef" :style="{
     fontSize: `${curCompConfig.fontSize / 2}px`,
     fontWeight: `${curCompConfig.fontWeight}`,
     fontStyle: `${curCompConfig.fontStyle}`,
@@ -52,4 +51,5 @@ watch(
 onMounted(() => {
   setTextCompSize();
 });
+
 </script>
