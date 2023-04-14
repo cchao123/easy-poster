@@ -9,7 +9,7 @@
   </el-config-provider>
 </template>
 
-<style lang="postcss">
+<style lang="scss">
 body,
 html,
 #app {

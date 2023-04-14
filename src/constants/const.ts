@@ -27,6 +27,8 @@ const COMMON_PARAMS: CommonParams = {
 }
 
 // 本地存储key
+export const FIRST_VISIT = '__FIRST_VISIT';
+
 export const HISTORTLIST_KEY = '__HISTORT_LIST';
 
 // code输出类型

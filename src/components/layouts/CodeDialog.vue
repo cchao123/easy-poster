@@ -1,46 +1,41 @@
 <template>
-  <el-dialog v-model="isCodeDialogShow"
-             @close="setCodeDialog(false)"
-             @open="openOver"
-             :show-close="true"
-             class="code-dialog"
-             :fullscreen="true">
+  <ElDialog v-model="isCodeDialogShow" @close="setCodeDialog(false)" @open="openOver" :show-close="true"
+    class="code-dialog" :fullscreen="true">
     <template v-if="isCodeDialogShow">
-      <div class="code-container line-numbers"
-           v-show="outputCodyType === OutputType.PIXI">
+      <div class="code-container line-numbers" v-show="outputCodyType === OutputType.PIXI">
         <div class="code-tips">
-          clone演示DEMO：<a href="https://github.com/cchao123/poster-demo"
-             target="_blank">poster-demo</a> copy面板代码将<span class="code-highlight">src/pages/pixi/index.vue</span>文件中<span class="code-highlight"> initPoster</span>方法的内容替换。
+          clone演示DEMO：<a href="https://github.com/cchao123/poster-demo" target="_blank">poster-demo</a> copy面板代码将<span
+            class="code-highlight">src/pages/pixi/index.vue</span>文件中<span class="code-highlight">
+            initPoster</span>方法的内容替换。
         </div>
         <pre>
-          <code class="language-js">
-            <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.TEXT">{{ getTextTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).PIXI }}</template>
-            </template>
-      {{ pixiLastCode }}
-          </code>
-        </pre>
+            <code class="language-js">
+              <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.TEXT">{{ getTextTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).PIXI }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).PIXI }}</template>
+              </template>
+        {{ pixiLastCode }}
+            </code>
+          </pre>
       </div>
 
-      <div class="code-container line-numbers"
-           v-show="outputCodyType === OutputType.HTML2CANVAS">
+      <div class="code-container line-numbers" v-show="outputCodyType === OutputType.HTML2CANVAS">
         <div class="code-tips">
-          clone演示DEMO：<a href="https://github.com/cchao123/poster-demo"
-             target="_blank">poster-demo</a> copy面板代码覆盖<span class="code-highlight">src/pages/html2canvas/posterDom.vue</span>中内容。
+          clone演示DEMO：<a href="https://github.com/cchao123/poster-demo" target="_blank">poster-demo</a> copy面板代码覆盖<span
+            class="code-highlight">src/pages/html2canvas/posterDom.vue</span>中内容。
         </div>
         <pre>
-          <code class="language-js"> 
-      &lt;template&gt;
-      <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).DOM }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).DOM }}</template><template v-if="item.type === TemplateType.TEXT">{{ getTextTpl(item).DOM }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).DOM }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).DOM }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).DOM }}</template></template>
-      &lt;/template&gt;
+            <code class="language-js"> 
+        &lt;template&gt;
+        <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).DOM }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).DOM }}</template><template v-if="item.type === TemplateType.TEXT">{{ getTextTpl(item).DOM }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).DOM }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).DOM }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).DOM }}</template></template>
+        &lt;/template&gt;
 
-      &lt;style&gt;
-      <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).CSS }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).CSS }}</template><template v-if="item.type === 'text'">{{ getTextTpl(item).CSS }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).CSS }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).CSS }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).CSS }}</template></template>
-      &lt;/style&gt;
-          </code>
-        </pre>
+        &lt;style&gt;
+        <template v-for="item in compList"><template v-if="item.type === TemplateType.BACKGROUND">{{ getBackgroundTpl(item).CSS }}</template><template v-if="item.type === TemplateType.CONTAINER">{{ getContainerTpl(item).CSS }}</template><template v-if="item.type === 'text'">{{ getTextTpl(item).CSS }}</template><template v-if="item.type === TemplateType.HEAD">{{ getHeadTpl(item).CSS }}</template><template v-if="item.type === TemplateType.IMAGE">{{ getImageTpl(item).CSS }}</template><template v-if="item.type === TemplateType.QRCODE">{{ getQrTpl(item).CSS }}</template></template>
+        &lt;/style&gt;
+            </code>
+          </pre>
       </div>
     </template>
-  </el-dialog>
+  </ElDialog>
 </template>
 
 <script lang="ts" setup>
@@ -69,7 +64,7 @@ const openOver = () => {
 </script>
 
 
-<style lang="postcss">
+<style lang="scss">
 .code-container {
   user-select: text;
   background-color: #2d2d2d;

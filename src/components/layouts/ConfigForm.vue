@@ -4,151 +4,150 @@
       <div>
         <!-- {{curCompConfig }} -->
         <h4>画布设置</h4>
-        <el-row>
-          <el-col :span="5">
+        <ElRow>
+          <ElCol :span="5">
             <span class="labelText">宽度:</span>
-            <el-input-number v-model="canvasConfig.width" :min="750" controls-position="right" style="width: 90px" />
-          </el-col>
-          <el-col :span="5">
+            <ElInputNumber v-model="canvasConfig.width" :min="750" controls-position="right" style="width: 90px" />
+          </ElCol>
+          <ElCol :span="5">
             <span class="labelText">高度:</span>
-            <el-input-number v-model="canvasConfig.height" :min="1334" controls-position="right" style="width: 90px" />
-          </el-col>
-          <el-col :span="12">
+            <ElInputNumber v-model="canvasConfig.height" :min="1334" controls-position="right" style="width: 90px" />
+          </ElCol>
+          <ElCol :span="12">
             <span class="labelText">画布颜色:</span>
-            <el-color-picker v-model="canvasConfig.background" :predefine="predefineColors" />
-          </el-col>
-        </el-row>
+            <ElColor-picker v-model="canvasConfig.background" :predefine="predefineColors" />
+          </ElCol>
+        </ElRow>
       </div>
 
       <template v-if="curCompConfig">
-        <template v-if="['container'].includes(curCompConfig.type)">
-          <el-divider />
+        <template v-if="[TemplateType.CONTAINER].includes(curCompConfig.type)">
+          <ElDivider />
           <h4>容器设置</h4>
-          <el-row>
-            <el-col :span="5">
+          <ElRow>
+            <ElCol :span="5">
               <span class="labelText">宽度:</span>
-              <el-input-number v-model="curCompConfig.width" :max="canvasConfig.width" controls-position="right"
+              <ElInputNumber v-model="curCompConfig.width" :max="canvasConfig.width" controls-position="right"
                 style="width: 90px" />
-            </el-col>
-            <el-col :span="5">
+            </ElCol>
+            <ElCol :span="5">
               <span class="labelText">高度:</span>
-              <el-input-number v-model="curCompConfig.height" :max="canvasConfig.height" controls-position="right"
+              <ElInputNumber v-model="curCompConfig.height" :max="canvasConfig.height" controls-position="right"
                 style="width: 90px" />
-            </el-col>
-            <el-col :span="12">
+            </ElCol>
+            <ElCol :span="12">
               <span class="labelText">画布颜色:</span>
-              <el-color-picker v-model="curCompConfig.background" :predefine="predefineColors" />
-            </el-col>
-
-          </el-row>
+              <ElColor-picker v-model="curCompConfig.background" :predefine="predefineColors" />
+            </ElCol>
+          </ElRow>
         </template>
 
         <template v-if="['text'].includes(curCompConfig.type)">
-          <el-divider />
+          <ElDivider />
           <h4>文字设置</h4>
-          <el-row>
-            <el-col :span="4">
+          <ElRow>
+            <ElCol :span="4">
               <span class="labelText">字体颜色:</span>
-              <el-color-picker v-model="curCompConfig.fontColor" :predefine="fontDefineColors" />
-            </el-col>
-            <el-col :span="20">
+              <ElColor-picker v-model="curCompConfig.fontColor" :predefine="fontDefineColors" />
+            </ElCol>
+            <ElCol :span="20">
               <span class="labelText">文字内容:</span>
-              <el-input v-model="curCompConfig.textValue" style="width: 525px" />
-            </el-col>
-          </el-row>
+              <ElInput v-model="curCompConfig.textValue" style="width: 525px" />
+            </ElCol>
+          </ElRow>
           <br>
-          <el-row>
-            <el-col :span="8">
+          <ElRow>
+            <ElCol :span="8">
               <span class="labelText">字体大小:</span>
-              <el-input-number v-model="curCompConfig.fontSize" :min="12" :step="2" />
-            </el-col>
-            <el-col :span="8">
+              <ElInputNumber v-model="curCompConfig.fontSize" :min="12" :step="2" />
+            </ElCol>
+            <ElCol :span="8">
               <span class="labelText">字体样式:</span>
               <el-select v-model="curCompConfig.fontStyle" style="width: 150px" placeholder="normal">
-                <el-option label="normal" value="normal" />
-                <el-option label="italic" value="italic" />
+                <ElOption :label="val" :value="val" v-for="val in FONT_STYlE" />
               </el-select>
-            </el-col>
-
-            <el-col :span="8">
+            </ElCol>
+            <ElCol :span="8">
               <span class="labelText">字体粗细:</span>
               <el-select v-model="curCompConfig.fontWeight" style="width: 150px" placeholder="normal">
-                <el-option label="normal" value="normal" />
-                <el-option label="bold" value="bold" />
-                <el-option label="bolder" value="bolder" />
+                <ElOption :label="val" :value="val" v-for="val in FONT_WEIGHT" />
               </el-select>
-            </el-col>
-          </el-row>
+            </ElCol>
+          </ElRow>
         </template>
 
-        <template v-if="['image', 'head', 'background', 'qrcode'].includes(curCompConfig.type)">
-          <el-divider />
+        <template
+          v-if="[TemplateType.IMAGE, TemplateType.HEAD, TemplateType.BACKGROUND, TemplateType.QRCODE].includes(curCompConfig.type)">
+          <ElDivider />
           <h4>素材设置</h4>
-          <el-row>
-            <template v-if="['head', 'qrcode'].includes(curCompConfig.type)">
-              <el-col :span="5">
+          <ElRow>
+            <template v-if="[TemplateType.HEAD, TemplateType.QRCODE].includes(curCompConfig.type)">
+              <ElCol :span="5">
                 <span class="labelText">宽高:</span>
-                <el-input-number v-model="curCompConfig.width" @change="SyncSetHeight(curCompConfig.width)" :min="0" :max="375"
-                  controls-position="right" style="width: 90px" />
-
-              </el-col>
+                <ElInputNumber v-model="curCompConfig.width" @change="SyncSetHeight(curCompConfig.width)" :min="0"
+                  :max="375" controls-position="right" style="width: 90px" />
+              </ElCol>
             </template>
             <template v-else>
-              <el-col :span="5">
+              <ElCol :span="5">
                 <span class="labelText">宽度:</span>
-                <el-input-number v-model="curCompConfig.width" :min="0" controls-position="right" style="width: 90px" />
-              </el-col>
-              <el-col :span="5">
+                <ElInputNumber v-model="curCompConfig.width" :min="0" controls-position="right" style="width: 90px" />
+              </ElCol>
+              <ElCol :span="5">
                 <span class="labelText">高度:</span>
-                <el-input-number v-model="curCompConfig.height" :min="0" controls-position="right" style="width: 90px" />
-              </el-col>
+                <ElInputNumber v-model="curCompConfig.height" :min="0" controls-position="right" style="width: 90px" />
+              </ElCol>
             </template>
-            <el-col :span="12">
+            <ElCol :span="12">
               <span class="labelText">素材地址:</span>
-              <el-input v-model="curCompConfig.url" placeholder="生成二维码所需链接" style="width: 300px" />
-            </el-col>
-
-          </el-row>
+              <ElInput v-model="curCompConfig.url"
+                :placeholder="`${curCompConfig.type === TemplateType.QRCODE ? '生成二维码所需链接' : '输入素材地址'}`"
+                style="width: 300px" />
+            </ElCol>
+          </ElRow>
         </template>
 
-        <el-divider />
+        <ElDivider />
         <h4>拖拽设置</h4>
-        <el-row>
-          <el-col :span="3">
-            <el-checkbox v-model="isCheckAll" :indeterminate="isIndeterminate"
-              @change="handleCheckAllChange(isCheckAll)">拖拽锁定</el-checkbox>
-          </el-col>
-          <el-col :span="3">
-            <el-checkbox-group v-model="curCompConfig.dragDirFixed">
-              <el-checkbox key="x" label="X">锁定X轴</el-checkbox>
-              <el-checkbox key="y" label="Y">锁定Y轴</el-checkbox>
-            </el-checkbox-group>
-          </el-col>
-          <el-col :span="10">
+        <ElRow>
+          <ElCol :span="3">
+            <ElCheckbox v-model="isCheckAll" :indeterminate="isIndeterminate" @change="handleCheckAllChange(isCheckAll)">
+              拖拽锁定</ElCheckbox>
+          </ElCol>
+          <ElCol :span="3">
+            <ElCheckboxGroup v-model="curCompConfig.dragDirFixed">
+              <ElCheckbox key="x" label="X">锁定X轴</ElCheckbox>
+              <ElCheckbox key="y" label="Y">锁定Y轴</ElCheckbox>
+            </ElCheckboxGroup>
+          </ElCol>
+          <ElCol :span="10">
             <div class="dirContainer">
               <div class="icon-wrap iconfont" v-for="btn in POSITION_BUTTON" :key="btn.class" :content="btn.content"
                 :placement="btn.placement" @click="changeFixedDirection(btn.direction)"
                 :class="`${btn.class} ${btn.direction}`"></div>
             </div>
-          </el-col>
-          <el-col :span="5">
-            <el-row>
-              <el-col>
+          </ElCol>
+          <ElCol :span="5">
+            <ElRow>
+              <ElCol>
                 <span class="labelText">X轴:</span>
-                <el-input-number v-model="curCompConfig.point.x" style="width: 120px" />
-              </el-col>
-              <el-col style="margin-top: 5px">
+                <ElInputNumber v-model="curCompConfig.point.x" style="width: 120px" />
+              </ElCol>
+              <ElCol style="margin-top: 5px">
                 <span class="labelText">Y轴:</span>
-                <el-input-number v-model="curCompConfig.point.y" style="width: 120px" />
-              </el-col>
-            </el-row>
-
-          </el-col>
-        </el-row>
+                <ElInputNumber v-model="curCompConfig.point.y" style="width: 120px" />
+              </ElCol>
+            </ElRow>
+          </ElCol>
+        </ElRow>
       </template>
     </div>
   </div>
 </template>
+<script lang="ts">
+const FONT_STYlE = ['normal', 'italic'];
+const FONT_WEIGHT = ['normal', 'bold', 'bolder'];
+</script>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
@@ -188,7 +187,7 @@ const handleCheckAllChange = (status: boolean) => {
 };
 </script>
 
-<style lang="postcss">
+<style lang="scss">
 .formWrap {
   border-bottom: 1px solid var(--ep-menu-border-color);
   padding-bottom: 20px;
@@ -246,5 +245,4 @@ const handleCheckAllChange = (status: boolean) => {
 
 .middle {
   transform: translateX(25px);
-}
-</style>
+}</style>

@@ -1,5 +1,4 @@
 <template>
-  <!-- borderRadius: `${curCompConfig.radius}%`, -->
   <div class="qrCode" :style="{
     width: `${curCompConfig.width / 2}px`,
     height: `${curCompConfig.width / 2}px`,
@@ -33,9 +32,7 @@ const setQrCode = () => {
   });
 };
 
-onMounted(() => {
-  setQrCode();
-});
+onMounted(setQrCode);
 
 watch(
   () => curCompConfig.value && curCompConfig.value.url,

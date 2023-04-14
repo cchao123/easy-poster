@@ -1,17 +1,18 @@
 <template>
-  <el-upload :auto-upload="false" class="psd-btn" ref="upload" :limit="1" :before-upload="beforeAvatarUpload"
+  <ElUpload :auto-upload="false" class="psd-btn" ref="upload" :limit="1" :before-upload="beforeAvatarUpload"
     :on-exceed="handleExceed" :on-change="parsePSD">
-    <el-button color="#626aef" :icon="UploadFilled" size="large" :loading="isParseLoading"
-      type="primary">解析PSD</el-button>
-  </el-upload>
+    <ElButton color="#626aef" :icon="UploadFilled" size="large" :loading="isParseLoading"
+      type="primary">解析PSD</ElButton>
+  </ElUpload>
 </template>
 
 <script lang="ts" setup>
 import PSD from 'psd.js';
 import { ref, computed } from 'vue';
 import { base64Toblob } from '~/utils';
+import { PsdTreeItem, PsdFile } from '~/types';
 import type { UploadFile, UploadInstance, UploadProps, UploadRawFile } from 'element-plus'
-import { genFileId, ElMessage } from 'element-plus'
+import { genFileId, ElMessage, ElNotification } from 'element-plus'
 import { UploadFilled } from '@element-plus/icons-vue';
 import { useStore } from '~/store';
 const store = useStore();
@@ -29,22 +30,22 @@ const parsePSD = (file: UploadFile) => {
   isParseLoading.value = true;
   clearCompList();
   var url = URL.createObjectURL(file.raw);
-  PSD.fromURL(url).then((result: any) => {
+  PSD.fromURL(url).then((result: PsdFile) => {
+    console.log(result)
     // 建议把不group合并为layer-递归处理所有layer转化为base64
     const tree = result.tree().children();
     parsePsdTree(tree);
   });
 };
 
-const parsePsdTree = (tree: { isGroup?: any; _children?: any; layer: any; name: any; width?: any; height?: any; left?: any; top?: any; }[]) => {
-  return tree.forEach((treeItems: { isGroup?: any; _children?: any; layer: any; name: any; width?: any; height?: any; left?: any; top?: any; }, index: number) => {
+const parsePsdTree = (tree: PsdTreeItem[]) => {
+  return tree.forEach((treeItems: PsdTreeItem, index: number) => {
     if (treeItems.isGroup()) parsePsdTree(treeItems._children);
     else {
       try {
         const { width, height, left: x, top: y, name } = treeItems;
         const base64 = treeItems.layer.image.toBase64();
         const blobUrl = base64Toblob(base64)
-
         setCurCompIndex(compList.value.length);
         setCompList({
           dragDirFixed: [],
@@ -66,7 +67,10 @@ const parsePsdTree = (tree: { isGroup?: any; _children?: any; layer: any; name: 
           background: ''
         });
       } catch {
-        console.error(treeItems.name);
+        ElNotification({
+          message: treeItems.name,
+          type: 'error',
+        });
       }
       isParseLoading.value = false;
     }
@@ -75,6 +79,7 @@ const parsePsdTree = (tree: { isGroup?: any; _children?: any; layer: any; name: 
 
 const upload = ref<UploadInstance>();
 const handleExceed: UploadProps['onExceed'] = (files) => {
+  console.log(111)
   upload.value!.clearFiles()
   const file = files[0] as UploadRawFile
   file.uid = genFileId()
@@ -82,6 +87,7 @@ const handleExceed: UploadProps['onExceed'] = (files) => {
 }
 
 const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
+  console.log(rawFile.type)
   if (rawFile.type !== 'image/jpeg') {
     ElMessage.error('Avatar picture must be JPG format!')
     return false

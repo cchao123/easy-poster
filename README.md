@@ -48,9 +48,3 @@ npm run dev
 ### Custom theme
 
 See `src/styles/element/index.scss`.
-
-TODOLIST：
-1.处理：import顺序
-2.定义全局类型
-3.postcss
-4.demo项目Monorepos改造

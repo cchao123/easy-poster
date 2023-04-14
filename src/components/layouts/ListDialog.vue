@@ -1,47 +1,47 @@
 <template>
-  <el-dialog v-model="isListDialogShow" @close="setListDialog(false)" :draggable="true" top="10vh" title="暂存模板列表">
-    <el-table class="his-tab" :data="historyList.slice(pageStartIdx, pageEndIdx)" highlight-current-row>
-      <el-table-column property="id" label="id" />
-      <el-table-column label="thumbnail">
+  <ElDialog v-model="isListDialogShow" @close="setListDialog(false)" :draggable="true" top="10vh" title="暂存模板列表">
+    <ElTable class="his-tab" :data="historyList.slice(pageStartIdx, pageEndIdx)" highlight-current-row>
+      <ElTableColumn property="id" label="id" />
+      <ElTableColumn label="thumbnail">
         <template #default="scope">
           <img class="thumbnail" :src="scope.row.thumbnail">
         </template>
-      </el-table-column>
+      </ElTableColumn>
 
-      <el-table-column property="date" label="last modified">
+      <ElTableColumn property="date" label="last modified">
         <template #default="scope">
           <div style="display: flex; align-items: center">
-            <el-icon>
+            <ElIcon>
               <Timer />
-            </el-icon>
+            </ElIcon>
             <span style="margin-left: 10px">{{ formatFullDateNew(scope.row.date) }}</span>
           </div>
         </template>
-      </el-table-column>
+      </ElTableColumn>
 
-      <el-table-column property="remarks" label="remarks" width="160px">
-      </el-table-column>
+      <ElTableColumn property="remarks" label="remarks" width="160px">
+      </ElTableColumn>
 
-      <el-table-column fixed="right" label="Operations">
+      <ElTableColumn fixed="right" label="Operations">
         <template #default="scope">
-          <el-popconfirm title="确定删除该项?" @confirm="handleDel(scope.$index)">
+          <ElPopconfirm title="确定删除该项?" @confirm="handleDel(scope.$index)">
             <template #reference>
-              <el-button link :disabled="['centralaxis', 'olympic'].includes(scope.row.id)" type="primary"
-                size="small">删除</el-button>
+              <ElButton link :disabled="['centralaxis', 'olympic'].includes(scope.row.id)" type="primary"
+                size="small">删除</ElButton>
             </template>
-          </el-popconfirm>
+          </ElPopconfirm>
 
-          <el-popconfirm title="应用替至画板?" icon-color="#c93b33" :icon="InfoFilled" @confirm="handleEdit(scope.$index)">
+          <ElPopconfirm title="应用替至画板?" icon-color="#c93b33" :icon="InfoFilled" @confirm="handleEdit(scope.$index)">
             <template #reference>
-              <el-button link type="primary" size="small">编辑</el-button>
+              <ElButton link type="primary" size="small">编辑</ElButton>
             </template>
-          </el-popconfirm>
+          </ElPopconfirm>
         </template>
-      </el-table-column>
-    </el-table>
-    <el-pagination class="his-pag" small :current-page="currentPage" :page-size="3" background layout="prev, pager, next"
+      </ElTableColumn>
+    </ElTable>
+    <ElPagination class="his-pag" small :current-page="currentPage" :page-size="3" background layout="prev, pager, next"
       :total="historyList.length" @current-change="handleChange" />
-  </el-dialog>
+  </ElDialog>
 </template>
 
 <script lang="ts" setup>
@@ -69,9 +69,7 @@ const handleChange = (curPage: number) => {
   currentPage.value = curPage
 }
 
-onMounted(() => {
-  initHisList()
-})
+onMounted(initHisList)
 
 const getCvsInTabIndex = (index: number) => {
   return index + (currentPage.value - 1) * PAGE_SIZE
@@ -92,7 +90,7 @@ const handleEdit = (index: number) => {
 </script>
 
 
-<style lang="postcss">
+<style lang="scss">
 .thumbnail {
   width: 80px;
 }

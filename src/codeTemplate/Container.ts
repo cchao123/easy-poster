@@ -11,7 +11,7 @@ export const getContainerTpl = (params: CompItem) => {
       ${compName}.x =  ${x};
       ${compName}.y =  ${y};
       const graphics${compId} = new PIXI.Graphics();
-      graphics${compId}.beginFill(${background.replace('#', '0x')});
+      graphics${compId}.beginFill(${background?.replace('#', '0x')});
       graphics${compId}.drawRect(0, 0, ${width}, ${height});
       ${compName}.addChild(graphics${compId});
     `,

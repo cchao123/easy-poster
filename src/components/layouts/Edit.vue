@@ -76,7 +76,7 @@ const handleMouseDown = (e: MouseEvent) => {
 };
 </script>
 
-<style lang="postcss">
+<style lang="scss">
 .editWrap {
   cursor: move;
   position: absolute;

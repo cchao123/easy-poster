@@ -1,5 +1,4 @@
 <template>
-  <!-- borderRadius: `${curCompConfig.radius}%`, -->
   <img class="header" :style="{
     width: `${curCompConfig.width / 2}px`,
     height: `${curCompConfig.width / 2}px`,
@@ -22,7 +21,7 @@ const store = useStore();
 const curCompConfig = computed(() => store.compList[props.index]);
 </script>
 
-<style lang="postcss">
+<style lang="scss">
 .header {
   overflow: hidden;
   border-radius: 50%;

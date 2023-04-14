@@ -1,54 +1,60 @@
 <template>
-  <el-menu mode="horizontal" class="el-header">
-    <div class="el-header-logo">EasyPoster</div>
-    <el-menu-item h="full" @click="toggleDark()" index="theme">
-      <button class="border-none w-full bg-transparent cursor-pointer" style="height: var(--ep-menu-item-height);">
+  <ElMenu mode="horizontal" class="el-header">
+    <div class="el-header-logo" ref="logo" :style="{
+      transform: `translate3d(${x}px, ${y}px ,0)`,
+    }">EasyPoster</div>
+    <ElMenuItem h="full" @click="toggleDark()" index="theme">
+      <button class="border-none w-full bg-transparent cursor-pointer" style="height: var(--ep-menuItem-height);">
         <i inline-flex i="dark:ep-moon ep-sunny" />
       </button>
-    </el-menu-item>
+    </ElMenuItem>
     <div class="el-btn-container">
       <ParsePsdBtn />
 
-      <el-button size="large" color="#626aef" type="primary" :icon="List" @click="setListDialog(true)">
+      <ElButton size="large" color="#626aef" type="primary" :icon="List" @click="setListDialog(true)">
         模板记录
-      </el-button>
+      </ElButton>
 
-      <el-button size="large" type="primary" color="#626aef" :icon="InfoFilled" @click="savaTpl"
+      <ElButton size="large" type="primary" color="#626aef" :icon="InfoFilled" @click="savaTpl"
         :disabled="!compList.length" :loading="isSaveLoading">
         暂存进度
-      </el-button>
+      </ElButton>
 
-      <el-button plain color="#626aef" :disabled="!compList.length" size="large" :icon="View"
+      <ElButton plain color="#626aef" :disabled="!compList.length" size="large" :icon="View"
         @click="setCodeDialog(true)">
         查看代码
-      </el-button>
+      </ElButton>
 
-      <el-button v-if="['centralaxis', 'olympic'].includes(curCanvasId)" plain color="#626aef" :icon="RefreshLeft"
+      <ElButton v-if="['centralaxis', 'olympic'].includes(curCanvasId)" plain color="#626aef" :icon="RefreshLeft"
         @click="handleReset" size="large">
         <span>恢复预设</span>
-      </el-button>
+      </ElButton>
 
       <div class="codeType" :class="{ codeTypeIndex: isCodeDialogShow }">
-        <el-switch v-model="outputCodyType" @change="changeOutput(outputCodyType)" inactive-color="#626aef"
+        <ElSwitch v-model="outputCodyType" @change="changeOutput(outputCodyType)" inactive-color="#626aef"
           :active-value="OutputType.HTML2CANVAS" :active-text="OutputType.HTML2CANVAS" :inactive-value="OutputType.PIXI"
           :inactive-text="OutputType.PIXI" />
       </div>
     </div>
-  </el-menu>
-  <ListDialog />
-  <CodeDialog />
+  </ElMenu>
+  <Teleport to="#app">
+    <ListDialog />
+    <CodeDialog />
+  </Teleport>
 </template>
 
 <script lang="ts" setup>
+import { useMouseMove } from '~/hooks';
 import { ref, computed } from 'vue';
 import { toggleDark } from '~/composables';
 import { OutputType } from '~/constants';
-import { convertDOMToImage, generateMixed, base64Toblob } from '~/utils';
+import { convertDOMToImage } from '~/utils';
 import { ElMessage } from 'element-plus'
 import { List, InfoFilled, RefreshLeft, View } from '@element-plus/icons-vue';
 import ListDialog from '~/components/layouts/ListDialog.vue';
 import CodeDialog from '~/components/layouts/CodeDialog.vue';
 import ParsePsdBtn from '~/components/layouts/ParsePsdBtn.vue';
+
 import { useStore } from '~/store';
 const store = useStore();
 const isCodeDialogShow = computed(() => store.isCodeDialogShow);
@@ -56,6 +62,10 @@ const historyList = computed(() => store.historyList);
 const curCanvasId = computed(() => store.curCanvasId);
 const compList = computed(() => store.compList);
 const outputCodyType = ref<OutputType>(OutputType.PIXI);
+
+
+const logo = ref();
+const { x, y } = useMouseMove(logo);
 
 const {
   addHistoryList,

@@ -10,7 +10,7 @@ import ConfigForm from '~/components/layouts/ConfigForm.vue';
 import CodeContainer from '~/components/layouts/CodeContainer.vue';
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .aside-config {
   position: relative;
   width: 800px;

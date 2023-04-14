@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { watch, ref, onMounted, computed, nextTick } from 'vue';
+import { watch, ref, computed, nextTick } from 'vue';
 import { useStore } from '~/store';
 import errorImg from '~/assets/image.png';
 

@@ -1,3 +1,4 @@
+import { TemplateType } from './constants';
 export interface CommonStyle {
   width: number;
   height: number;
@@ -19,7 +20,7 @@ export interface CommonParams {
 
 export interface CompItem extends CommonStyle, CommonParams {
   icon: string,
-  type: string,
+  type: TemplateType,
   name: string,
   compId?: string,
   index?: number;
@@ -54,4 +55,24 @@ export interface CanvasConfig {
   width: number;
   height: number;
   background: string;
+}
+
+export interface PsdTreeItem {
+  isGroup?: any;
+  _children?: any;
+  layer: any;
+  name: any;
+  width?: any;
+  height?: any;
+  left?: any;
+  top?: any;
+}
+
+export interface PsdFile {
+  file: File,
+  header: any,
+  image: any,
+  parsed: Boolean,
+  resources: any,
+  tree: any,
 }

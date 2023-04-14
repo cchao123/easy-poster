@@ -1,5 +1,5 @@
 <template>
-  <div class="main" @mousedown="handleMouseDown" ref="mainRef">
+  <div class="main" ref="mainRef">
     <div class="h5-view" :style="{
       width: `${canvasConfig.width / 2}px`,
       height: `${canvasConfig.height / 2}px`,
@@ -19,17 +19,17 @@
     <div class="h5-bar" v-if="curCompConfig">
       <div :class="`bar-items iconfont icon-${curCompConfig.icon} bar-bt`"></div>
 
-      <el-icon class="bar-items" @click="setCompZindex(curCompIndex, true)">
+      <ElIcon class="bar-items" @click="setCompZindex(curCompIndex, true)">
         <CaretTop />
-      </el-icon>
+      </ElIcon>
 
-      <el-icon class="bar-items" @click="setCompZindex(curCompIndex, false)">
+      <ElIcon class="bar-items" @click="setCompZindex(curCompIndex, false)">
         <CaretBottom />
-      </el-icon>
+      </ElIcon>
 
-      <el-icon class="bar-items bar-bb" @click="handleDelCurComp">
+      <ElIcon class="bar-items bar-bb" @click="handleDelCurComp">
         <Delete />
-      </el-icon>
+      </ElIcon>
     </div>
 
     <div class="h5-help" @click.stop="driverStart">
@@ -41,9 +41,9 @@
 <script lang="ts" setup>
 import { ref, onMounted, computed } from 'vue';
 import { Delete, CaretTop, CaretBottom } from '@element-plus/icons-vue';
-import { MATERIAL_LIST, TemplateType } from '~/constants';
+import { MATERIAL_LIST, TemplateType, driverFun, setDriveMessage } from '~/constants';
 import { useStore } from '~/store';
-
+import { useMouseMove, useKeyboard } from '~/hooks';
 import Container from '~/components/template/Container.vue';
 import Background from '~/components/template/Background.vue';
 import Image from '~/components/template/Image.vue';
@@ -51,7 +51,6 @@ import Text from '~/components/template/Text.vue';
 import Header from '~/components/template/Header.vue';
 import QrCode from '~/components/template/QrCode.vue';
 
-import { driverFun, setDriveMessage } from '~/constants/driver';
 const driverStart = () => {
   setDriveMessage(() => {
     driverFun.start();
@@ -62,11 +61,6 @@ const SCROLL_BASE_NUM = 10;
 const ZOOM_BASE_NUM = 0.2;
 const ZOOM_MIN_NUM = 0.5;
 
-const mainRef = ref();
-
-// 画布位置
-const canvasX = ref(0);
-const canvasY = ref(0);
 const canvasZoom = ref(1);
 
 let point = {
@@ -100,37 +94,15 @@ const drop: (e: DragEvent | any) => void | undefined = (e) => {
   });
 };
 
-const handleMouseDown = (e: MouseEvent) => {
-  // 鼠标位置
-  const startX = e.clientX;
-  const startY = e.clientY;
-
-  const dcanvasX = Number(canvasX.value);
-  const dcanvasY = Number(canvasY.value);
-
-  const move = (moveEvent: MouseEvent) => {
-    // 当前位置
-    const currX = moveEvent.clientX;
-    const currY = moveEvent.clientY;
-
-    canvasX.value = dcanvasX + (currX - startX);
-    canvasY.value = dcanvasY + (currY - startY);
-  };
-
-  const up = () => {
-    document.removeEventListener('mousemove', move);
-    document.removeEventListener('mouseup', up);
-  };
-
-  document.addEventListener('mousemove', move);
-  document.addEventListener('mouseup', up);
-};
-
 const isZoomCompose = ref(false);
 
+const mainRef = ref();
+const { x: canvasX, y: canvasY } = useMouseMove(mainRef);
+const { keyDown, keyUp } = useKeyboard('');
 onMounted(() => {
   if (false) driverStart();
   document.body.onkeydown = (e: KeyboardEvent) => {
+    console.log(e.key)
     if (e.keyCode === 91) isZoomCompose.value = true;
   };
 
@@ -139,8 +111,8 @@ onMounted(() => {
   };
 
   mainRef.value.onmousewheel = (e: WheelEvent) => {
-    // 键盘回复
-    if (isZoomCompose.value) {
+    // 键盘恢复
+    if (isZoomCompose.value) { 
       if (e.deltaY > 0) {
         canvasZoom.value <= ZOOM_MIN_NUM ? (canvasZoom.value = ZOOM_MIN_NUM) : (canvasZoom.value -= ZOOM_BASE_NUM);
       } else canvasZoom.value += ZOOM_BASE_NUM;
@@ -152,7 +124,7 @@ onMounted(() => {
 });
 </script>
 
-<style lang="postcss">
+<style lang="scss">
 .main {
   position: relative;
   cursor: grab;

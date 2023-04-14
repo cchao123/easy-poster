@@ -14,7 +14,7 @@ import { useStore } from '~/store';
 
 const textRef = ref();
 const store = useStore();
-const { curCompIndex, setCompSize } = store;
+const { setCompSize } = store;
 
 const props = defineProps({
   index: {
@@ -48,8 +48,6 @@ watch(
   },
 );
 
-onMounted(() => {
-  setTextCompSize();
-});
+onMounted(setTextCompSize);
 
 </script>

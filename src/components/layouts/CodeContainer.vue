@@ -63,9 +63,7 @@ const getApplicationCode = () => {
   nextTick(() => window.Prism.highlightAll());
 };
 
-onMounted(() => {
-  getApplicationCode();
-});
+onMounted(getApplicationCode);
 
 const getCurCode = (curCompConfig: CompItem) => {
   if (!curCompConfig) {
@@ -98,7 +96,7 @@ const getCurCode = (curCompConfig: CompItem) => {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .codeWrap {
   flex: 1;
   user-select: text;
