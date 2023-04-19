@@ -6,6 +6,7 @@ import {
   CHECK_ALL_VALUE,
   CHECK_MAX_LENGTH,
   DEFAULT_TEMP,
+  FIRST_VISIT,
   HISTORTLIST_KEY,
   OutputType,
 } from '~/constants';
@@ -30,6 +31,14 @@ export const useStore = defineStore('easyPoster', {
     delStatus: false,
   }),
   actions: {
+    async initDriver (cb: (isShow: Boolean)=> void) {
+      const KEY = await getStorage(FIRST_VISIT);
+      if (KEY === null){
+        setStorage(FIRST_VISIT, '1');
+        cb(true);
+      }
+      else cb(false);
+    },
     async initHisList () {
       const hisList = await getStorage(HISTORTLIST_KEY);
       if (hisList) this.historyList = JSON.parse(hisList);

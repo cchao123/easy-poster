@@ -1,6 +1,6 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import type { Ref } from 'vue';
-export function useMouseMove(eleRef: Ref) {
+export function useMouseMove(eleRef: Ref, cb?: (x: any, y: any)=> any) {
   const startX = ref(0);
   const startY = ref(0);
   const moveX = ref(0);
@@ -17,14 +17,16 @@ export function useMouseMove(eleRef: Ref) {
     const currY = e.clientY;
     moveX.value = currentX.value + (currX - startX.value);
     moveY.value = currentY.value + (currY - startY.value);
+    cb && cb(moveX.value, moveY.value);
   }
 
   const down = (e: MouseEvent) => {
+    e.stopPropagation();
     startX.value = e.pageX;
     startY.value = e.pageY;
     currentX.value = Number(moveX.value);
     currentY.value = Number(moveY.value);
-    eleRef.value.addEventListener('mousemove', move)
+    eleRef.value.addEventListener('mousemove', move);
   }
 
   onMounted(() => {
@@ -32,7 +34,9 @@ export function useMouseMove(eleRef: Ref) {
     document.addEventListener('mouseup', up);
   });
 
-  onUnmounted(up);
+  onUnmounted(()=> {
+    up();
+  });
   
   return { x: moveX, y: moveY };
 }

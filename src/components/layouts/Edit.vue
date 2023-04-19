@@ -1,5 +1,6 @@
 <template>
-  <div class="editWrap"
+  <div class="editContainer"
+  ref="editRef"
     :class="{ noDrop: curFixedStatus.length === CHECK_MAX_LENGTH, ewDrop: curFixedStatus.indexOf('Y') !== -1, nsDrop: curFixedStatus.indexOf('X') !== -1 }"
     @mousedown.stop.prevent="handleMouseDown" :style="{
       left: `${item.point.x / 2}px`,
@@ -18,7 +19,6 @@
 import { computed } from 'vue';
 import { useStore } from '~/store';
 import { CHECK_MAX_LENGTH } from '~/constants';
-
 const store = useStore();
 const { setCompPoint, setCurCompIndex } = store;
 const curFixedStatus = computed(() => store.curFixedStatus);
@@ -77,7 +77,7 @@ const handleMouseDown = (e: MouseEvent) => {
 </script>
 
 <style lang="scss">
-.editWrap {
+.editContainer {
   cursor: move;
   position: absolute;
 }
@@ -126,19 +126,19 @@ const handleMouseDown = (e: MouseEvent) => {
   border-right: 1px dashed #000;
 }
 
-.editWrap:hover .bd-top {
+.editContainer:hover .bd-top {
   display: block;
 }
 
-.editWrap:hover .bd-btm {
+.editContainer:hover .bd-btm {
   display: block;
 }
 
-.editWrap:hover .bd-left {
+.editContainer:hover .bd-left {
   display: block;
 }
 
-.editWrap:hover .bd-right {
+.editContainer:hover .bd-right {
   display: block;
 }
 
