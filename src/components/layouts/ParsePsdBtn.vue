@@ -16,6 +16,7 @@ import { UploadFilled } from '@element-plus/icons-vue';
 import { useStore } from '~/store';
 const store = useStore();
 const {
+  setCurCompIndex,
   clearCompList,
   setCompList,
 } = store;
@@ -66,6 +67,7 @@ const parsePsdTree = (tree: PsdTreeItem[]) => {
           index: 0,
           background: ''
         });
+        setCurCompIndex(index);
       } catch {
         ElNotification({
           message: treeItems.name,

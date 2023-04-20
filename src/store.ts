@@ -135,6 +135,7 @@ export const useStore = defineStore('easyPoster', {
       return state.curCompConfig.dragDirFixed.length === CHECK_MAX_LENGTH;
     },
     curFixedStatus(status) {
+      console.log(status.curCompConfig)
       return status.curCompConfig.dragDirFixed;
     },
     pixiLastCode () {
